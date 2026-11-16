@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar sesión | VetCare</title>
+    <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+    <header class="encabezado">
+        <p class="marca">VetCare</p>
+        <p>Clínica veterinaria Huellitas</p>
+    </header>
+
+    <main class="contenido">
+        <section class="acceso" aria-labelledby="titulo-acceso">
+            <h1 id="titulo-acceso">Iniciar sesión</h1>
+            <p>Ingresa datos ficticios y selecciona tu rol para probar VetCare.</p>
+
+            <form class="formulario-acceso" method="get">
+                <fieldset>
+                    <legend>Datos de acceso</legend>
+
+                    <div class="campo">
+                        <label for="correo">Correo electrónico</label>
+                        <input
+                            type="email"
+                            id="correo"
+                            placeholder="demo@example.com"
+                            required
+                        >
+                    </div>
+
+                    <div class="campo">
+                        <label for="contrasena">Contraseña</label>
+                        <input
+                            type="password"
+                            id="contrasena"
+                            required
+                        >
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Ingresar según tu rol</legend>
+
+                    <div class="opciones-acceso">
+                        <button type="submit" formaction="pages/menu-recepcion.html">
+                            Ingresar como recepcionista
+                        </button>
+                        <button type="submit" formaction="pages/menu-veterinario.html">
+                            Ingresar como veterinario
+                        </button>
+                        <button type="submit" formaction="pages/menu-administrador.html">
+                            Ingresar como administrador
+                        </button>
+                    </div>
+                </fieldset>
+            </form>
+        </section>
+    </main>
+
+    <footer class="pie-pagina">
+        <p>VetCare · Proyecto de Aplicaciones Web</p>
+    </footer>
+</body>
+</html>
