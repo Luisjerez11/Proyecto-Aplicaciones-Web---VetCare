@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar atención médica | VetCare</title>
+    <link rel="stylesheet" href="../css/estilos.css">
+</head>
+<body>
+    <header class="encabezado">
+        <p class="marca">VetCare</p>
+        <p>Clínica veterinaria Huellitas</p>
+    </header>
+
+    <main class="contenido">
+        <!-- CU-07, pasos 1 y 2: identificar la cita y mostrar el formulario. -->
+        <h1>Registrar atención médica</h1>
+
+        <dl class="ficha">
+            <dt>Cita</dt>
+            <dd>C-001</dd>
+
+            <dt>Mascota</dt>
+            <dd>Toby</dd>
+
+            <dt>Servicio</dt>
+            <dd>Consulta general</dd>
+
+            <dt>Veterinaria</dt>
+            <dd>Dra. Ana Pérez</dd>
+
+            <dt>Fecha y hora</dt>
+            <dd><time datetime="2026-11-18T09:00">18/11/2026 a las 09:00</time></dd>
+
+            <dt>Estado actual</dt>
+            <dd>Programada</dd>
+        </dl>
+
+        <p class="nota">
+            Para reproducir el resultado de ejemplo, ingresa «Control de rutina»
+            como diagnóstico, «Control en seis meses» como tratamiento y 12,5 kg
+            como peso.
+        </p>
+
+        <!-- CU-07, pasos 3 a 6: validar los datos y abrir la confirmación. -->
+        <form action="atencion-confirmada.html" method="get">
+            <fieldset>
+                <legend>Datos de la atención</legend>
+
+                <div class="campo">
+                    <label for="diagnostico">Diagnóstico</label>
+                    <textarea id="diagnostico" rows="3" required></textarea>
+                </div>
+
+                <div class="campo">
+                    <label for="tratamiento">Tratamiento</label>
+                    <textarea id="tratamiento" rows="3" required></textarea>
+                </div>
+
+                <div class="campo">
+                    <label for="peso">Peso de la mascota (kg)</label>
+                    <input type="number" id="peso" min="0.1" max="120"
+                           step="0.1" aria-describedby="ayuda-peso" required>
+                    <p id="ayuda-peso" class="nota">
+                        Ingresa un peso entre 0,1 y 120 kg, en incrementos de 0,1 kg.
+                    </p>
+                </div>
+            </fieldset>
+
+            <div class="acciones">
+                <!-- CU-07, flujos 5a y 5b: los datos inválidos bloquean el envío. -->
+                <button type="submit">Guardar</button>
+
+                <!-- CU-07, flujo 4a: volver a la cita programada de la agenda. -->
+                <a href="agenda-dia.html#resultado">Cancelar</a>
+            </div>
+        </form>
+    </main>
+
+    <footer class="pie-pagina">
+        <p>VetCare · Proyecto de Aplicaciones Web</p>
+    </footer>
+</body>
+</html>

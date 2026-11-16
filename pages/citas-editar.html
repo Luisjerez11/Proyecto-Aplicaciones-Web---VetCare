@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reprogramar cita C-001 | VetCare</title>
+    <link rel="stylesheet" href="../css/estilos.css">
+</head>
+<body>
+    <header class="encabezado">
+        <p class="marca">VetCare</p>
+        <p>Clínica veterinaria Huellitas</p>
+    </header>
+
+    <main class="contenido">
+        <h1>Reprogramar cita C-001</h1>
+
+        <dl class="ficha">
+            <dt>Mascota</dt>
+            <dd>Toby</dd>
+
+            <dt>Servicio</dt>
+            <dd>Consulta general</dd>
+
+            <dt>Veterinaria</dt>
+            <dd>Dra. Ana Pérez</dd>
+
+            <dt>Estado</dt>
+            <dd>Programada</dd>
+        </dl>
+
+        <p class="nota">
+            Para probar el resultado de ejemplo, conserva el 18/11/2026
+            y cambia la hora a las 10:30. Al guardar se abre una vista
+            estática de demostración.
+        </p>
+
+        <!-- CU-05, pasos 5 a 8: editar y validar el horario de la cita. -->
+        <form action="citas-reprogramada.html" method="get">
+            <fieldset>
+                <legend>Fecha y hora de la cita</legend>
+
+                <div class="campo">
+                    <label for="fecha-cita">Fecha</label>
+                    <input type="date" id="fecha-cita" value="2026-11-18"
+                           min="2026-11-18" max="2026-11-21"
+                           aria-describedby="ayuda-fecha" required>
+                    <p id="ayuda-fecha">Fechas de prueba del 18 al 21 de noviembre de 2026.</p>
+                </div>
+
+                <div class="campo">
+                    <label for="hora-cita">Hora</label>
+                    <input type="time" id="hora-cita" value="09:00"
+                           min="08:00" max="18:00" step="1800"
+                           aria-describedby="ayuda-hora" required>
+                    <p id="ayuda-hora">Elige una hora entre las 08:00 y las 18:00, en intervalos de 30 minutos.</p>
+                </div>
+            </fieldset>
+
+            <div class="acciones">
+                <!-- CU-05, flujo 8a: los datos inválidos bloquean el envío. -->
+                <button type="submit">Guardar</button>
+
+                <!-- CU-05, flujo 7a: volver al listado original. -->
+                <a href="citas-listado.html">Cancelar</a>
+            </div>
+        </form>
+    </main>
+
+    <footer class="pie-pagina">
+        <p>VetCare · Proyecto de Aplicaciones Web</p>
+    </footer>
+</body>
+</html>
