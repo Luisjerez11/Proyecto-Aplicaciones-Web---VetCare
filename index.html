@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar sesión | VetCare</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&amp;family=Poppins:wght@600;700&amp;display=swap">
+    <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+    <header class="encabezado">
+        <p class="marca">VetCare <span>Clínica veterinaria Huellitas</span></p>
+    </header>
+
+    <main class="contenido">
+        <!-- CU-01, pasos 1 y 2: pantalla de acceso con correo, contraseña y opciones por rol -->
+        <section class="acceso" aria-labelledby="titulo-acceso">
+            <h1 id="titulo-acceso">Iniciar sesión</h1>
+            <p class="introduccion">Ingresa tu correo y contraseña, y elige el rol con el que vas a trabajar.</p>
+
+            <!-- CU-01, pasos 3 a 6 y flujos 5a–5c: la validación nativa impide ingresar con datos inválidos -->
+            <form class="formulario" method="get">
+                <fieldset>
+                    <legend>Datos de acceso</legend>
+                    <div class="campos">
+                        <div class="campo campo--ancho">
+                            <label for="correo">Correo electrónico</label>
+                            <input type="email" id="correo" name="correo" required
+                                   placeholder="nombre@correo.com" autocomplete="email"
+                                   aria-describedby="ayuda-correo">
+                            <p id="ayuda-correo" class="ayuda">Formato: nombre@correo.com</p>
+                        </div>
+
+                        <div class="campo campo--ancho">
+                            <label for="contrasena">Contraseña</label>
+                            <!-- Sin name a propósito: así la contraseña no aparece en la URL del envío GET -->
+                            <input type="password" id="contrasena" required
+                                   autocomplete="current-password">
+                        </div>
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Ingresar según tu rol</legend>
+                    <div class="opciones-acceso">
+                        <button type="submit" class="boton" formaction="pages/menu-recepcion.html">Ingresar como recepcionista</button>
+                        <button type="submit" class="boton" formaction="pages/menu-veterinario.html">Ingresar como veterinario</button>
+                        <button type="submit" class="boton" formaction="pages/menu-administrador.html">Ingresar como administrador</button>
+                    </div>
+                </fieldset>
+            </form>
+
+            <aside class="nota-demo" aria-label="Datos para la demostración">
+                <p>Prototipo sin servidor: cualquier correo con formato válido y cualquier contraseña permiten ingresar. Ejemplo: recepcion@correo.com.</p>
+            </aside>
+        </section>
+    </main>
+
+    <footer class="pie-pagina">
+        <p>VetCare · Clínica veterinaria Huellitas · Proyecto de Aplicaciones Web · EPN 2026B</p>
+    </footer>
+</body>
+</html>
