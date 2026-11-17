@@ -24,9 +24,121 @@
     <main class="contenido">
         <h1>Listado de citas</h1>
 
-        <!-- Pendiente: Integrante 2 · CU-05. Reemplazar este aviso por el contenido de la pantalla
-             (ver docs/PLAN_IMPLEMENTACION.md, sección 7). No modificar header, footer ni head. -->
-        <p class="aviso aviso--info">Pantalla en construcción · Integrante 2 · CU-05.</p>
+        <!-- CU-05, paso 1: buscar citas y acceder al formulario de registro. -->
+        <section class="barra-herramientas" aria-label="Herramientas del listado">
+            <form class="buscador" role="search" action="citas-listado.html#resultados" method="get">
+                <label for="busqueda-cita">Buscar cita</label>
+                <input type="search" id="busqueda-cita" name="busqueda" placeholder="Buscar cita">
+                <button type="submit" class="boton">Buscar</button>
+            </form>
+            <a class="boton" href="citas-nueva.html">Nueva cita</a>
+        </section>
+
+        <!-- CU-05, paso 2: listado fijo de citas de demostración. -->
+        <section id="resultados" aria-labelledby="titulo-resultados">
+            <h2 id="titulo-resultados">Citas registradas</h2>
+            <div class="tabla-contenedor">
+                <table class="tabla">
+                    <caption>Citas de ejemplo de la clínica Huellitas.</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col">Código</th>
+                            <th scope="col">Mascota</th>
+                            <th scope="col">Servicio</th>
+                            <th scope="col">Veterinario</th>
+                            <th scope="col">Fecha</th>
+                            <th scope="col">Hora</th>
+                            <th scope="col">Estado</th>
+                            <th scope="col">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">C-001</th>
+                            <td>Toby</td>
+                            <td>Consulta general</td>
+                            <td>Dra. Ana Pérez</td>
+                            <td><time datetime="2026-11-18">18/11/2026</time></td>
+                            <td><time datetime="09:00">09:00</time></td>
+                            <td><span class="estado" data-estado="Programada">Programada</span></td>
+                            <td>
+                                <ul class="acciones-fila">
+                                    <li><a href="citas-detalle.html" aria-label="Ver detalle de la cita C-001">Ver detalle</a></li>
+                                    <li><a href="citas-editar.html" aria-label="Reprogramar cita C-001">Reprogramar cita</a></li>
+                                    <li><a href="citas-cancelar.html" aria-label="Cancelar cita C-001">Cancelar cita</a></li>
+                                    <li><a href="citas-eliminar.html" aria-label="Eliminar cita C-001">Eliminar</a></li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">C-002</th>
+                            <td>Michi</td>
+                            <td>Vacunación</td>
+                            <td>Dra. Ana Pérez</td>
+                            <td><time datetime="2026-11-18">18/11/2026</time></td>
+                            <td><time datetime="10:30">10:30</time></td>
+                            <td><span class="estado" data-estado="Programada">Programada</span></td>
+                            <td>
+                                <ul class="acciones-fila">
+                                    <li><a href="citas-detalle.html" aria-label="Ver detalle de la cita C-002">Ver detalle</a></li>
+                                    <li><a href="citas-editar.html" aria-label="Reprogramar cita C-002">Reprogramar cita</a></li>
+                                    <li><a href="citas-cancelar.html" aria-label="Cancelar cita C-002">Cancelar cita</a></li>
+                                    <li><a href="citas-eliminar.html" aria-label="Eliminar cita C-002">Eliminar</a></li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">C-003</th>
+                            <td>Luna</td>
+                            <td>Desparasitación</td>
+                            <td>Dr. Luis Mora</td>
+                            <td><time datetime="2026-11-18">18/11/2026</time></td>
+                            <td><time datetime="11:00">11:00</time></td>
+                            <td><span class="estado" data-estado="Programada">Programada</span></td>
+                            <td>
+                                <ul class="acciones-fila">
+                                    <li><a href="citas-detalle.html" aria-label="Ver detalle de la cita C-003">Ver detalle</a></li>
+                                    <li><a href="citas-editar.html" aria-label="Reprogramar cita C-003">Reprogramar cita</a></li>
+                                    <li><a href="citas-cancelar.html" aria-label="Cancelar cita C-003">Cancelar cita</a></li>
+                                    <li><a href="citas-eliminar.html" aria-label="Eliminar cita C-003">Eliminar</a></li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">C-004</th>
+                            <td>Toby</td>
+                            <td>Vacunación</td>
+                            <td>Dra. Ana Pérez</td>
+                            <td><time datetime="2026-11-12">12/11/2026</time></td>
+                            <td><time datetime="09:30">09:30</time></td>
+                            <td><span class="estado" data-estado="Atendida">Atendida</span></td>
+                            <td>
+                                <ul class="acciones-fila">
+                                    <li><a href="citas-detalle.html" aria-label="Ver detalle de la cita C-004">Ver detalle</a></li>
+                                    <li><a href="citas-eliminar.html" aria-label="Eliminar cita C-004">Eliminar</a></li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">C-005</th>
+                            <td>Kiwi</td>
+                            <td>Consulta general</td>
+                            <td>Dra. Sofía Vega</td>
+                            <td><time datetime="2026-11-19">19/11/2026</time></td>
+                            <td><time datetime="15:00">15:00</time></td>
+                            <td><span class="estado" data-estado="Cancelada">Cancelada</span></td>
+                            <td>
+                                <ul class="acciones-fila">
+                                    <li><a href="citas-detalle.html" aria-label="Ver detalle de la cita C-005">Ver detalle</a></li>
+                                    <li><a href="citas-eliminar.html" aria-label="Eliminar cita C-005">Eliminar</a></li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="aviso aviso--info">Sin coincidencias: no hay citas que coincidan con la búsqueda realizada.</p>
+        </section>
     </main>
 
     <footer class="pie-pagina">

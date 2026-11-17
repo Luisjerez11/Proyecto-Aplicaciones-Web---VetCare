@@ -24,9 +24,34 @@
     <main class="contenido">
         <h1>Detalle de la cita</h1>
 
-        <!-- Pendiente: Integrante 2 · CU-05. Reemplazar este aviso por el contenido de la pantalla
-             (ver docs/PLAN_IMPLEMENTACION.md, sección 7). No modificar header, footer ni head. -->
-        <p class="aviso aviso--info">Pantalla en construcción · Integrante 2 · CU-05.</p>
+        <p class="introduccion">Ficha de la cita C-001, programada para Toby.</p>
+
+        <!-- CU-05, pasos 3 y 4: consultar los datos de la cita seleccionada. -->
+        <dl class="ficha">
+            <dt>Código</dt>
+            <dd>C-001</dd>
+            <dt>Mascota</dt>
+            <dd>Toby (M-001), perro mestizo</dd>
+            <dt>Propietario</dt>
+            <dd>Carlos Andrés Andrade Ruiz (P-001)</dd>
+            <dt>Servicio</dt>
+            <dd>Consulta general</dd>
+            <dt>Veterinario</dt>
+            <dd>Dra. Ana Pérez (V-001)</dd>
+            <dt>Fecha</dt>
+            <dd><time datetime="2026-11-18">18/11/2026</time></dd>
+            <dt>Hora</dt>
+            <dd><time datetime="09:00">09:00</time></dd>
+            <dt>Estado</dt>
+            <dd>Programada</dd>
+        </dl>
+
+        <div class="acciones">
+            <a class="boton boton--secundario" href="citas-listado.html">Volver</a>
+            <a class="boton" href="citas-editar.html">Reprogramar cita</a>
+            <a class="boton boton--secundario" href="citas-cancelar.html">Cancelar cita</a>
+            <a class="boton boton--peligro" href="citas-eliminar.html">Eliminar</a>
+        </div>
     </main>
 
     <footer class="pie-pagina">
