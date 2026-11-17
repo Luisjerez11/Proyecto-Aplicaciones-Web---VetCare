@@ -26,32 +26,35 @@
 
         <p class="introduccion">Ficha de la cita C-001, programada para Toby.</p>
 
-        <!-- CU-05, pasos 3 y 4: consultar los datos de la cita seleccionada. -->
-        <dl class="ficha">
-            <dt>Código</dt>
-            <dd>C-001</dd>
-            <dt>Mascota</dt>
-            <dd>Toby (M-001), perro mestizo</dd>
-            <dt>Propietario</dt>
-            <dd>Carlos Andrés Andrade Ruiz (P-001)</dd>
-            <dt>Servicio</dt>
-            <dd>Consulta general</dd>
-            <dt>Veterinario</dt>
-            <dd>Dra. Ana Pérez (V-001)</dd>
-            <dt>Fecha</dt>
-            <dd><time datetime="2026-11-18">18/11/2026</time></dd>
-            <dt>Hora</dt>
-            <dd><time datetime="09:00">09:00</time></dd>
-            <dt>Estado</dt>
-            <dd>Programada</dd>
-        </dl>
+        <!-- CU-05, pasos 4 a 6: datos de la cita seleccionada y acciones de los flujos 5a, 5b y 5c. -->
+        <article aria-labelledby="titulo-ficha">
+            <h2 id="titulo-ficha">Cita C-001</h2>
+            <dl class="ficha">
+                <dt>Código</dt>
+                <dd>C-001</dd>
+                <dt>Mascota</dt>
+                <dd>Toby (M-001), perro mestizo</dd>
+                <dt>Propietario</dt>
+                <dd>Carlos Andrés Andrade Ruiz (P-001)</dd>
+                <dt>Servicio</dt>
+                <dd>Consulta general</dd>
+                <dt>Veterinario</dt>
+                <dd>Dra. Ana Pérez (V-001)</dd>
+                <dt>Fecha</dt>
+                <dd><time datetime="2026-11-18">18/11/2026</time></dd>
+                <dt>Hora</dt>
+                <dd><time datetime="09:00">09:00</time></dd>
+                <dt>Estado</dt>
+                <dd><span class="estado" data-estado="Programada">Programada</span></dd>
+            </dl>
 
-        <div class="acciones">
-            <a class="boton boton--secundario" href="citas-listado.html">Volver</a>
-            <a class="boton" href="citas-editar.html">Reprogramar cita</a>
-            <a class="boton boton--secundario" href="citas-cancelar.html">Cancelar cita</a>
-            <a class="boton boton--peligro" href="citas-eliminar.html">Eliminar</a>
-        </div>
+            <div class="acciones">
+                <a class="boton boton--secundario" href="citas-listado.html">Volver</a>
+                <a class="boton" href="citas-editar.html">Reprogramar cita</a>
+                <a class="boton boton--secundario" href="citas-cancelar.html">Cancelar cita</a>
+                <a class="boton boton--peligro" href="citas-eliminar.html">Eliminar</a>
+            </div>
+        </article>
     </main>
 
     <footer class="pie-pagina">

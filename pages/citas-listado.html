@@ -24,7 +24,7 @@
     <main class="contenido">
         <h1>Listado de citas</h1>
 
-        <!-- CU-05, paso 1: buscar citas y acceder al formulario de registro. -->
+        <!-- CU-05, paso 3: buscar citas; «Nueva cita» es el flujo 3b y continúa en CU-04, paso 1. -->
         <section class="barra-herramientas" aria-label="Herramientas del listado">
             <form class="buscador" role="search" action="citas-listado.html#resultados" method="get">
                 <label for="busqueda-cita">Buscar cita</label>
@@ -34,7 +34,8 @@
             <a class="boton" href="citas-nueva.html">Nueva cita</a>
         </section>
 
-        <!-- CU-05, paso 2: listado fijo de citas de demostración. -->
+        <!-- CU-05, paso 2: listado de citas con sus estados y acciones (flujos 4, 5a, 5b y 5c).
+             Flujo 5d: las citas Atendidas o Canceladas no ofrecen «Reprogramar cita» ni «Cancelar cita». -->
         <section id="resultados" aria-labelledby="titulo-resultados">
             <h2 id="titulo-resultados">Citas registradas</h2>
             <div class="tabla-contenedor">
@@ -137,7 +138,11 @@
                     </tbody>
                 </table>
             </div>
-            <p class="aviso aviso--info">Sin coincidencias: no hay citas que coincidan con la búsqueda realizada.</p>
+        </section>
+
+        <!-- CU-05, flujo 3a: escenario estático de búsqueda sin coincidencias. -->
+        <section class="aviso aviso--info" aria-label="Ejemplo de búsqueda sin resultados">
+            <p>Ejemplo: al buscar «C-099» no se encontraron citas. Intenta con otro criterio.</p>
         </section>
     </main>
 

@@ -26,21 +26,23 @@
 
         <p class="introduccion">Selecciona la mascota, el servicio, el veterinario y la fecha para consultar los horarios disponibles.</p>
 
-        <!-- CU-04, pasos 1 a 3: seleccionar los datos de la cita y consultar disponibilidad. -->
+        <!-- CU-04, pasos 2 a 5: seleccionar los datos de la cita y consultar disponibilidad.
+             Flujo 6a: el navegador indica los campos a corregir; flujo 5a: «Cancelar». -->
         <form class="formulario" action="citas-disponibilidad.html" method="get">
             <fieldset>
                 <legend>Datos de la cita</legend>
                 <div class="campos">
                     <div class="campo">
                         <label for="mascota">Mascota</label>
-                        <select id="mascota" name="mascota" required>
+                        <select id="mascota" name="mascota" required aria-describedby="ayuda-mascota">
                             <option value="" selected disabled>Selecciona una mascota…</option>
                             <option value="M-001">Toby · M-001</option>
                             <option value="M-002">Michi · M-002</option>
                             <option value="M-003">Luna · M-003</option>
                             <option value="M-004">Kiwi · M-004</option>
                         </select>
-                        <p class="ayuda">¿No encuentras la mascota? <a href="mascotas-listado.html">Identificar mascota</a>.</p>
+                        <!-- CU-04, paso 3 y flujo 3a: punto de extensión «Identificar mascota» (CU-03). -->
+                        <p id="ayuda-mascota" class="ayuda">¿No encuentras la mascota? <a href="mascotas-listado.html">Identificar mascota</a>.</p>
                     </div>
                     <div class="campo">
                         <label for="servicio">Servicio</label>

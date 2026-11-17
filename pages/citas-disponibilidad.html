@@ -75,12 +75,20 @@
             </div>
         </section>
 
+        <!-- CU-11, flujo 2a: escenario estático sin bloques libres. -->
         <section class="aviso" aria-labelledby="titulo-sin-bloques">
             <h2 id="titulo-sin-bloques">Sin bloques libres</h2>
             <p>Ejemplo: el Dr. Luis Mora no tiene bloques disponibles el sábado 21/11/2026.</p>
         </section>
 
-        <!-- CU-11, paso 4: seleccionar una hora válida y guardar la cita. -->
+        <!-- CU-11, flujo 5a: escenario estático de bloque ocupado. -->
+        <section class="aviso aviso--error" aria-labelledby="titulo-bloque-ocupado">
+            <h2 id="titulo-bloque-ocupado">Bloque ocupado</h2>
+            <p>Ejemplo: la hora 09:00 ya está ocupada por la cita C-001. Elige un bloque libre.</p>
+        </section>
+
+        <!-- CU-11, pasos 3 y 4: escribir la hora de un bloque libre y guardar.
+             Flujo 3a: el navegador rechaza horas fuera de 08:00-17:30 o que no caen en un bloque de 30 minutos. -->
         <form class="formulario" action="citas-listado.html" method="get">
             <fieldset>
                 <legend>Hora de la cita</legend>
@@ -97,6 +105,7 @@
             </div>
         </form>
 
+        <!-- CU-11, flujo 4a: desistir y volver al formulario de origen (CU-04, flujo 7a; CU-05, flujos 5a.4a y 5a.5a). -->
         <aside class="nota-demo">
             <p>Esta pantalla se comparte entre el registro y la reprogramación de citas. Usa el enlace correspondiente para volver al formulario desde el que llegaste.</p>
             <p><a href="citas-nueva.html">Volver a nueva cita</a></p>

@@ -26,39 +26,42 @@
 
         <p class="introduccion">Indica el motivo para cancelar la cita C-001.</p>
 
-        <!-- CU-05, flujo 5b: revisar la cita programada antes de cancelarla. -->
-        <dl class="ficha">
-            <dt>Código</dt>
-            <dd>C-001</dd>
-            <dt>Mascota</dt>
-            <dd>Toby (M-001)</dd>
-            <dt>Servicio</dt>
-            <dd>Consulta general</dd>
-            <dt>Veterinario</dt>
-            <dd>Dra. Ana Pérez (V-001)</dd>
-            <dt>Fecha y hora</dt>
-            <dd><time datetime="2026-11-18T09:00">18/11/2026 a las 09:00</time></dd>
-            <dt>Estado actual</dt>
-            <dd>Programada</dd>
-        </dl>
+        <!-- CU-05, flujo 5b.2: la cita programada C-001 y la solicitud del motivo. -->
+        <article aria-labelledby="titulo-ficha">
+            <h2 id="titulo-ficha">Cita C-001</h2>
+            <dl class="ficha">
+                <dt>Código</dt>
+                <dd>C-001</dd>
+                <dt>Mascota</dt>
+                <dd>Toby (M-001)</dd>
+                <dt>Servicio</dt>
+                <dd>Consulta general</dd>
+                <dt>Veterinario</dt>
+                <dd>Dra. Ana Pérez (V-001)</dd>
+                <dt>Fecha y hora</dt>
+                <dd><time datetime="2026-11-18T09:00">18/11/2026 a las 09:00</time></dd>
+                <dt>Estado actual</dt>
+                <dd>Programada</dd>
+            </dl>
 
-        <!-- CU-05, flujo 5b: motivo obligatorio y confirmación de la cancelación. -->
-        <form class="formulario" action="citas-listado.html" method="get">
-            <fieldset>
-                <legend>Datos de cancelación</legend>
-                <div class="campos">
-                    <div class="campo campo--ancho">
-                        <label for="motivo">Motivo de cancelación</label>
-                        <textarea id="motivo" name="motivo" maxlength="200" aria-describedby="ayuda-motivo" required></textarea>
-                        <p id="ayuda-motivo" class="ayuda">Máximo 200 caracteres. Ejemplo: El propietario solicitó cancelar.</p>
+            <!-- CU-05, flujo 5b.3 y 5b.4: motivo obligatorio (5b.4a si está vacío) y «Volver» (5b.3a). -->
+            <form class="formulario" action="citas-listado.html" method="get">
+                <fieldset>
+                    <legend>Datos de cancelación</legend>
+                    <div class="campos">
+                        <div class="campo campo--ancho">
+                            <label for="motivo">Motivo de cancelación</label>
+                            <textarea id="motivo" name="motivo" maxlength="200" aria-describedby="ayuda-motivo" required></textarea>
+                            <p id="ayuda-motivo" class="ayuda">Máximo 200 caracteres. Ejemplo: El propietario solicitó cancelar.</p>
+                        </div>
                     </div>
+                </fieldset>
+                <div class="acciones">
+                    <button type="submit" class="boton">Confirmar</button>
+                    <a class="boton boton--secundario" href="citas-listado.html">Volver</a>
                 </div>
-            </fieldset>
-            <div class="acciones">
-                <button type="submit" class="boton">Confirmar</button>
-                <a class="boton boton--secundario" href="citas-listado.html">Volver</a>
-            </div>
-        </form>
+            </form>
+        </article>
     </main>
 
     <footer class="pie-pagina">
