@@ -199,7 +199,7 @@ Todos los integrantes usan **solo estas variables**. Prohibido escribir colores,
 - En cada página van `<body class="rol-…">` (el rol de la pantalla) y un `<title>` con el formato «Nombre de pantalla | VetCare».
 - La navegación común del `header` tiene «Menú» (→ menú del rol) y «Cerrar sesión» (→ `../index.html`). En los tres menús solo aparece «Cerrar sesión».
 - Antes de cada bloque funcional va un comentario que lo enlaza a la especificación: `<!-- CU-05, flujo 5b: … -->`.
-- Los `id` van en español y con guiones (`fecha-nacimiento`). Cada control lleva `id` **y** `name`; el `name` es imprescindible para que los `radio` funcionen como grupo.
+- Los `id` van en español y con guiones (`fecha-nacimiento`). Cada control lleva `id` **y** `name`; el `name` es imprescindible para que los `radio` funcionen como grupo. Única excepción: la contraseña de `index.html` no lleva `name`, para que no aparezca en la URL del envío GET.
 - Ningún `style="…"` y ninguna clase fuera del catálogo 4.3.
 
 ### 4.3 Catálogo de componentes (las únicas clases permitidas)
@@ -215,9 +215,11 @@ Todos los integrantes usan **solo estas variables**. Prohibido escribir colores,
 | `.tabla-contenedor` › `table.tabla` | Listados | `tbody tr:nth-child(even)` (zebra), scroll horizontal en móvil |
 | `.estado[data-estado="Programada"]`, `[data-estado="Atendida"]`, `[data-estado="Cancelada"]` | Etiqueta de estado de la cita | **Selector de atributo** |
 | `.acciones-fila` | Lista de enlaces por fila (Ver detalle / Editar / Eliminar) | Flexbox |
-| `.formulario` | Todo formulario de alta o edición | Grid (2 columnas ≥ 40rem) |
-| `.campo` | `label` + control + `.ayuda` | — |
-| `.campo-grupo` | Grupo de `radio`/`checkbox` dentro de un `fieldset` | Flexbox |
+| `.introduccion` | Párrafo breve bajo el `h1` | — |
+| `.formulario` | Todo formulario de alta o edición (separa los `fieldset`) | Flexbox |
+| `.campos` | Contenedor de los `.campo` dentro de cada `fieldset` | Grid (2 columnas ≥ 40rem) |
+| `.campo`, `.campo--ancho` | `label` + control + `.ayuda`; `--ancho` ocupa las 2 columnas (p. ej. `textarea`) | — |
+| `.campo-grupo` › `.opciones` | `fieldset` anidado con un grupo de `radio`/`checkbox`; cada opción es `<label><input> Texto</label>` | Flexbox |
 | `.ayuda` | Texto bajo el control (con `aria-describedby`) | — |
 | `.acciones` | Fila de botones al final de un formulario | Flexbox |
 | `.boton`, `.boton--secundario`, `.boton--peligro` | Botones y enlaces con aspecto de botón | `:hover`, `:active`, `:focus-visible`, `transition` |
@@ -225,11 +227,15 @@ Todos los integrantes usan **solo estas variables**. Prohibido escribir colores,
 | `.aviso`, `.aviso--error`, `.aviso--exito`, `.aviso--info` | Escenarios estáticos («Sin bloques libres», «sin coincidencias»…) | — |
 | `aside.nota-demo` | Instrucciones para quien prueba («ingresa 12,5 kg…») | `aside` semántico |
 | `.solo-lector` | Texto oculto visualmente para lectores de pantalla | Accesibilidad |
+| `.acceso`, `.opciones-acceso` | Solo `index.html` (tarjeta de inicio de sesión) | Grid |
+| `article:target` | Detalle resaltado al llegar por un ancla (historial clínico) | `:target` |
+
+**Página de referencia:** `pages/propietarios-listado.html` está totalmente maquetada con este catálogo; úsala como modelo para los demás listados.
 
 **Estados de los formularios (los define el Integrante 1 una sola vez):**
 - `input:required`, `select:required` y `textarea:required` muestran un indicador en su `label`.
-- `:user-invalid` usa borde `--c-error` y muestra el mensaje `.ayuda` en rojo. Para que funcione en Chrome y Firefox, usar `:user-invalid` y como respaldo `:invalid:not(:placeholder-shown)`.
-- `:valid` usa borde `--c-exito`.
+- `:user-invalid` usa borde `--c-error` y muestra el mensaje `.ayuda` en rojo. Funciona en Chrome 119+ y Firefox 88+. No se usa `:invalid` solo, porque pintaría de rojo los campos vacíos nada más cargar la página.
+- `:valid` usa borde `--c-exito` mientras el campo tiene el foco.
 - `:focus-visible` usa un contorno de 3px en `--c-primario` con `outline-offset: 2px`.
 - `a` y `.boton` cambian con `:hover` y `:active`, con `transition: background-color var(--transicion), color var(--transicion)`.
 
@@ -288,11 +294,25 @@ Si alguien necesita un estilo que no está en el catálogo, **no edita `estilos.
 <form class="formulario" action="mascotas-listado.html" method="get">
     <fieldset>
         <legend>Datos de la mascota</legend>
-        <div class="campo">
-            <label for="nombre">Nombre</label>
-            <input type="text" id="nombre" name="nombre" required minlength="2" maxlength="40" placeholder="Toby">
+        <div class="campos">
+            <div class="campo">
+                <label for="nombre">Nombre</label>
+                <input type="text" id="nombre" name="nombre" required minlength="2" maxlength="40" placeholder="Toby">
+            </div>
+
+            <fieldset class="campo-grupo campo--ancho">
+                <legend>Sexo</legend>
+                <div class="opciones">
+                    <label><input type="radio" name="sexo" value="Macho" required> Macho</label>
+                    <label><input type="radio" name="sexo" value="Hembra"> Hembra</label>
+                </div>
+            </fieldset>
+
+            <div class="campo campo--ancho">
+                <label for="observaciones">Observaciones</label>
+                <textarea id="observaciones" name="observaciones" maxlength="300"></textarea>
+            </div>
         </div>
-        …
     </fieldset>
     <div class="acciones">
         <button type="submit" class="boton">Guardar</button>
