@@ -24,9 +24,119 @@
     <main class="contenido">
         <h1>Listado de mascotas</h1>
 
-        <!-- Pendiente: Integrante 2 · CU-03. Reemplazar este aviso por el contenido de la pantalla
-             (ver docs/PLAN_IMPLEMENTACION.md, sección 7). No modificar header, footer ni head. -->
-        <p class="aviso aviso--info">Pantalla en construcción · Integrante 2 · CU-03.</p>
+        <!-- CU-03, paso 2: herramientas para buscar y registrar mascotas. -->
+        <section class="barra-herramientas" aria-label="Herramientas del listado">
+            <form class="buscador" role="search" action="mascotas-listado.html#resultados" method="get">
+                <label for="busqueda-mascota">Buscar mascota</label>
+                <input type="search" id="busqueda-mascota" name="busqueda" placeholder="Buscar mascota">
+                <button type="submit" class="boton">Buscar</button>
+            </form>
+            <a class="boton" href="mascotas-nueva.html">Nueva mascota</a>
+            <a class="boton boton--secundario" href="citas-nueva.html">Retomar nueva cita</a>
+        </section>
+
+        <!-- CU-03, paso 2: registros canónicos y acciones disponibles para cada mascota. -->
+        <section id="resultados" aria-labelledby="titulo-resultados">
+            <h2 id="titulo-resultados">Mascotas registradas</h2>
+            <div class="tabla-contenedor">
+                <table class="tabla">
+                    <caption>Datos de ejemplo de las mascotas registradas en la clínica.</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col">Código</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Especie</th>
+                            <th scope="col">Raza</th>
+                            <th scope="col">Sexo</th>
+                            <th scope="col">Nacimiento</th>
+                            <th scope="col">Peso</th>
+                            <th scope="col">Esterilizado</th>
+                            <th scope="col">Propietario</th>
+                            <th scope="col">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">M-001</th>
+                            <td>Toby</td>
+                            <td>Perro</td>
+                            <td>Mestizo</td>
+                            <td>Macho</td>
+                            <td>15/03/2021</td>
+                            <td>12,5 kg</td>
+                            <td>Sí</td>
+                            <td>Carlos Andrade</td>
+                            <td>
+                                <ul class="acciones-fila">
+                                    <li><a href="mascotas-detalle.html" aria-label="Ver detalle de Toby">Ver detalle</a></li>
+                                    <li><a href="mascotas-editar.html" aria-label="Editar a Toby">Editar</a></li>
+                                    <li><a href="mascotas-eliminar.html" aria-label="Eliminar a Toby">Eliminar</a></li>
+                                    <li><a href="citas-nueva.html" aria-label="Seleccionar a Toby para una cita">Seleccionar mascota</a></li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">M-002</th>
+                            <td>Michi</td>
+                            <td>Gato</td>
+                            <td>Siamés</td>
+                            <td>Hembra</td>
+                            <td>02/07/2022</td>
+                            <td>4,2 kg</td>
+                            <td>Sí</td>
+                            <td>María López</td>
+                            <td>
+                                <ul class="acciones-fila">
+                                    <li><a href="mascotas-detalle.html" aria-label="Ver detalle de Michi">Ver detalle</a></li>
+                                    <li><a href="mascotas-editar.html" aria-label="Editar a Michi">Editar</a></li>
+                                    <li><a href="mascotas-eliminar.html" aria-label="Eliminar a Michi">Eliminar</a></li>
+                                    <li><a href="citas-nueva.html" aria-label="Seleccionar a Michi para una cita">Seleccionar mascota</a></li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">M-003</th>
+                            <td>Luna</td>
+                            <td>Perro</td>
+                            <td>Labrador</td>
+                            <td>Hembra</td>
+                            <td>20/01/2020</td>
+                            <td>28,0 kg</td>
+                            <td>No</td>
+                            <td>María López</td>
+                            <td>
+                                <ul class="acciones-fila">
+                                    <li><a href="mascotas-detalle.html" aria-label="Ver detalle de Luna">Ver detalle</a></li>
+                                    <li><a href="mascotas-editar.html" aria-label="Editar a Luna">Editar</a></li>
+                                    <li><a href="mascotas-eliminar.html" aria-label="Eliminar a Luna">Eliminar</a></li>
+                                    <li><a href="citas-nueva.html" aria-label="Seleccionar a Luna para una cita">Seleccionar mascota</a></li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">M-004</th>
+                            <td>Kiwi</td>
+                            <td>Ave</td>
+                            <td>Loro amazona</td>
+                            <td>Macho</td>
+                            <td>10/05/2024</td>
+                            <td>0,4 kg</td>
+                            <td>No</td>
+                            <td>Jorge Paredes</td>
+                            <td>
+                                <ul class="acciones-fila">
+                                    <li><a href="mascotas-detalle.html" aria-label="Ver detalle de Kiwi">Ver detalle</a></li>
+                                    <li><a href="mascotas-editar.html" aria-label="Editar a Kiwi">Editar</a></li>
+                                    <li><a href="mascotas-eliminar.html" aria-label="Eliminar a Kiwi">Eliminar</a></li>
+                                    <li><a href="citas-nueva.html" aria-label="Seleccionar a Kiwi para una cita">Seleccionar mascota</a></li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="aviso aviso--info">Sin coincidencias: no hay mascotas que coincidan con la búsqueda realizada.</p>
+        </section>
     </main>
 
     <footer class="pie-pagina">

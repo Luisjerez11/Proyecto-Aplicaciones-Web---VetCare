@@ -24,9 +24,86 @@
     <main class="contenido">
         <h1>Nueva mascota</h1>
 
-        <!-- Pendiente: Integrante 2 · CU-03. Reemplazar este aviso por el contenido de la pantalla
-             (ver docs/PLAN_IMPLEMENTACION.md, sección 7). No modificar header, footer ni head. -->
-        <p class="aviso aviso--info">Pantalla en construcción · Integrante 2 · CU-03.</p>
+        <p class="introduccion">Registra una mascota y vincúlala con su propietario para mantener juntos sus datos.</p>
+
+        <!-- CU-03, paso 1: formulario con validaciones HTML5 para el registro de la mascota. -->
+        <form class="formulario" action="mascotas-listado.html" method="get">
+            <fieldset>
+                <legend>Datos de la mascota</legend>
+                <div class="campos">
+                    <div class="campo">
+                        <label for="nombre">Nombre</label>
+                        <input type="text" id="nombre" name="nombre" required minlength="2" maxlength="40" placeholder="Toby">
+                    </div>
+                    <div class="campo">
+                        <label for="especie">Especie</label>
+                        <select id="especie" name="especie" required>
+                            <option value="" selected disabled>Selecciona…</option>
+                            <option value="Perro">Perro</option>
+                            <option value="Gato">Gato</option>
+                            <option value="Ave">Ave</option>
+                            <option value="Roedor">Roedor</option>
+                            <option value="Otro">Otro</option>
+                        </select>
+                    </div>
+                    <div class="campo">
+                        <label for="raza">Raza</label>
+                        <input type="text" id="raza" name="raza" list="razas-mascota">
+                        <datalist id="razas-mascota">
+                            <option value="Mestizo"></option>
+                            <option value="Labrador"></option>
+                            <option value="Siamés"></option>
+                            <option value="Loro amazona"></option>
+                            <option value="Persa"></option>
+                            <option value="Caniche"></option>
+                        </datalist>
+                    </div>
+                    <fieldset class="campo-grupo">
+                        <legend>Sexo</legend>
+                        <div class="opciones">
+                            <label for="sexo-macho"><input type="radio" id="sexo-macho" name="sexo" value="Macho" required> Macho</label>
+                            <label for="sexo-hembra"><input type="radio" id="sexo-hembra" name="sexo" value="Hembra" required> Hembra</label>
+                        </div>
+                    </fieldset>
+                    <div class="campo">
+                        <label for="fecha-nacimiento">Fecha de nacimiento</label>
+                        <input type="date" id="fecha-nacimiento" name="fecha-nacimiento" max="2026-11-18">
+                    </div>
+                    <div class="campo">
+                        <label for="peso">Peso (kg)</label>
+                        <input type="number" id="peso" name="peso" min="0.1" max="120" step="0.1">
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Propietario y observaciones</legend>
+                <div class="campos">
+                    <div class="campo">
+                        <label for="propietario">Propietario</label>
+                        <select id="propietario" name="propietario" required>
+                            <option value="" selected disabled>Selecciona un propietario…</option>
+                            <option value="P-001">P-001 · Carlos Andrés Andrade Ruiz</option>
+                            <option value="P-002">P-002 · María Fernanda López Vera</option>
+                            <option value="P-003">P-003 · Jorge Luis Paredes Mena</option>
+                        </select>
+                        <p class="ayuda">¿No aparece en la lista? <a href="propietarios-nuevo.html">Registrar propietario</a>.</p>
+                    </div>
+                    <div class="campo">
+                        <label for="esterilizado"><input type="checkbox" id="esterilizado" name="esterilizado" value="sí"> Esterilizado</label>
+                    </div>
+                    <div class="campo campo--ancho">
+                        <label for="observaciones">Observaciones</label>
+                        <textarea id="observaciones" name="observaciones" maxlength="300"></textarea>
+                    </div>
+                </div>
+            </fieldset>
+
+            <div class="acciones">
+                <button type="submit" class="boton">Guardar</button>
+                <a class="boton boton--secundario" href="mascotas-listado.html">Cancelar</a>
+            </div>
+        </form>
     </main>
 
     <footer class="pie-pagina">
