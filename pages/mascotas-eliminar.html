@@ -24,9 +24,35 @@
     <main class="contenido">
         <h1>Eliminar mascota</h1>
 
-        <!-- Pendiente: Integrante 2 · CU-03. Reemplazar este aviso por el contenido de la pantalla
-             (ver docs/PLAN_IMPLEMENTACION.md, sección 7). No modificar header, footer ni head. -->
-        <p class="aviso aviso--info">Pantalla en construcción · Integrante 2 · CU-03.</p>
+        <p class="introduccion">Confirma si deseas eliminar el registro de Kiwi (M-004).</p>
+
+        <!-- CU-03, paso 5: confirmación para la mascota M-004. -->
+        <dl class="ficha">
+            <dt>Código</dt>
+            <dd>M-004</dd>
+            <dt>Nombre</dt>
+            <dd>Kiwi</dd>
+            <dt>Especie</dt>
+            <dd>Ave</dd>
+            <dt>Raza</dt>
+            <dd>Loro amazona</dd>
+            <dt>Sexo</dt>
+            <dd>Macho</dd>
+            <dt>Fecha de nacimiento</dt>
+            <dd>10/05/2024</dd>
+            <dt>Peso</dt>
+            <dd>0,4 kg</dd>
+            <dt>Esterilizado</dt>
+            <dd>No</dd>
+            <dt>Propietario</dt>
+            <dd>Jorge Luis Paredes Mena (P-003)</dd>
+        </dl>
+
+        <p class="aviso aviso--info">Esta demostración es estática. Al confirmar, volverás al listado de mascotas.</p>
+        <form class="acciones" action="mascotas-listado.html" method="get">
+            <button type="submit" class="boton boton--peligro">Confirmar</button>
+            <a class="boton boton--secundario" href="mascotas-listado.html">Cancelar</a>
+        </form>
     </main>
 
     <footer class="pie-pagina">
