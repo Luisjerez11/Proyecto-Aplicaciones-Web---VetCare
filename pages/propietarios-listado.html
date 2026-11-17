@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listado de propietarios | VetCare</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&amp;family=Poppins:wght@600;700&amp;display=swap">
+    <link rel="stylesheet" href="../css/estilos.css">
+</head>
+<body class="rol-recepcion">
+    <header class="encabezado">
+        <p class="marca">VetCare <span>Clínica veterinaria Huellitas</span></p>
+        <p class="rol-actual">Recepción</p>
+        <nav class="nav-principal" aria-label="Navegación común">
+            <ul>
+                <li><a href="menu-recepcion.html">Menú</a></li>
+                <li><a href="../index.html">Cerrar sesión</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="contenido">
+        <!-- CU-02, paso 2: listado de propietarios con campo de búsqueda -->
+        <h1>Listado de propietarios</h1>
+
+        <section class="barra-herramientas" aria-label="Herramientas del listado">
+            <!-- CU-02, flujo 3a.1–3a.2: buscar propietario -->
+            <form class="buscador" role="search" action="propietarios-listado.html#resultados" method="get">
+                <label for="busqueda">Buscar por cédula, nombres o apellidos</label>
+                <input type="search" id="busqueda" name="busqueda" placeholder="Buscar propietario">
+                <button type="submit" class="boton">Buscar</button>
+            </form>
+
+            <!-- CU-02, paso 3: registrar un propietario -->
+            <a class="boton" href="propietarios-nuevo.html">Nuevo propietario</a>
+        </section>
+
+        <!-- CU-02, paso 2 y flujo 3a.2: propietarios registrados -->
+        <section id="resultados" aria-labelledby="titulo-resultados">
+            <h2 id="titulo-resultados">Propietarios registrados</h2>
+            <div class="tabla-contenedor">
+                <table class="tabla">
+                    <caption>Propietarios de ejemplo de la clínica Huellitas</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col">Código</th>
+                            <th scope="col">Cédula</th>
+                            <th scope="col">Nombres y apellidos</th>
+                            <th scope="col">Celular</th>
+                            <th scope="col">Correo electrónico</th>
+                            <th scope="col">Mascotas</th>
+                            <th scope="col">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">P-001</th>
+                            <td>1712345678</td>
+                            <td>Carlos Andrés Andrade Ruiz</td>
+                            <td>0991234567</td>
+                            <td>carlos.andrade@correo.com</td>
+                            <td>Toby</td>
+                            <td>
+                                <!-- CU-02, flujos 3a.3, 3b.1 y 3c.1 -->
+                                <ul class="acciones-fila">
+                                    <li><a href="propietarios-detalle.html">Ver detalle<span class="solo-lector"> de Carlos Andrade</span></a></li>
+                                    <li><a href="propietarios-editar.html">Editar<span class="solo-lector"> a Carlos Andrade</span></a></li>
+                                    <li><a href="propietarios-eliminar.html">Eliminar<span class="solo-lector"> a Carlos Andrade</span></a></li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">P-002</th>
+                            <td>1723456789</td>
+                            <td>María Fernanda López Vera</td>
+                            <td>0987654321</td>
+                            <td>maria.lopez@correo.com</td>
+                            <td>Michi, Luna</td>
+                            <td>
+                                <ul class="acciones-fila">
+                                    <li><a href="propietarios-detalle.html">Ver detalle<span class="solo-lector"> de María López</span></a></li>
+                                    <li><a href="propietarios-editar.html">Editar<span class="solo-lector"> a María López</span></a></li>
+                                    <li><a href="propietarios-eliminar.html">Eliminar<span class="solo-lector"> a María López</span></a></li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">P-003</th>
+                            <td>1734567890</td>
+                            <td>Jorge Luis Paredes Mena</td>
+                            <td>0976543210</td>
+                            <td>jorge.paredes@correo.com</td>
+                            <td>Kiwi</td>
+                            <td>
+                                <ul class="acciones-fila">
+                                    <li><a href="propietarios-detalle.html">Ver detalle<span class="solo-lector"> de Jorge Paredes</span></a></li>
+                                    <li><a href="propietarios-editar.html">Editar<span class="solo-lector"> a Jorge Paredes</span></a></li>
+                                    <li><a href="propietarios-eliminar.html">Eliminar<span class="solo-lector"> a Jorge Paredes</span></a></li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- CU-02, flujo 3a.2a: escenario estático de búsqueda sin coincidencias -->
+        <section class="aviso aviso--info" aria-labelledby="titulo-sin-resultados">
+            <h2 id="titulo-sin-resultados" class="solo-lector">Ejemplo de búsqueda sin resultados</h2>
+            <p>Ejemplo: al buscar «0912345678» no se encontraron propietarios. Revisa el criterio e intenta otra búsqueda.</p>
+        </section>
+
+        <!-- CU-03, flujo 5a y CU-04, flujo 3b: continuar el registro de una mascota -->
+        <aside class="nota-demo" aria-labelledby="titulo-retomar">
+            <h2 id="titulo-retomar" class="solo-lector">Continuar un registro pendiente</h2>
+            <p>¿Registraste al propietario mientras creabas una mascota? Continúa con su registro:</p>
+            <p><a class="boton boton--secundario" href="mascotas-nueva.html">Retomar nueva mascota</a></p>
+        </aside>
+    </main>
+
+    <footer class="pie-pagina">
+        <p>VetCare · Clínica veterinaria Huellitas · Proyecto de Aplicaciones Web · EPN 2026B</p>
+    </footer>
+</body>
+</html>
