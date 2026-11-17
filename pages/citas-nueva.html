@@ -24,9 +24,56 @@
     <main class="contenido">
         <h1>Nueva cita</h1>
 
-        <!-- Pendiente: Integrante 2 · CU-04. Reemplazar este aviso por el contenido de la pantalla
-             (ver docs/PLAN_IMPLEMENTACION.md, sección 7). No modificar header, footer ni head. -->
-        <p class="aviso aviso--info">Pantalla en construcción · Integrante 2 · CU-04.</p>
+        <p class="introduccion">Selecciona la mascota, el servicio, el veterinario y la fecha para consultar los horarios disponibles.</p>
+
+        <!-- CU-04, pasos 1 a 3: seleccionar los datos de la cita y consultar disponibilidad. -->
+        <form class="formulario" action="citas-disponibilidad.html" method="get">
+            <fieldset>
+                <legend>Datos de la cita</legend>
+                <div class="campos">
+                    <div class="campo">
+                        <label for="mascota">Mascota</label>
+                        <select id="mascota" name="mascota" required>
+                            <option value="" selected disabled>Selecciona una mascota…</option>
+                            <option value="M-001">Toby · M-001</option>
+                            <option value="M-002">Michi · M-002</option>
+                            <option value="M-003">Luna · M-003</option>
+                            <option value="M-004">Kiwi · M-004</option>
+                        </select>
+                        <p class="ayuda">¿No encuentras la mascota? <a href="mascotas-listado.html">Identificar mascota</a>.</p>
+                    </div>
+                    <div class="campo">
+                        <label for="servicio">Servicio</label>
+                        <select id="servicio" name="servicio" required>
+                            <option value="" selected disabled>Selecciona un servicio…</option>
+                            <option value="S-001">Consulta general · $25,00</option>
+                            <option value="S-002">Vacunación · $18,00</option>
+                            <option value="S-003">Desparasitación · $12,00</option>
+                            <option value="S-004">Control postoperatorio · $20,00</option>
+                            <option value="S-005">Baño medicado · $15,00</option>
+                        </select>
+                    </div>
+                    <div class="campo">
+                        <label for="veterinario">Veterinario</label>
+                        <select id="veterinario" name="veterinario" required>
+                            <option value="" selected disabled>Selecciona un veterinario…</option>
+                            <option value="V-001">Dra. Ana Pérez</option>
+                            <option value="V-002">Dr. Luis Mora</option>
+                            <option value="V-003">Dra. Sofía Vega</option>
+                        </select>
+                    </div>
+                    <div class="campo">
+                        <label for="fecha-cita">Fecha</label>
+                        <input type="date" id="fecha-cita" name="fecha" min="2026-11-18" required>
+                    </div>
+                </div>
+            </fieldset>
+
+            <div class="acciones">
+                <button type="submit" class="boton">Consultar disponibilidad</button>
+                <a class="boton boton--secundario" href="citas-listado.html">Cancelar</a>
+            </div>
+        </form>
     </main>
 
     <footer class="pie-pagina">
