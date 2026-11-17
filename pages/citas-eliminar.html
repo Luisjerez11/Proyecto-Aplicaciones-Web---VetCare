@@ -26,29 +26,34 @@
 
         <p class="introduccion">Confirma si deseas eliminar el registro de la cita C-005.</p>
 
-        <!-- CU-05, paso 9: confirmación para la cita de ejemplo C-005. -->
-        <dl class="ficha">
-            <dt>Código</dt>
-            <dd>C-005</dd>
-            <dt>Mascota</dt>
-            <dd>Kiwi (M-004)</dd>
-            <dt>Servicio</dt>
-            <dd>Consulta general</dd>
-            <dt>Veterinario</dt>
-            <dd>Dra. Sofía Vega (V-003)</dd>
-            <dt>Fecha y hora</dt>
-            <dd><time datetime="2026-11-19T15:00">19/11/2026 a las 15:00</time></dd>
-            <dt>Estado</dt>
-            <dd>Cancelada</dd>
-            <dt>Motivo de cancelación</dt>
-            <dd>El propietario solicitó cancelar.</dd>
-        </dl>
+        <!-- CU-05, flujo 5c.2 a 5c.4: datos de la cita C-005 y confirmación; «Cancelar» es el flujo 5c.3a. -->
+        <article aria-labelledby="titulo-ficha">
+            <h2 id="titulo-ficha">¿Eliminar la cita C-005?</h2>
+            <dl class="ficha">
+                <dt>Código</dt>
+                <dd>C-005</dd>
+                <dt>Mascota</dt>
+                <dd>Kiwi (M-004)</dd>
+                <dt>Servicio</dt>
+                <dd>Consulta general</dd>
+                <dt>Veterinario</dt>
+                <dd>Dra. Sofía Vega (V-003)</dd>
+                <dt>Fecha y hora</dt>
+                <dd><time datetime="2026-11-19T15:00">19/11/2026 a las 15:00</time></dd>
+                <dt>Estado</dt>
+                <dd>Cancelada</dd>
+                <dt>Motivo de cancelación</dt>
+                <dd>El propietario solicitó cancelar.</dd>
+            </dl>
 
-        <p class="aviso aviso--info">Esta demostración es estática. Al confirmar, volverás al listado de citas.</p>
-        <form class="acciones" action="citas-listado.html" method="get">
-            <button type="submit" class="boton boton--peligro">Confirmar</button>
-            <a class="boton boton--secundario" href="citas-listado.html">Cancelar</a>
-        </form>
+            <p class="aviso aviso--info">Esta demostración es estática. Al confirmar, volverás al listado de citas.</p>
+            <form action="citas-listado.html" method="get">
+                <div class="acciones">
+                    <button type="submit" class="boton boton--peligro">Confirmar</button>
+                    <a class="boton boton--secundario" href="citas-listado.html">Cancelar</a>
+                </div>
+            </form>
+        </article>
     </main>
 
     <footer class="pie-pagina">

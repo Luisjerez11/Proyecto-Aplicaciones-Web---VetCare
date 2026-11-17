@@ -26,7 +26,7 @@
 
         <p class="introduccion">Cambia la fecha de la cita C-001 y consulta los horarios disponibles. Se conserva el veterinario asignado.</p>
 
-        <!-- CU-05, paso 5: datos de C-001; el veterinario se conserva al reprogramar. -->
+        <!-- CU-05, flujo 5a.2: datos de C-001; el veterinario asignado se conserva al reprogramar. -->
         <dl class="ficha">
             <dt>Código</dt>
             <dd>C-001</dd>
@@ -40,7 +40,8 @@
             <dd><time datetime="09:00">09:00</time></dd>
         </dl>
 
-        <!-- CU-05, pasos 5 a 8: validar la fecha y continuar a la consulta de disponibilidad. -->
+        <!-- CU-05, flujo 5a.3: proponer la fecha y consultar disponibilidad (CU-11).
+             Flujo 5a.6a: el navegador rechaza fechas anteriores al 18/11/2026; flujo 5a.2a: «Cancelar». -->
         <form class="formulario" action="citas-disponibilidad.html" method="get">
             <fieldset>
                 <legend>Nueva fecha de la cita</legend>

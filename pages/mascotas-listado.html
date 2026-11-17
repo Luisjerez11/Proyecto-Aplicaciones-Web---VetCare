@@ -32,10 +32,12 @@
                 <button type="submit" class="boton">Buscar</button>
             </form>
             <a class="boton" href="mascotas-nueva.html">Nueva mascota</a>
+            <!-- CU-04, flujo 3a: tras registrar la mascota, la recepcionista retoma el agendamiento. -->
             <a class="boton boton--secundario" href="citas-nueva.html">Retomar nueva cita</a>
         </section>
 
-        <!-- CU-03, paso 2: registros canónicos y acciones disponibles para cada mascota. -->
+        <!-- CU-03, paso 2 y flujos 3a, 3b y 3c: registros canónicos y acciones de cada mascota.
+             «Seleccionar mascota» corresponde a CU-04, paso 3 (punto de extensión «Identificar mascota»). -->
         <section id="resultados" aria-labelledby="titulo-resultados">
             <h2 id="titulo-resultados">Mascotas registradas</h2>
             <div class="tabla-contenedor">
@@ -135,7 +137,11 @@
                     </tbody>
                 </table>
             </div>
-            <p class="aviso aviso--info">Sin coincidencias: no hay mascotas que coincidan con la búsqueda realizada.</p>
+        </section>
+
+        <!-- CU-03, flujo 3a.2a: escenario estático de búsqueda sin coincidencias. -->
+        <section class="aviso aviso--info" aria-label="Ejemplo de búsqueda sin resultados">
+            <p>Ejemplo: al buscar «Rex» no se encontraron mascotas. Intenta con otro criterio.</p>
         </section>
     </main>
 

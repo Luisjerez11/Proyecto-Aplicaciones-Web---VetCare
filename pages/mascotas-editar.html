@@ -26,7 +26,8 @@
 
         <p class="introduccion">Actualiza los datos de Toby (M-001). El propietario actual está seleccionado.</p>
 
-        <!-- CU-03, paso 4: formulario precargado con los datos canónicos de Toby. -->
+        <!-- CU-03, flujo 3b.2 a 3b.4: formulario precargado con los datos canónicos de Toby.
+             Flujo 3b.5a: el navegador indica el dato inválido; flujo 3b.4a: «Cancelar». -->
         <form class="formulario" action="mascotas-listado.html" method="get">
             <fieldset>
                 <legend>Datos de la mascota</legend>
@@ -58,7 +59,7 @@
                             <option value="Caniche"></option>
                         </datalist>
                     </div>
-                    <fieldset class="campo-grupo">
+                    <fieldset class="campo-grupo campo--ancho">
                         <legend>Sexo</legend>
                         <div class="opciones">
                             <label for="sexo-macho"><input type="radio" id="sexo-macho" name="sexo" value="Macho" required checked> Macho</label>
@@ -81,13 +82,14 @@
                 <div class="campos">
                     <div class="campo">
                         <label for="propietario">Propietario</label>
-                        <select id="propietario" name="propietario" required>
+                        <select id="propietario" name="propietario" required aria-describedby="ayuda-propietario">
                             <option value="" disabled>Selecciona un propietario…</option>
                             <option value="P-001" selected>P-001 · Carlos Andrés Andrade Ruiz</option>
                             <option value="P-002">P-002 · María Fernanda López Vera</option>
                             <option value="P-003">P-003 · Jorge Luis Paredes Mena</option>
                         </select>
-                        <p class="ayuda">¿No aparece en la lista? <a href="propietarios-nuevo.html">Registrar propietario</a>.</p>
+                        <!-- CU-03, flujo 5a: propietario no registrado; se registra mediante CU-02. -->
+                        <p id="ayuda-propietario" class="ayuda">¿No aparece en la lista? <a href="propietarios-nuevo.html">Registrar propietario</a>.</p>
                     </div>
                     <div class="campo">
                         <label for="esterilizado"><input type="checkbox" id="esterilizado" name="esterilizado" value="sí" checked> Esterilizado</label>
