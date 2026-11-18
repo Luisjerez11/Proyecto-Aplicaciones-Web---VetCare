@@ -4,9 +4,9 @@
    «Solicitud CSS: …» (ver docs/PLAN_IMPLEMENTACION.md, sección 8).
 
    Índice
-   1. Tokens de diseño (:root)
+   1. Tokens de diseño (:root y colores por rol)
    2. Base y tipografía
-   3. Layout común: encabezado, contenido y pie
+   3. Layout común: encabezado, contenido, portada de módulo y pie
    4. Componentes: botones, menús, barra de herramientas y buscador
    5. Tablas y estados de cita
    6. Formularios y validación
@@ -14,6 +14,12 @@
    8. Pantalla de acceso
    9. Utilidades
    10. Puntos de quiebre (tablet 40rem y escritorio 64rem)
+   11. Movimiento reducido (prefers-reduced-motion)
+
+   Imágenes: las fotos están en img/fotos/ y los iconos (Lucide, licencia
+   ISC) en img/iconos/. Los iconos se colocan solo desde esta hoja con
+   ::before, así el HTML no cambia y los textos de enlaces y botones
+   siguen siendo exactamente los del Anexo A.
    ========================================================================== */
 
 /* 1. Tokens de diseño ===================================================== */
@@ -22,6 +28,7 @@
     --ff-titulos: "Poppins", system-ui, sans-serif;
     --ff-texto: "Nunito Sans", system-ui, sans-serif;
 
+    --fs-xs: 0.8125rem;
     --fs-sm: 0.875rem;
     --fs-base: 1rem;
     --fs-md: 1.125rem;
@@ -43,6 +50,8 @@
     /* Colores (contraste AA verificado) */
     --c-primario: #0f766e;
     --c-primario-osc: #134e4a;
+    --c-primario-suave: #ccfbf1;
+    --c-acento: #c2410c;
     --c-texto: #1f2937;
     --c-texto-suave: #4b5563;
     --c-fondo: #f8fafc;
@@ -50,6 +59,7 @@
     --c-fila-alterna: #f1f5f9;
     --c-borde: #d1d5db;
     --c-error: #b91c1c;
+    --c-error-osc: #7f1d1d;
     --c-error-fondo: #fee2e2;
     --c-exito: #15803d;
     --c-exito-fondo: #dcfce7;
@@ -60,24 +70,42 @@
 
     /* Color del rol (lo cambian las clases .rol-*) */
     --c-rol: var(--c-primario);
+    --c-rol-osc: var(--c-primario-osc);
+    --c-rol-suave: var(--c-primario-suave);
+
+    /* Forma y elevación */
+    --radio: 0.5rem;
+    --radio-lg: 1rem;
+    --radio-pildora: 999px;
+    --sombra: 0 1px 3px rgb(15 23 42 / 0.12);
+    --sombra-md: 0 4px 12px rgb(15 23 42 / 0.1);
+    --sombra-lg: 0 12px 28px rgb(15 23 42 / 0.16);
+
+    /* Movimiento */
+    --transicion: 200ms ease;
+    --transicion-rapida: 150ms ease-out;
 
     /* Otros */
-    --radio: 0.5rem;
-    --sombra: 0 1px 3px rgb(0 0 0 / 0.12);
     --ancho-max: 72rem;
-    --transicion: 200ms ease;
+    --icono: 1.25rem;
 }
 
 .rol-recepcion {
     --c-rol: #166534;
+    --c-rol-osc: #14532d;
+    --c-rol-suave: #dcfce7;
 }
 
 .rol-veterinario {
     --c-rol: #92400e;
+    --c-rol-osc: #78350f;
+    --c-rol-suave: #fef3c7;
 }
 
 .rol-administrador {
     --c-rol: #5b21b6;
+    --c-rol-osc: #4c1d95;
+    --c-rol-suave: #ede9fe;
 }
 
 /* 2. Base y tipografía ==================================================== */
@@ -102,6 +130,11 @@ body {
     line-height: var(--lh-texto);
     color: var(--c-texto);
     background-color: var(--c-fondo);
+}
+
+::selection {
+    color: var(--c-texto);
+    background-color: var(--c-rol-suave);
 }
 
 h1,
@@ -132,6 +165,17 @@ h4 {
     font-size: var(--fs-md);
 }
 
+/* Título de cada pantalla con una barra de acento del color del rol */
+.contenido > h1::after {
+    content: "";
+    display: block;
+    width: 3.5rem;
+    height: 0.25rem;
+    margin-top: var(--sp-3);
+    background-image: linear-gradient(90deg, var(--c-rol), var(--c-acento));
+    border-radius: var(--radio-pildora);
+}
+
 p,
 ul,
 ol,
@@ -159,8 +203,16 @@ a:active {
 }
 
 img {
+    display: block;
     max-width: 100%;
     height: auto;
+}
+
+/* Cifras de igual ancho para horas, fechas, códigos y precios */
+time,
+.tabla,
+.ficha dd {
+    font-variant-numeric: tabular-nums;
 }
 
 /* 3. Layout común ========================================================= */
@@ -173,22 +225,38 @@ img {
     padding: var(--sp-3) var(--sp-4);
     color: #ffffff;
     background-color: var(--c-rol);
+    background-image: linear-gradient(120deg, var(--c-rol) 0%, var(--c-rol-osc) 100%);
+    box-shadow: var(--sombra-md);
 }
 
 .encabezado p {
     margin: 0;
 }
 
+/* Marca: huella + «VetCare» + nombre de la clínica */
 .marca {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    column-gap: var(--sp-3);
     font-family: var(--ff-titulos);
     font-size: var(--fs-lg);
     font-weight: 700;
     line-height: var(--lh-titulos);
 }
 
+.marca::before {
+    content: "";
+    grid-row: 1 / span 2;
+    width: 2.5rem;
+    height: 2.5rem;
+    background: rgb(255 255 255 / 0.16) url("../img/iconos/paw-print-blanco.svg") center / 1.5rem no-repeat;
+    border: 1px solid rgb(255 255 255 / 0.35);
+    border-radius: 50%;
+}
+
 .marca span {
+    grid-column: 2;
     font-family: var(--ff-texto);
     font-size: var(--fs-sm);
     font-weight: 400;
@@ -198,8 +266,9 @@ img {
     padding: var(--sp-1) var(--sp-3);
     font-size: var(--fs-sm);
     font-weight: 700;
+    background-color: rgb(255 255 255 / 0.12);
     border: 1px solid rgb(255 255 255 / 0.7);
-    border-radius: 999px;
+    border-radius: var(--radio-pildora);
 }
 
 .nav-principal {
@@ -216,13 +285,38 @@ img {
 }
 
 .nav-principal a {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-2);
+    min-height: 2.5rem;
     padding: var(--sp-1) var(--sp-3);
     font-weight: 600;
     color: #ffffff;
     text-decoration: none;
+    border: 1px solid transparent;
     border-radius: var(--radio);
-    transition: background-color var(--transicion);
+    transition: background-color var(--transicion), border-color var(--transicion);
+}
+
+.nav-principal a::before {
+    content: "";
+    flex: none;
+    width: 1.125rem;
+    height: 1.125rem;
+    background: center / contain no-repeat;
+}
+
+/* «Menú» lleva una casa; «Cerrar sesión» una puerta y queda separado */
+.nav-principal a[href^="menu-"]::before {
+    background-image: url("../img/iconos/house-blanco.svg");
+}
+
+.nav-principal a[href$="index.html"] {
+    border-color: rgb(255 255 255 / 0.55);
+}
+
+.nav-principal a[href$="index.html"]::before {
+    background-image: url("../img/iconos/log-out-blanco.svg");
 }
 
 .nav-principal a:hover {
@@ -255,8 +349,28 @@ img {
 }
 
 .introduccion {
-    max-width: 48rem;
+    max-width: 65ch;
+    font-size: var(--fs-md);
     color: var(--c-texto-suave);
+}
+
+/* Foto decorativa bajo el título de cada pantalla de entrada de módulo */
+.portada-modulo {
+    width: 100%;
+    aspect-ratio: 3 / 1;
+    object-fit: cover;
+    object-position: center 40%;
+    border-radius: var(--radio-lg);
+    box-shadow: var(--sombra-md);
+}
+
+/* Encuadre por foto, para que el recorte panorámico no corte caras */
+.portada-modulo[src$="historial.webp"] {
+    object-position: center 30%;
+}
+
+.portada-modulo[src$="agenda.webp"] {
+    object-position: center 55%;
 }
 
 .pie-pagina {
@@ -269,7 +383,18 @@ img {
 }
 
 .pie-pagina p {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-2);
     margin: 0;
+}
+
+.pie-pagina p::before {
+    content: "";
+    flex: none;
+    width: 1rem;
+    height: 1rem;
+    background: url("../img/iconos/paw-print-primario.svg") center / contain no-repeat;
 }
 
 /* 4. Componentes ========================================================== */
@@ -279,6 +404,7 @@ img {
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    gap: var(--sp-2);
     min-height: 2.75rem;
     padding: var(--sp-2) var(--sp-5);
     font-family: var(--ff-texto);
@@ -292,27 +418,32 @@ img {
     background-color: var(--c-primario);
     border: 2px solid var(--c-primario);
     border-radius: var(--radio);
-    transition: background-color var(--transicion), border-color var(--transicion), color var(--transicion), transform var(--transicion);
+    box-shadow: var(--sombra);
+    transition: background-color var(--transicion), border-color var(--transicion), color var(--transicion), box-shadow var(--transicion), transform var(--transicion-rapida);
 }
 
 .boton:hover {
     color: #ffffff;
     background-color: var(--c-primario-osc);
     border-color: var(--c-primario-osc);
+    box-shadow: var(--sombra-md);
 }
 
 .boton:active {
     transform: translateY(1px);
+    box-shadow: var(--sombra);
 }
 
 .boton--secundario {
     color: var(--c-primario);
     background-color: var(--c-superficie);
+    box-shadow: none;
 }
 
 .boton--secundario:hover {
     color: var(--c-primario-osc);
     background-color: var(--c-fila-alterna);
+    box-shadow: none;
 }
 
 .boton--peligro {
@@ -321,8 +452,37 @@ img {
 }
 
 .boton--peligro:hover {
-    background-color: #7f1d1d;
-    border-color: #7f1d1d;
+    background-color: var(--c-error-osc);
+    border-color: var(--c-error-osc);
+}
+
+/* Iconos de los botones: se eligen por su función, sin tocar el HTML */
+.buscador .boton::before,
+.barra-herramientas > a.boton:not(.boton--secundario)::before,
+a.boton[href$="-editar.html"]:not(.boton--secundario)::before,
+.boton--peligro::before,
+.opciones-acceso .boton::before {
+    content: "";
+    flex: none;
+    width: var(--icono);
+    height: var(--icono);
+    background: center / contain no-repeat;
+}
+
+.buscador .boton::before {
+    background-image: url("../img/iconos/search-blanco.svg");
+}
+
+.barra-herramientas > a.boton:not(.boton--secundario)::before {
+    background-image: url("../img/iconos/plus-blanco.svg");
+}
+
+a.boton[href$="-editar.html"]:not(.boton--secundario)::before {
+    background-image: url("../img/iconos/pencil-blanco.svg");
+}
+
+.boton--peligro::before {
+    background-image: url("../img/iconos/trash-2-blanco.svg");
 }
 
 /* Fila de botones al final de un formulario o una ficha */
@@ -333,11 +493,16 @@ img {
     margin: 0;
 }
 
-/* Menús de rol: cada opción es una tarjeta (toda la tarjeta es clicable) */
+/* En móvil cada botón ocupa el ancho completo (área táctil más cómoda) */
+.acciones > .boton {
+    flex: 1 1 12rem;
+}
+
+/* Menús de rol: cada opción es una tarjeta con foto (toda la tarjeta es clicable) */
 .menu-tarjetas ul {
     display: grid;
     grid-template-columns: 1fr;
-    gap: var(--sp-4);
+    gap: var(--sp-5);
     margin: 0;
     padding: 0;
     list-style: none;
@@ -345,24 +510,50 @@ img {
 
 .menu-tarjetas li {
     position: relative;
-    padding: var(--sp-5);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
     background-color: var(--c-superficie);
     border: 1px solid var(--c-borde);
-    border-top: 4px solid var(--c-rol);
-    border-radius: var(--radio);
+    border-bottom: 4px solid var(--c-rol);
+    border-radius: var(--radio-lg);
     box-shadow: var(--sombra);
     transition: transform var(--transicion), box-shadow var(--transicion);
 }
 
 .menu-tarjetas li:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgb(0 0 0 / 0.12);
+    transform: translateY(-4px);
+    box-shadow: var(--sombra-lg);
+}
+
+/* Foco del teclado: se marca la tarjeta completa, no solo el texto */
+.menu-tarjetas li:has(a:focus-visible) {
+    outline: 3px solid var(--c-rol);
+    outline-offset: 3px;
+}
+
+.menu-tarjetas a:focus-visible {
+    outline: none;
+}
+
+.menu-tarjetas img {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    background-color: var(--c-rol-suave);
+    transition: transform 400ms ease;
+}
+
+.menu-tarjetas li:hover img {
+    transform: scale(1.05);
 }
 
 .menu-tarjetas a {
+    margin: var(--sp-4) var(--sp-5) 0;
     font-family: var(--ff-titulos);
     font-size: var(--fs-lg);
     font-weight: 600;
+    color: var(--c-rol);
     text-decoration: none;
 }
 
@@ -370,11 +561,12 @@ img {
     content: "";
     position: absolute;
     inset: 0;
-    border-radius: var(--radio);
+    z-index: 1;
+    border-radius: var(--radio-lg);
 }
 
 .menu-tarjetas p {
-    margin: var(--sp-2) 0 0;
+    margin: var(--sp-2) var(--sp-5) var(--sp-5);
     color: var(--c-texto-suave);
 }
 
@@ -385,6 +577,11 @@ img {
     align-items: flex-end;
     justify-content: space-between;
     gap: var(--sp-4);
+    padding: var(--sp-4);
+    background-color: var(--c-superficie);
+    border: 1px solid var(--c-borde);
+    border-radius: var(--radio-lg);
+    box-shadow: var(--sombra);
 }
 
 .buscador {
@@ -411,7 +608,7 @@ img {
     overflow-x: auto;
     background-color: var(--c-superficie);
     border: 1px solid var(--c-borde);
-    border-radius: var(--radio);
+    border-radius: var(--radio-lg);
     box-shadow: var(--sombra);
 }
 
@@ -433,7 +630,7 @@ img {
 .tabla td {
     padding: var(--sp-3) var(--sp-4);
     text-align: left;
-    vertical-align: top;
+    vertical-align: middle;
     border-top: 1px solid var(--c-borde);
 }
 
@@ -441,7 +638,13 @@ img {
     font-family: var(--ff-titulos);
     font-weight: 600;
     color: #ffffff;
-    background-color: var(--c-primario-osc);
+    white-space: nowrap;
+    background-color: var(--c-rol-osc);
+}
+
+.tabla tbody th[scope="row"] {
+    font-weight: 700;
+    white-space: nowrap;
 }
 
 .tabla tbody tr:nth-child(even) {
@@ -453,31 +656,116 @@ img {
 }
 
 .tabla tbody tr:hover {
-    background-color: var(--c-info-fondo);
+    background-color: var(--c-rol-suave);
 }
 
-/* Enlaces de acción dentro de una fila */
+/* La celda de acciones deja al menos dos píldoras por línea */
+.tabla td:has(.acciones-fila) {
+    min-width: 16rem;
+}
+
+/* Enlaces de acción dentro de una fila: «píldoras» con icono */
 .acciones-fila {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--sp-1) var(--sp-3);
+    gap: var(--sp-2);
     margin: 0;
     padding: 0;
     list-style: none;
 }
 
 .acciones-fila a {
+    --icono-fila: none;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-1);
+    min-height: 2rem;
+    padding: var(--sp-1) var(--sp-3);
+    font-size: var(--fs-sm);
     font-weight: 600;
     white-space: nowrap;
+    text-decoration: none;
+    background-color: var(--c-superficie);
+    border: 1px solid var(--c-borde);
+    border-radius: var(--radio-pildora);
+    transition: background-color var(--transicion), border-color var(--transicion), color var(--transicion);
+}
+
+.acciones-fila a::before {
+    content: "";
+    flex: none;
+    width: 1rem;
+    height: 1rem;
+    background: var(--icono-fila) center / contain no-repeat;
+}
+
+.acciones-fila a:hover {
+    background-color: var(--c-primario-suave);
+    border-color: currentColor;
+}
+
+.acciones-fila a[href*="-detalle"] {
+    --icono-fila: url("../img/iconos/eye-primario.svg");
+}
+
+.acciones-fila a[href*="-editar"] {
+    --icono-fila: url("../img/iconos/pencil-primario.svg");
+}
+
+.acciones-fila a[href="citas-editar.html"] {
+    --icono-fila: url("../img/iconos/calendar-clock-primario.svg");
+}
+
+.acciones-fila a[href="citas-nueva.html"] {
+    --icono-fila: url("../img/iconos/calendar-plus-primario.svg");
+}
+
+.acciones-fila a[href^="atencion-registrar"] {
+    --icono-fila: url("../img/iconos/clipboard-plus-primario.svg");
+}
+
+.acciones-fila a[href^="historial-clinico"] {
+    --icono-fila: url("../img/iconos/clipboard-list-primario.svg");
+}
+
+/* Acciones destructivas en rojo (no solo por color: también cambia el icono) */
+.acciones-fila a[href*="-eliminar"],
+.acciones-fila a[href*="-cancelar"] {
+    color: var(--c-error);
+}
+
+.acciones-fila a[href*="-eliminar"]:hover,
+.acciones-fila a[href*="-cancelar"]:hover {
+    color: var(--c-error-osc);
+    background-color: var(--c-error-fondo);
+}
+
+.acciones-fila a[href*="-eliminar"] {
+    --icono-fila: url("../img/iconos/trash-2-error.svg");
+}
+
+.acciones-fila a[href*="-cancelar"] {
+    --icono-fila: url("../img/iconos/calendar-x-error.svg");
 }
 
 /* Etiqueta de estado: se colorea según el atributo data-estado */
 .estado {
-    display: inline-block;
-    padding: 0 var(--sp-2);
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-1);
+    padding: 0.125rem var(--sp-3);
     font-size: var(--fs-sm);
     font-weight: 700;
-    border-radius: 999px;
+    white-space: nowrap;
+    border-radius: var(--radio-pildora);
+}
+
+.estado::before {
+    content: "";
+    width: 0.5rem;
+    height: 0.5rem;
+    background-color: currentColor;
+    border-radius: 50%;
 }
 
 .estado[data-estado="Programada"] {
@@ -509,7 +797,8 @@ fieldset {
     padding: var(--sp-4) var(--sp-4) var(--sp-5);
     background-color: var(--c-superficie);
     border: 1px solid var(--c-borde);
-    border-radius: var(--radio);
+    border-radius: var(--radio-lg);
+    box-shadow: var(--sombra);
 }
 
 legend {
@@ -517,6 +806,21 @@ legend {
     font-family: var(--ff-titulos);
     font-size: var(--fs-md);
     font-weight: 600;
+}
+
+/* Huella junto al título de cada grupo principal del formulario */
+.formulario > fieldset > legend {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-2);
+}
+
+.formulario > fieldset > legend::before {
+    content: "";
+    flex: none;
+    width: 1.125rem;
+    height: 1.125rem;
+    background: url("../img/iconos/paw-print-primario.svg") center / contain no-repeat;
 }
 
 /* Campos dentro de un fieldset: una columna en móvil, dos desde tablet */
@@ -570,7 +874,12 @@ input[type="checkbox"] {
     min-height: 1.25rem;
     height: 1.25rem;
     margin: 0;
-    accent-color: var(--c-primario);
+    accent-color: var(--c-rol);
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: #6b7280;
 }
 
 input:hover,
@@ -585,6 +894,7 @@ textarea:focus-visible {
     border-color: var(--c-primario);
     outline: 3px solid var(--c-primario);
     outline-offset: 1px;
+    box-shadow: 0 0 0 6px var(--c-primario-suave);
 }
 
 /* Valor válido mientras se escribe */
@@ -606,6 +916,7 @@ input:user-invalid:focus-visible,
 select:user-invalid:focus-visible,
 textarea:user-invalid:focus-visible {
     outline-color: var(--c-error);
+    box-shadow: 0 0 0 6px var(--c-error-fondo);
 }
 
 .campo:has(:user-invalid) .ayuda {
@@ -617,6 +928,7 @@ textarea:user-invalid:focus-visible {
 input[readonly] {
     color: var(--c-texto-suave);
     background-color: var(--c-fila-alterna);
+    border-style: dashed;
 }
 
 .ayuda {
@@ -629,6 +941,7 @@ input[readonly] {
 .campo-grupo {
     padding: var(--sp-3) var(--sp-4);
     background-color: transparent;
+    box-shadow: none;
 }
 
 .campo-grupo legend {
@@ -639,15 +952,32 @@ input[readonly] {
 .opciones {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--sp-2) var(--sp-5);
+    gap: var(--sp-2);
 }
 
+/* Cada opción es un «chip»: se ve de un vistazo cuál está marcada */
 .opciones label {
     display: inline-flex;
     align-items: center;
     gap: var(--sp-2);
+    min-height: 2.75rem;
+    padding: var(--sp-2) var(--sp-4);
     font-weight: 400;
     cursor: pointer;
+    background-color: var(--c-superficie);
+    border: 1px solid var(--c-borde);
+    border-radius: var(--radio-pildora);
+    transition: background-color var(--transicion), border-color var(--transicion);
+}
+
+.opciones label:hover {
+    border-color: var(--c-rol);
+}
+
+.opciones label:has(:checked) {
+    font-weight: 700;
+    background-color: var(--c-rol-suave);
+    border-color: var(--c-rol);
 }
 
 /* 7. Fichas, avisos y notas =============================================== */
@@ -660,23 +990,48 @@ input[readonly] {
     background-color: var(--c-superficie);
     border: 1px solid var(--c-borde);
     border-left: 4px solid var(--c-rol);
-    border-radius: var(--radio);
+    border-radius: var(--radio-lg);
+    box-shadow: var(--sombra);
 }
 
 .ficha dt {
+    font-size: var(--fs-xs);
     font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--c-texto-suave);
 }
 
 .ficha dd {
     margin: 0 0 var(--sp-2);
+    font-weight: 600;
 }
 
+/* Avisos: el tipo se distingue por color y también por icono */
 .aviso {
-    padding: var(--sp-3) var(--sp-4);
+    position: relative;
+    padding: var(--sp-3) var(--sp-4) var(--sp-3) 3.25rem;
     color: var(--c-aviso-texto);
     background-color: var(--c-aviso-fondo);
     border-left: 4px solid currentColor;
     border-radius: var(--radio);
+}
+
+.aviso::before {
+    content: "";
+    position: absolute;
+    top: 0.875rem;
+    left: var(--sp-4);
+    width: 1.5rem;
+    height: 1.5rem;
+    background: url("../img/iconos/triangle-alert-aviso.svg") center / contain no-repeat;
+}
+
+.aviso h2,
+.aviso h3 {
+    margin-bottom: var(--sp-1);
+    font-size: var(--fs-md);
+    color: inherit;
 }
 
 .aviso > :last-child {
@@ -688,14 +1043,26 @@ input[readonly] {
     background-color: var(--c-error-fondo);
 }
 
+.aviso--error::before {
+    background-image: url("../img/iconos/circle-alert-error.svg");
+}
+
 .aviso--exito {
     color: #166534;
     background-color: var(--c-exito-fondo);
 }
 
+.aviso--exito::before {
+    background-image: url("../img/iconos/circle-check-exito.svg");
+}
+
 .aviso--info {
     color: var(--c-info-texto);
     background-color: var(--c-info-fondo);
+}
+
+.aviso--info::before {
+    background-image: url("../img/iconos/info-info.svg");
 }
 
 .nota-demo {
@@ -707,6 +1074,10 @@ input[readonly] {
     border-radius: var(--radio);
 }
 
+.nota-demo h2 {
+    font-size: var(--fs-md);
+}
+
 .nota-demo > :last-child {
     margin-bottom: 0;
 }
@@ -716,12 +1087,50 @@ input[readonly] {
     scroll-margin-top: var(--sp-5);
 }
 
+/* Varios artículos seguidos (detalles del historial): aire entre uno y otro */
+article + article {
+    margin-top: var(--sp-6);
+}
+
 article:target {
     outline: 3px solid var(--c-rol);
     outline-offset: 4px;
+    border-radius: var(--radio-lg);
+    animation: resaltar 1.2s ease-out;
+}
+
+@keyframes resaltar {
+    from {
+        background-color: var(--c-rol-suave);
+    }
+
+    to {
+        background-color: transparent;
+    }
 }
 
 /* 8. Pantalla de acceso =================================================== */
+
+/* Foto de la clínica + tarjeta de inicio de sesión */
+.acceso-portada {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--sp-5);
+    width: 100%;
+    max-width: 64rem;
+    margin-inline: auto;
+}
+
+.acceso-portada > img {
+    width: 100%;
+    max-width: 30rem;
+    margin-inline: auto;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border-radius: var(--radio-lg);
+    box-shadow: var(--sombra-md);
+}
+
 .acceso {
     width: 100%;
     max-width: 30rem;
@@ -730,8 +1139,8 @@ article:target {
     background-color: var(--c-superficie);
     border: 1px solid var(--c-borde);
     border-top: 4px solid var(--c-primario);
-    border-radius: var(--radio);
-    box-shadow: var(--sombra);
+    border-radius: var(--radio-lg);
+    box-shadow: var(--sombra-lg);
 }
 
 .acceso .formulario {
@@ -741,6 +1150,43 @@ article:target {
 .opciones-acceso {
     display: grid;
     gap: var(--sp-3);
+}
+
+/* Cada botón de ingreso lleva el color y el icono de su rol */
+.opciones-acceso .boton {
+    justify-content: flex-start;
+    text-align: left;
+}
+
+.opciones-acceso .boton[formaction$="menu-recepcion.html"] {
+    background-color: #166534;
+    border-color: #166534;
+}
+
+.opciones-acceso .boton[formaction$="menu-recepcion.html"]::before {
+    background-image: url("../img/iconos/users-blanco.svg");
+}
+
+.opciones-acceso .boton[formaction$="menu-veterinario.html"] {
+    background-color: #92400e;
+    border-color: #92400e;
+}
+
+.opciones-acceso .boton[formaction$="menu-veterinario.html"]::before {
+    background-image: url("../img/iconos/stethoscope-blanco.svg");
+}
+
+.opciones-acceso .boton[formaction$="menu-administrador.html"] {
+    background-color: #5b21b6;
+    border-color: #5b21b6;
+}
+
+.opciones-acceso .boton[formaction$="menu-administrador.html"]::before {
+    background-image: url("../img/iconos/clipboard-list-blanco.svg");
+}
+
+.opciones-acceso .boton:hover {
+    filter: brightness(0.85);
 }
 
 /* 9. Utilidades =========================================================== */
@@ -783,10 +1229,19 @@ article:target {
 
     .ficha {
         grid-template-columns: max-content 1fr;
+        align-items: baseline;
     }
 
     .ficha dd {
         margin-bottom: 0;
+    }
+
+    .acciones > .boton {
+        flex: 0 0 auto;
+    }
+
+    .portada-modulo {
+        aspect-ratio: 5 / 1;
     }
 
     .acceso {
@@ -810,5 +1265,39 @@ article:target {
 
     .tabla {
         font-size: var(--fs-base);
+    }
+
+    /* Login en dos columnas: foto a la izquierda, tarjeta a la derecha */
+    .acceso-portada {
+        grid-template-columns: minmax(0, 1fr) 30rem;
+        align-items: stretch;
+    }
+
+    .acceso-portada > img {
+        max-width: none;
+        height: 100%;
+        aspect-ratio: auto;
+    }
+}
+
+/* 11. Movimiento reducido ================================================= */
+@media (prefers-reduced-motion: no-preference) {
+    html {
+        scroll-behavior: smooth;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+    }
+
+    .menu-tarjetas li:hover,
+    .menu-tarjetas li:hover img {
+        transform: none;
     }
 }

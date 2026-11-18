@@ -229,6 +229,12 @@ Todos los integrantes usan **solo estas variables**. Prohibido escribir colores,
 | `.solo-lector` | Texto oculto visualmente para lectores de pantalla | Accesibilidad |
 | `.acceso`, `.opciones-acceso` | Solo `index.html` (tarjeta de inicio de sesión) | Grid |
 | `article:target` | Detalle resaltado al llegar por un ancla (historial clínico) | `:target` |
+| `.acceso-portada` | Solo `index.html`: foto de la clínica + tarjeta `.acceso` | Grid (2 columnas ≥ 64rem) |
+| `img.portada-modulo` | Foto decorativa (`alt=""`) bajo el `h1` de cada pantalla de entrada de módulo | `aspect-ratio` + `object-fit` |
+
+**Imágenes e iconos** (rama `feature/mejora-interfaz`; análisis en `docs/ANALISIS_UX.md`):
+- Las fotos están en `img/fotos/`. En los menús, cada tarjeta empieza con un `<img alt="">`, sin clase: el estilo lo da `.menu-tarjetas img`.
+- Los iconos (Lucide, en `img/iconos/`) **no se escriben en el HTML**. `estilos.css` los agrega con `::before` según la función del elemento, por ejemplo `.buscador .boton`, `.boton--peligro`, `.acciones-fila a[href*="-editar"]`, `.aviso--info` o `.nav-principal a[href$="index.html"]`. Por eso el texto de enlaces y botones sigue igual al del Anexo A.
 
 **Página de referencia:** `pages/propietarios-listado.html` está totalmente maquetada con este catálogo; úsala como modelo para los demás listados.
 
