@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menú de Administración | VetCare</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&amp;family=Poppins:wght@600;700&amp;display=swap">
+    <link rel="stylesheet" href="../css/estilos.css">
+</head>
+<body class="rol-administrador">
+    <header class="encabezado">
+        <p class="marca">VetCare <span>Clínica veterinaria Huellitas</span></p>
+        <p class="rol-actual">Administrador</p>
+        <nav class="nav-principal" aria-label="Navegación común">
+            <ul>
+                <li><a href="../index.html">Cerrar sesión</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="contenido">
+        <!-- CU-01, paso 6: menú del rol Administrador -->
+        <h1>Menú de Administración</h1>
+        <p class="introduccion">Mantén actualizado el personal veterinario y el catálogo de servicios con sus precios.</p>
+
+        <nav class="menu-tarjetas" aria-label="Módulos de Administración">
+            <ul>
+                <!-- CU-09, paso 1 -->
+                <li>
+                    <img src="../img/fotos/veterinarios.webp" alt="" width="800" height="533" loading="lazy">
+                    <a href="veterinarios-listado.html">Veterinarios</a>
+                    <p>Registrar, consultar, editar y eliminar veterinarios.</p>
+                </li>
+                <!-- CU-10, paso 1 -->
+                <li>
+                    <img src="../img/fotos/servicios.webp" alt="" width="800" height="533" loading="lazy">
+                    <a href="servicios-listado.html">Servicios</a>
+                    <p>Mantener el catálogo de servicios y sus precios.</p>
+                </li>
+            </ul>
+        </nav>
+    </main>
+
+    <footer class="pie-pagina">
+        <p>VetCare · Clínica veterinaria Huellitas · Proyecto de Aplicaciones Web · EPN 2026B</p>
+    </footer>
+</body>
+</html>

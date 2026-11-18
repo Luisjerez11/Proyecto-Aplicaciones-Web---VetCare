@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eliminar veterinario | VetCare</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&amp;family=Poppins:wght@600;700&amp;display=swap">
+    <link rel="stylesheet" href="../css/estilos.css">
+</head>
+<body class="rol-administrador">
+    <header class="encabezado">
+        <p class="marca">VetCare <span>Clínica veterinaria Huellitas</span></p>
+        <p class="rol-actual">Administrador</p>
+        <nav class="nav-principal" aria-label="Navegación común">
+            <ul>
+                <li><a href="menu-administrador.html">Menú</a></li>
+                <li><a href="../index.html">Cerrar sesión</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="contenido">
+        <!-- CU-09, flujo 3c: confirmar eliminación del veterinario V-003. -->
+        <h1>Eliminar veterinario</h1>
+        <article aria-labelledby="titulo-eliminar-veterinario">
+            <h2 id="titulo-eliminar-veterinario">¿Eliminar a la Dra. Sofía Vega?</h2>
+            <p>Confirma si deseas quitar este registro del listado de ejemplo.</p>
+            <dl class="ficha">
+                <dt>Código</dt><dd>V-003</dd>
+                <dt>Nombres</dt><dd>Sofía Elena</dd>
+                <dt>Apellidos</dt><dd>Vega Ríos</dd>
+                <dt>Celular</dt><dd>0993334455</dd>
+                <dt>Correo electrónico</dt><dd>sofia.vega@correo.com</dd>
+                <dt>Días habituales de atención</dt><dd>Martes, jueves y sábado</dd>
+            </dl>
+            <form action="veterinarios-listado.html" method="get">
+                <div class="acciones">
+                    <button type="submit" class="boton boton--peligro">Confirmar</button>
+                    <a class="boton boton--secundario" href="veterinarios-listado.html">Cancelar</a>
+                </div>
+            </form>
+        </article>
+    </main>
+
+    <footer class="pie-pagina">
+        <p>VetCare · Clínica veterinaria Huellitas · Proyecto de Aplicaciones Web · EPN 2026B</p>
+    </footer>
+</body>
+</html>

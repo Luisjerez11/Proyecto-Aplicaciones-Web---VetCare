@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cancelar cita | VetCare</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&amp;family=Poppins:wght@600;700&amp;display=swap">
+    <link rel="stylesheet" href="../css/estilos.css">
+</head>
+<body class="rol-recepcion">
+    <header class="encabezado">
+        <p class="marca">VetCare <span>Clínica veterinaria Huellitas</span></p>
+        <p class="rol-actual">Recepción</p>
+        <nav class="nav-principal" aria-label="Navegación común">
+            <ul>
+                <li><a href="menu-recepcion.html">Menú</a></li>
+                <li><a href="../index.html">Cerrar sesión</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="contenido">
+        <h1>Cancelar cita</h1>
+
+        <p class="introduccion">Indica el motivo para cancelar la cita C-001.</p>
+
+        <!-- CU-05, flujo 5b.2: la cita programada C-001 y la solicitud del motivo. -->
+        <article aria-labelledby="titulo-ficha">
+            <h2 id="titulo-ficha">Cita C-001</h2>
+            <dl class="ficha">
+                <dt>Código</dt>
+                <dd>C-001</dd>
+                <dt>Mascota</dt>
+                <dd>Toby (M-001)</dd>
+                <dt>Servicio</dt>
+                <dd>Consulta general</dd>
+                <dt>Veterinario</dt>
+                <dd>Dra. Ana Pérez (V-001)</dd>
+                <dt>Fecha y hora</dt>
+                <dd><time datetime="2026-11-18T09:00">18/11/2026 a las 09:00</time></dd>
+                <dt>Estado actual</dt>
+                <dd>Programada</dd>
+            </dl>
+
+            <!-- CU-05, flujo 5b.3 y 5b.4: motivo obligatorio (5b.4a si está vacío) y «Volver» (5b.3a). -->
+            <form class="formulario" action="citas-listado.html" method="get">
+                <fieldset>
+                    <legend>Datos de cancelación</legend>
+                    <div class="campos">
+                        <div class="campo campo--ancho">
+                            <label for="motivo">Motivo de cancelación</label>
+                            <textarea id="motivo" name="motivo" maxlength="200" aria-describedby="ayuda-motivo" required></textarea>
+                            <p id="ayuda-motivo" class="ayuda">Máximo 200 caracteres. Ejemplo: El propietario solicitó cancelar.</p>
+                        </div>
+                    </div>
+                </fieldset>
+                <div class="acciones">
+                    <button type="submit" class="boton">Confirmar</button>
+                    <a class="boton boton--secundario" href="citas-listado.html">Volver</a>
+                </div>
+            </form>
+        </article>
+    </main>
+
+    <footer class="pie-pagina">
+        <p>VetCare · Clínica veterinaria Huellitas · Proyecto de Aplicaciones Web · EPN 2026B</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disponibilidad horaria | VetCare</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&amp;family=Poppins:wght@600;700&amp;display=swap">
+    <link rel="stylesheet" href="../css/estilos.css">
+</head>
+<body class="rol-recepcion">
+    <header class="encabezado">
+        <p class="marca">VetCare <span>Clínica veterinaria Huellitas</span></p>
+        <p class="rol-actual">Recepción</p>
+        <nav class="nav-principal" aria-label="Navegación común">
+            <ul>
+                <li><a href="menu-recepcion.html">Menú</a></li>
+                <li><a href="../index.html">Cerrar sesión</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="contenido">
+        <h1>Disponibilidad horaria</h1>
+
+        <p class="introduccion">Horarios para la Dra. Ana Pérez el 18/11/2026. Los bloques ocupados no están disponibles.</p>
+
+        <!-- CU-11, pasos 1 a 3: resumen de la consulta y bloques de 30 minutos. -->
+        <dl class="ficha">
+            <dt>Mascota</dt>
+            <dd>Toby (M-001)</dd>
+            <dt>Servicio</dt>
+            <dd>Consulta general</dd>
+            <dt>Veterinario</dt>
+            <dd>Dra. Ana Pérez (V-001)</dd>
+            <dt>Fecha</dt>
+            <dd><time datetime="2026-11-18">18/11/2026</time></dd>
+        </dl>
+
+        <section aria-labelledby="titulo-bloques">
+            <h2 id="titulo-bloques">Bloques de atención</h2>
+            <div class="tabla-contenedor">
+                <table class="tabla">
+                    <caption>Disponibilidad informativa en intervalos de 30 minutos, de 08:00 a 17:30.</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col">Hora</th>
+                            <th scope="col">Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><th scope="row"><time datetime="08:00">08:00</time></th><td>Libre</td></tr>
+                        <tr><th scope="row"><time datetime="08:30">08:30</time></th><td>Libre</td></tr>
+                        <tr><th scope="row"><time datetime="09:00">09:00</time></th><td>Ocupado · C-001</td></tr>
+                        <tr><th scope="row"><time datetime="09:30">09:30</time></th><td>Libre</td></tr>
+                        <tr><th scope="row"><time datetime="10:00">10:00</time></th><td>Libre</td></tr>
+                        <tr><th scope="row"><time datetime="10:30">10:30</time></th><td>Ocupado · C-002</td></tr>
+                        <tr><th scope="row"><time datetime="11:00">11:00</time></th><td>Libre</td></tr>
+                        <tr><th scope="row"><time datetime="11:30">11:30</time></th><td>Libre</td></tr>
+                        <tr><th scope="row"><time datetime="12:00">12:00</time></th><td>Libre</td></tr>
+                        <tr><th scope="row"><time datetime="12:30">12:30</time></th><td>Libre</td></tr>
+                        <tr><th scope="row"><time datetime="13:00">13:00</time></th><td>Libre</td></tr>
+                        <tr><th scope="row"><time datetime="13:30">13:30</time></th><td>Libre</td></tr>
+                        <tr><th scope="row"><time datetime="14:00">14:00</time></th><td>Libre</td></tr>
+                        <tr><th scope="row"><time datetime="14:30">14:30</time></th><td>Libre</td></tr>
+                        <tr><th scope="row"><time datetime="15:00">15:00</time></th><td>Libre</td></tr>
+                        <tr><th scope="row"><time datetime="15:30">15:30</time></th><td>Libre</td></tr>
+                        <tr><th scope="row"><time datetime="16:00">16:00</time></th><td>Libre</td></tr>
+                        <tr><th scope="row"><time datetime="16:30">16:30</time></th><td>Libre</td></tr>
+                        <tr><th scope="row"><time datetime="17:00">17:00</time></th><td>Libre</td></tr>
+                        <tr><th scope="row"><time datetime="17:30">17:30</time></th><td>Libre</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- CU-11, flujo 2a: escenario estático sin bloques libres. -->
+        <section class="aviso" aria-labelledby="titulo-sin-bloques">
+            <h2 id="titulo-sin-bloques">Sin bloques libres</h2>
+            <p>Ejemplo: el Dr. Luis Mora no tiene bloques disponibles el sábado 21/11/2026.</p>
+        </section>
+
+        <!-- CU-11, flujo 5a: escenario estático de bloque ocupado. -->
+        <section class="aviso aviso--error" aria-labelledby="titulo-bloque-ocupado">
+            <h2 id="titulo-bloque-ocupado">Bloque ocupado</h2>
+            <p>Ejemplo: la hora 09:00 ya está ocupada por la cita C-001. Elige un bloque libre.</p>
+        </section>
+
+        <!-- CU-11, pasos 3 y 4: escribir la hora de un bloque libre y guardar.
+             Flujo 3a: el navegador rechaza horas fuera de 08:00-17:30 o que no caen en un bloque de 30 minutos. -->
+        <form class="formulario" action="citas-listado.html" method="get">
+            <fieldset>
+                <legend>Hora de la cita</legend>
+                <div class="campos">
+                    <div class="campo">
+                        <label for="hora-cita">Hora</label>
+                        <input type="time" id="hora-cita" name="hora" min="08:00" max="17:30" step="1800" aria-describedby="ayuda-hora" required>
+                        <p id="ayuda-hora" class="ayuda">Elige un bloque libre entre las 08:00 y las 17:30, en intervalos de 30 minutos.</p>
+                    </div>
+                </div>
+            </fieldset>
+            <div class="acciones">
+                <button type="submit" class="boton">Guardar</button>
+            </div>
+        </form>
+
+        <!-- CU-11, flujo 4a: desistir y volver al formulario de origen (CU-04, flujo 7a; CU-05, flujos 5a.4a y 5a.5a). -->
+        <aside class="nota-demo">
+            <p>Esta pantalla se comparte entre el registro y la reprogramación de citas. Usa el enlace correspondiente para volver al formulario desde el que llegaste.</p>
+            <p><a href="citas-nueva.html">Volver a nueva cita</a></p>
+            <p><a href="citas-editar.html">Volver a edición</a></p>
+        </aside>
+    </main>
+
+    <footer class="pie-pagina">
+        <p>VetCare · Clínica veterinaria Huellitas · Proyecto de Aplicaciones Web · EPN 2026B</p>
+    </footer>
+</body>
+</html>

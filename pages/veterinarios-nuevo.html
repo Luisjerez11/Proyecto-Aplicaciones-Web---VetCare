@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuevo veterinario | VetCare</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&amp;family=Poppins:wght@600;700&amp;display=swap">
+    <link rel="stylesheet" href="../css/estilos.css">
+</head>
+<body class="rol-administrador">
+    <header class="encabezado">
+        <p class="marca">VetCare <span>Clínica veterinaria Huellitas</span></p>
+        <p class="rol-actual">Administrador</p>
+        <nav class="nav-principal" aria-label="Navegación común">
+            <ul>
+                <li><a href="menu-administrador.html">Menú</a></li>
+                <li><a href="../index.html">Cerrar sesión</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="contenido">
+        <!-- CU-09, flujo principal: registrar datos del veterinario. -->
+        <h1>Nuevo veterinario</h1>
+        <form class="formulario" action="veterinarios-listado.html" method="get">
+            <fieldset>
+                <legend>Datos del veterinario</legend>
+                <div class="campos">
+                    <div class="campo">
+                        <label for="nombres">Nombres</label>
+                        <input type="text" id="nombres" name="nombres" required minlength="2" maxlength="50" pattern="[A-Za-zÁÉÍÓÚáéíóúÑñÜü ]{2,50}" title="Ingresa entre 2 y 50 letras y espacios." placeholder="Ana Lucía" value="" autocomplete="given-name">
+                    </div>
+                    <div class="campo">
+                        <label for="apellidos">Apellidos</label>
+                        <input type="text" id="apellidos" name="apellidos" required minlength="2" maxlength="50" pattern="[A-Za-zÁÉÍÓÚáéíóúÑñÜü ]{2,50}" title="Ingresa entre 2 y 50 letras y espacios." placeholder="Pérez Cevallos" value="" autocomplete="family-name">
+                    </div>
+                    <div class="campo">
+                        <label for="celular">Celular</label>
+                        <input type="tel" id="celular" name="celular" required pattern="09[0-9]{8}" minlength="10" maxlength="10" placeholder="0991234567" title="Ingresa 10 dígitos y comienza con 09." value="" autocomplete="tel">
+                    </div>
+                    <div class="campo">
+                        <label for="correo">Correo electrónico</label>
+                        <input type="email" id="correo" name="correo" required placeholder="nombre@correo.com" value="" autocomplete="email">
+                    </div>
+                    <fieldset class="campo-grupo campo--ancho">
+                        <legend>Días habituales de atención</legend>
+                        <div class="opciones">
+                            <label><input type="checkbox" id="lunes" name="dias" value="Lunes"> Lunes</label>
+                            <label><input type="checkbox" id="martes" name="dias" value="Martes"> Martes</label>
+                            <label><input type="checkbox" id="miercoles" name="dias" value="Miércoles"> Miércoles</label>
+                            <label><input type="checkbox" id="jueves" name="dias" value="Jueves"> Jueves</label>
+                            <label><input type="checkbox" id="viernes" name="dias" value="Viernes"> Viernes</label>
+                            <label><input type="checkbox" id="sabado" name="dias" value="Sábado"> Sábado</label>
+                        </div>
+                        <p class="ayuda">Información de referencia para coordinar citas.</p>
+                    </fieldset>
+                </div>
+            </fieldset>
+            <div class="acciones">
+                <button type="submit" class="boton">Guardar</button>
+                <a class="boton boton--secundario" href="veterinarios-listado.html">Cancelar</a>
+            </div>
+        </form>
+    </main>
+
+    <footer class="pie-pagina">
+        <p>VetCare · Clínica veterinaria Huellitas · Proyecto de Aplicaciones Web · EPN 2026B</p>
+    </footer>
+</body>
+</html>

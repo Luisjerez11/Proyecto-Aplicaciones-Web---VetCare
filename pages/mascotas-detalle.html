@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle de la mascota | VetCare</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&amp;family=Poppins:wght@600;700&amp;display=swap">
+    <link rel="stylesheet" href="../css/estilos.css">
+</head>
+<body class="rol-recepcion">
+    <header class="encabezado">
+        <p class="marca">VetCare <span>Clínica veterinaria Huellitas</span></p>
+        <p class="rol-actual">Recepción</p>
+        <nav class="nav-principal" aria-label="Navegación común">
+            <ul>
+                <li><a href="menu-recepcion.html">Menú</a></li>
+                <li><a href="../index.html">Cerrar sesión</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="contenido">
+        <h1>Detalle de la mascota</h1>
+
+        <p class="introduccion">Ficha de M-001 con la información registrada de Toby y su propietario.</p>
+
+        <!-- CU-03, flujo 3a.3 y 3a.4: ficha de Toby (M-001) con los datos de su propietario P-001. -->
+        <article aria-labelledby="titulo-ficha">
+            <h2 id="titulo-ficha">Toby</h2>
+            <dl class="ficha">
+                <dt>Código</dt>
+                <dd>M-001</dd>
+                <dt>Nombre</dt>
+                <dd>Toby</dd>
+                <dt>Especie</dt>
+                <dd>Perro</dd>
+                <dt>Raza</dt>
+                <dd>Mestizo</dd>
+                <dt>Sexo</dt>
+                <dd>Macho</dd>
+                <dt>Fecha de nacimiento</dt>
+                <dd>15/03/2021</dd>
+                <dt>Peso</dt>
+                <dd>12,5 kg</dd>
+                <dt>Esterilizado</dt>
+                <dd>Sí</dd>
+                <dt>Propietario</dt>
+                <dd>Carlos Andrés Andrade Ruiz (P-001)</dd>
+                <dt>Celular del propietario</dt>
+                <dd>0991234567</dd>
+                <dt>Correo del propietario</dt>
+                <dd><a href="mailto:carlos.andrade@correo.com">carlos.andrade@correo.com</a></dd>
+                <dt>Observaciones</dt>
+                <dd>Sin observaciones registradas.</dd>
+            </dl>
+
+            <div class="acciones">
+                <a class="boton boton--secundario" href="mascotas-listado.html">Volver</a>
+                <a class="boton" href="mascotas-editar.html">Editar</a>
+            </div>
+        </article>
+    </main>
+
+    <footer class="pie-pagina">
+        <p>VetCare · Clínica veterinaria Huellitas · Proyecto de Aplicaciones Web · EPN 2026B</p>
+    </footer>
+</body>
+</html>

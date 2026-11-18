@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reprogramar cita | VetCare</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&amp;family=Poppins:wght@600;700&amp;display=swap">
+    <link rel="stylesheet" href="../css/estilos.css">
+</head>
+<body class="rol-recepcion">
+    <header class="encabezado">
+        <p class="marca">VetCare <span>Clínica veterinaria Huellitas</span></p>
+        <p class="rol-actual">Recepción</p>
+        <nav class="nav-principal" aria-label="Navegación común">
+            <ul>
+                <li><a href="menu-recepcion.html">Menú</a></li>
+                <li><a href="../index.html">Cerrar sesión</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="contenido">
+        <h1>Reprogramar cita</h1>
+
+        <p class="introduccion">Cambia la fecha de la cita C-001 y consulta los horarios disponibles. Se conserva el veterinario asignado.</p>
+
+        <!-- CU-05, flujo 5a.2: datos de C-001; el veterinario asignado se conserva al reprogramar. -->
+        <dl class="ficha">
+            <dt>Código</dt>
+            <dd>C-001</dd>
+            <dt>Mascota</dt>
+            <dd>Toby (M-001)</dd>
+            <dt>Servicio</dt>
+            <dd>Consulta general</dd>
+            <dt>Veterinario</dt>
+            <dd>Dra. Ana Pérez (V-001)</dd>
+            <dt>Hora actual</dt>
+            <dd><time datetime="09:00">09:00</time></dd>
+        </dl>
+
+        <!-- CU-05, flujo 5a.3: proponer la fecha y consultar disponibilidad (CU-11).
+             Flujo 5a.6a: el navegador rechaza fechas anteriores al 18/11/2026; flujo 5a.2a: «Cancelar». -->
+        <form class="formulario" action="citas-disponibilidad.html" method="get">
+            <fieldset>
+                <legend>Nueva fecha de la cita</legend>
+                <div class="campos">
+                    <div class="campo">
+                        <label for="fecha-cita">Fecha</label>
+                        <input type="date" id="fecha-cita" name="fecha" value="2026-11-18" min="2026-11-18" required>
+                    </div>
+                </div>
+            </fieldset>
+            <div class="acciones">
+                <button type="submit" class="boton">Consultar disponibilidad</button>
+                <a class="boton boton--secundario" href="citas-listado.html">Cancelar</a>
+            </div>
+        </form>
+    </main>
+
+    <footer class="pie-pagina">
+        <p>VetCare · Clínica veterinaria Huellitas · Proyecto de Aplicaciones Web · EPN 2026B</p>
+    </footer>
+</body>
+</html>

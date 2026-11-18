@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar mascota | VetCare</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&amp;family=Poppins:wght@600;700&amp;display=swap">
+    <link rel="stylesheet" href="../css/estilos.css">
+</head>
+<body class="rol-recepcion">
+    <header class="encabezado">
+        <p class="marca">VetCare <span>Clínica veterinaria Huellitas</span></p>
+        <p class="rol-actual">Recepción</p>
+        <nav class="nav-principal" aria-label="Navegación común">
+            <ul>
+                <li><a href="menu-recepcion.html">Menú</a></li>
+                <li><a href="../index.html">Cerrar sesión</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="contenido">
+        <h1>Editar mascota</h1>
+
+        <p class="introduccion">Actualiza los datos de Toby (M-001). El propietario actual está seleccionado.</p>
+
+        <!-- CU-03, flujo 3b.2 a 3b.4: formulario precargado con los datos canónicos de Toby.
+             Flujo 3b.5a: el navegador indica el dato inválido; flujo 3b.4a: «Cancelar». -->
+        <form class="formulario" action="mascotas-listado.html" method="get">
+            <fieldset>
+                <legend>Datos de la mascota</legend>
+                <div class="campos">
+                    <div class="campo">
+                        <label for="nombre">Nombre</label>
+                        <input type="text" id="nombre" name="nombre" required minlength="2" maxlength="40" value="Toby">
+                    </div>
+                    <div class="campo">
+                        <label for="especie">Especie</label>
+                        <select id="especie" name="especie" required>
+                            <option value="" disabled>Selecciona…</option>
+                            <option value="Perro" selected>Perro</option>
+                            <option value="Gato">Gato</option>
+                            <option value="Ave">Ave</option>
+                            <option value="Roedor">Roedor</option>
+                            <option value="Otro">Otro</option>
+                        </select>
+                    </div>
+                    <div class="campo">
+                        <label for="raza">Raza</label>
+                        <input type="text" id="raza" name="raza" list="razas-mascota" value="Mestizo">
+                        <datalist id="razas-mascota">
+                            <option value="Mestizo"></option>
+                            <option value="Labrador"></option>
+                            <option value="Siamés"></option>
+                            <option value="Loro amazona"></option>
+                            <option value="Persa"></option>
+                            <option value="Caniche"></option>
+                        </datalist>
+                    </div>
+                    <fieldset class="campo-grupo campo--ancho">
+                        <legend>Sexo</legend>
+                        <div class="opciones">
+                            <label for="sexo-macho"><input type="radio" id="sexo-macho" name="sexo" value="Macho" required checked> Macho</label>
+                            <label for="sexo-hembra"><input type="radio" id="sexo-hembra" name="sexo" value="Hembra" required> Hembra</label>
+                        </div>
+                    </fieldset>
+                    <div class="campo">
+                        <label for="fecha-nacimiento">Fecha de nacimiento</label>
+                        <input type="date" id="fecha-nacimiento" name="fecha-nacimiento" max="2026-11-18" value="2021-03-15">
+                    </div>
+                    <div class="campo">
+                        <label for="peso">Peso (kg)</label>
+                        <input type="number" id="peso" name="peso" min="0.1" max="120" step="0.1" value="12.5">
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Propietario y observaciones</legend>
+                <div class="campos">
+                    <div class="campo">
+                        <label for="propietario">Propietario</label>
+                        <select id="propietario" name="propietario" required aria-describedby="ayuda-propietario">
+                            <option value="" disabled>Selecciona un propietario…</option>
+                            <option value="P-001" selected>P-001 · Carlos Andrés Andrade Ruiz</option>
+                            <option value="P-002">P-002 · María Fernanda López Vera</option>
+                            <option value="P-003">P-003 · Jorge Luis Paredes Mena</option>
+                        </select>
+                        <!-- CU-03, flujo 5a: propietario no registrado; se registra mediante CU-02. -->
+                        <p id="ayuda-propietario" class="ayuda">¿No aparece en la lista? <a href="propietarios-nuevo.html">Registrar propietario</a>.</p>
+                    </div>
+                    <div class="campo">
+                        <label for="esterilizado"><input type="checkbox" id="esterilizado" name="esterilizado" value="sí" checked> Esterilizado</label>
+                    </div>
+                    <div class="campo campo--ancho">
+                        <label for="observaciones">Observaciones</label>
+                        <textarea id="observaciones" name="observaciones" maxlength="300"></textarea>
+                    </div>
+                </div>
+            </fieldset>
+
+            <div class="acciones">
+                <button type="submit" class="boton">Guardar</button>
+                <a class="boton boton--secundario" href="mascotas-listado.html">Cancelar</a>
+            </div>
+        </form>
+    </main>
+
+    <footer class="pie-pagina">
+        <p>VetCare · Clínica veterinaria Huellitas · Proyecto de Aplicaciones Web · EPN 2026B</p>
+    </footer>
+</body>
+</html>

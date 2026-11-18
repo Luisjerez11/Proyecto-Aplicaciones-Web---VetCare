@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar atención médica | VetCare</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&amp;family=Poppins:wght@600;700&amp;display=swap">
+    <link rel="stylesheet" href="../css/estilos.css">
+</head>
+<body class="rol-veterinario">
+    <header class="encabezado">
+        <p class="marca">VetCare <span>Clínica veterinaria Huellitas</span></p>
+        <p class="rol-actual">Veterinario</p>
+        <nav class="nav-principal" aria-label="Navegación común">
+            <ul>
+                <li><a href="menu-veterinario.html">Menú</a></li>
+                <li><a href="../index.html">Cerrar sesión</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="contenido">
+        <!-- CU-07, pasos 1–3: registrar atención para la cita programada C-001. -->
+        <h1>Registrar atención médica</h1>
+        <p class="introduccion">Registra los datos clínicos de la atención. En este prototipo, guardar solo navega al historial de ejemplo.</p>
+
+        <section aria-labelledby="titulo-cita">
+            <h2 id="titulo-cita">Cita seleccionada</h2>
+            <dl class="ficha">
+                <dt>Código de cita</dt><dd>C-001</dd>
+                <dt>Estado</dt><dd>Programada</dd>
+                <dt>Mascota</dt><dd>Toby (M-001), perro mestizo, macho</dd>
+                <dt>Propietario</dt><dd>Carlos Andrés Andrade Ruiz</dd>
+                <dt>Servicio</dt><dd>Consulta general</dd>
+                <dt>Veterinaria</dt><dd>Dra. Ana Pérez</dd>
+                <dt>Fecha y hora</dt><dd><time datetime="2026-11-18T09:00">18/11/2026, 09:00</time></dd>
+            </dl>
+        </section>
+
+        <form class="formulario" action="historial-clinico.html" method="get">
+            <fieldset>
+                <legend>Datos de la atención</legend>
+                <div class="campos">
+                    <div class="campo campo--ancho">
+                        <label for="diagnostico">Diagnóstico</label>
+                        <textarea id="diagnostico" name="diagnostico" required aria-describedby="ayuda-diagnostico"></textarea>
+                        <p class="ayuda" id="ayuda-diagnostico">Describe la valoración clínica de Toby.</p>
+                    </div>
+                    <div class="campo campo--ancho">
+                        <label for="tratamiento">Tratamiento</label>
+                        <textarea id="tratamiento" name="tratamiento" required aria-describedby="ayuda-tratamiento"></textarea>
+                        <p class="ayuda" id="ayuda-tratamiento">Indica las indicaciones y cuidados recomendados.</p>
+                    </div>
+                    <div class="campo">
+                        <label for="peso">Peso actual (kg)</label>
+                        <input type="number" id="peso" name="peso" required min="0.1" max="120" step="0.1" placeholder="12.5" aria-describedby="ayuda-peso">
+                        <p class="ayuda" id="ayuda-peso">Ingresa el peso con un decimal, entre 0,1 y 120 kg.</p>
+                    </div>
+                </div>
+            </fieldset>
+            <div class="acciones">
+                <button type="submit" class="boton">Guardar</button>
+                <a class="boton boton--secundario" href="agenda-dia.html">Cancelar</a>
+            </div>
+        </form>
+
+        <!-- CU-07: datos que se mostrarán en el historial de ejemplo tras guardar. -->
+        <aside class="nota-demo" aria-labelledby="titulo-ejemplo-atencion">
+            <h2 id="titulo-ejemplo-atencion">Datos de ejemplo del historial</h2>
+            <p>El registro de demostración A-003 para Toby muestra «Control de rutina», «Control en seis meses» y 12,5 kg. El sitio estático no almacena lo que escribas ni cambia el estado de C-001.</p>
+        </aside>
+    </main>
+
+    <footer class="pie-pagina">
+        <p>VetCare · Clínica veterinaria Huellitas · Proyecto de Aplicaciones Web · EPN 2026B</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listado de servicios | VetCare</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&amp;family=Poppins:wght@600;700&amp;display=swap">
+    <link rel="stylesheet" href="../css/estilos.css">
+</head>
+<body class="rol-administrador">
+    <header class="encabezado">
+        <p class="marca">VetCare <span>Clínica veterinaria Huellitas</span></p>
+        <p class="rol-actual">Administrador</p>
+        <nav class="nav-principal" aria-label="Navegación común">
+            <ul>
+                <li><a href="menu-administrador.html">Menú</a></li>
+                <li><a href="../index.html">Cerrar sesión</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="contenido">
+        <!-- CU-10: listado, buscador y acciones CRUD de ejemplo. -->
+        <h1>Listado de servicios</h1>
+        <img class="portada-modulo" src="../img/fotos/servicios.webp" alt="" width="800" height="533">
+        <section class="barra-herramientas" aria-label="Herramientas del listado">
+            <form class="buscador" role="search" action="servicios-listado.html#resultados" method="get">
+                <label for="busqueda">Buscar servicio</label>
+                <input type="search" id="busqueda" name="busqueda" placeholder="Buscar servicio">
+                <button type="submit" class="boton">Buscar</button>
+            </form>
+            <a class="boton" href="servicios-nuevo.html">Nuevo servicio</a>
+        </section>
+        <section id="resultados" aria-labelledby="titulo-resultados">
+            <h2 id="titulo-resultados">Servicios registrados</h2>
+            <div class="tabla-contenedor">
+                <table class="tabla">
+                    <caption>Servicios de ejemplo de la clínica Huellitas.</caption>
+                    <thead><tr><th scope="col">Código</th><th scope="col">Servicio</th><th scope="col">Descripción</th><th scope="col">Precio</th><th scope="col">Acciones</th></tr></thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">S-001</th><td>Consulta general</td><td>Atención veterinaria general</td><td>$25,00</td>
+                            <td><ul class="acciones-fila">
+                                <li><a href="servicios-detalle.html">Ver detalle<span class="solo-lector"> de Consulta general</span></a></li>
+                                <li><a href="servicios-editar.html">Editar<span class="solo-lector"> a Consulta general</span></a></li>
+                                <li><a href="servicios-eliminar.html">Eliminar<span class="solo-lector"> a Consulta general</span></a></li>
+                            </ul></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">S-002</th><td>Vacunación</td><td>Aplicación de vacunas</td><td>$18,00</td>
+                            <td><ul class="acciones-fila">
+                                <li><a href="servicios-detalle.html">Ver detalle<span class="solo-lector"> de Vacunación</span></a></li>
+                                <li><a href="servicios-editar.html">Editar<span class="solo-lector"> a Vacunación</span></a></li>
+                                <li><a href="servicios-eliminar.html">Eliminar<span class="solo-lector"> a Vacunación</span></a></li>
+                            </ul></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">S-003</th><td>Desparasitación</td><td>Control de parásitos</td><td>$12,00</td>
+                            <td><ul class="acciones-fila">
+                                <li><a href="servicios-detalle.html">Ver detalle<span class="solo-lector"> de Desparasitación</span></a></li>
+                                <li><a href="servicios-editar.html">Editar<span class="solo-lector"> a Desparasitación</span></a></li>
+                                <li><a href="servicios-eliminar.html">Eliminar<span class="solo-lector"> a Desparasitación</span></a></li>
+                            </ul></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">S-004</th><td>Control postoperatorio</td><td>Seguimiento después de una cirugía</td><td>$20,00</td>
+                            <td><ul class="acciones-fila">
+                                <li><a href="servicios-detalle.html">Ver detalle<span class="solo-lector"> de Control postoperatorio</span></a></li>
+                                <li><a href="servicios-editar.html">Editar<span class="solo-lector"> a Control postoperatorio</span></a></li>
+                                <li><a href="servicios-eliminar.html">Eliminar<span class="solo-lector"> a Control postoperatorio</span></a></li>
+                            </ul></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">S-005</th><td>Baño medicado</td><td>Baño terapéutico indicado por veterinaria</td><td>$15,00</td>
+                            <td><ul class="acciones-fila">
+                                <li><a href="servicios-detalle.html">Ver detalle<span class="solo-lector"> de Baño medicado</span></a></li>
+                                <li><a href="servicios-editar.html">Editar<span class="solo-lector"> a Baño medicado</span></a></li>
+                                <li><a href="servicios-eliminar.html">Eliminar<span class="solo-lector"> a Baño medicado</span></a></li>
+                            </ul></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        <section class="aviso aviso--info" aria-label="Ejemplo de búsqueda sin coincidencias">
+            <p>Ejemplo: al buscar un registro inexistente no se encontraron coincidencias. Intenta con otro criterio.</p>
+        </section>
+    </main>
+
+    <footer class="pie-pagina">
+        <p>VetCare · Clínica veterinaria Huellitas · Proyecto de Aplicaciones Web · EPN 2026B</p>
+    </footer>
+</body>
+</html>
