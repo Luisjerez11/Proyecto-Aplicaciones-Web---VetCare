@@ -22,11 +22,36 @@
     </header>
 
     <main class="contenido">
+        <!-- CU-02, flujo 3a.3 y 3a.4: identificación y datos de contacto de P-001 -->
         <h1>Detalle del propietario</h1>
 
-        <!-- Pendiente: Integrante 1 · CU-02. Reemplazar este aviso por el contenido de la pantalla
-             (ver docs/PLAN_IMPLEMENTACION.md, sección 7). No modificar header, footer ni head. -->
-        <p class="aviso aviso--info">Pantalla en construcción · Integrante 1 · CU-02.</p>
+        <p class="introduccion">Ficha de P-001 con su identificación, sus datos de contacto y las mascotas que tiene registradas.</p>
+
+        <article aria-labelledby="titulo-ficha">
+            <h2 id="titulo-ficha">Carlos Andrés Andrade Ruiz</h2>
+            <dl class="ficha">
+                <dt>Código</dt>
+                <dd>P-001</dd>
+                <dt>Cédula</dt>
+                <dd>1712345678</dd>
+                <dt>Nombres</dt>
+                <dd>Carlos Andrés</dd>
+                <dt>Apellidos</dt>
+                <dd>Andrade Ruiz</dd>
+                <dt>Celular</dt>
+                <dd>0991234567</dd>
+                <dt>Correo electrónico</dt>
+                <dd><a href="mailto:carlos.andrade@correo.com">carlos.andrade@correo.com</a></dd>
+                <dt>Mascotas</dt>
+                <dd>Toby (M-001), perro mestizo</dd>
+            </dl>
+
+            <!-- Flujo 3a.4: «Volver» al listado; flujo 3b.1: «Editar» -->
+            <div class="acciones">
+                <a class="boton boton--secundario" href="propietarios-listado.html">Volver</a>
+                <a class="boton" href="propietarios-editar.html">Editar</a>
+            </div>
+        </article>
     </main>
 
     <footer class="pie-pagina">

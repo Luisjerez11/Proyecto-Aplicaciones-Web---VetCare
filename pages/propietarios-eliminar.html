@@ -22,11 +22,40 @@
     </header>
 
     <main class="contenido">
+        <!-- CU-02, flujo 3c.2: datos del propietario y solicitud de confirmación -->
         <h1>Eliminar propietario</h1>
 
-        <!-- Pendiente: Integrante 1 · CU-02. Reemplazar este aviso por el contenido de la pantalla
-             (ver docs/PLAN_IMPLEMENTACION.md, sección 7). No modificar header, footer ni head. -->
-        <p class="aviso aviso--info">Pantalla en construcción · Integrante 1 · CU-02.</p>
+        <p class="introduccion">Confirma si deseas eliminar el registro de Jorge Luis Paredes Mena (P-003).</p>
+
+        <article aria-labelledby="titulo-ficha">
+            <h2 id="titulo-ficha">¿Eliminar a Jorge Paredes?</h2>
+            <dl class="ficha">
+                <dt>Código</dt>
+                <dd>P-003</dd>
+                <dt>Cédula</dt>
+                <dd>1734567890</dd>
+                <dt>Nombres</dt>
+                <dd>Jorge Luis</dd>
+                <dt>Apellidos</dt>
+                <dd>Paredes Mena</dd>
+                <dt>Celular</dt>
+                <dd>0976543210</dd>
+                <dt>Correo electrónico</dt>
+                <dd>jorge.paredes@correo.com</dd>
+                <dt>Mascotas</dt>
+                <dd>Kiwi (M-004), ave loro amazona</dd>
+            </dl>
+
+            <p class="aviso aviso--info">Esta demostración es estática. Al confirmar, volverás al listado de propietarios.</p>
+
+            <!-- Flujos 3c.3 y 3c.4: «Confirmar»; flujo 3c.3a: «Cancelar» mantiene el registro -->
+            <form action="propietarios-listado.html" method="get">
+                <div class="acciones">
+                    <button type="submit" class="boton boton--peligro">Confirmar</button>
+                    <a class="boton boton--secundario" href="propietarios-listado.html">Cancelar</a>
+                </div>
+            </form>
+        </article>
     </main>
 
     <footer class="pie-pagina">

@@ -34,7 +34,7 @@
                 <div class="campos">
                     <div class="campo">
                         <label for="nombre">Nombre</label>
-                        <input type="text" id="nombre" name="nombre" required minlength="2" maxlength="40" value="Toby">
+                        <input type="text" id="nombre" name="nombre" required minlength="2" maxlength="40" placeholder="Toby" value="Toby">
                     </div>
                     <div class="campo">
                         <label for="especie">Especie</label>
@@ -88,8 +88,9 @@
                             <option value="P-002">P-002 · María Fernanda López Vera</option>
                             <option value="P-003">P-003 · Jorge Luis Paredes Mena</option>
                         </select>
-                        <!-- CU-03, flujo 5a: propietario no registrado; se registra mediante CU-02. -->
-                        <p id="ayuda-propietario" class="ayuda">¿No aparece en la lista? <a href="propietarios-nuevo.html">Registrar propietario</a>.</p>
+                        <!-- CU-03: el flujo 5a («Registrar propietario») pertenece al registro (fila 37 del Anexo A,
+                             solo desde mascotas-nueva.html); en la edición no hay esa transición. -->
+                        <p id="ayuda-propietario" class="ayuda">Selecciona un propietario ya registrado en el módulo Propietarios.</p>
                     </div>
                     <div class="campo">
                         <label for="esterilizado"><input type="checkbox" id="esterilizado" name="esterilizado" value="sí" checked> Esterilizado</label>

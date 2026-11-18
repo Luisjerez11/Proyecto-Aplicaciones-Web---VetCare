@@ -20,7 +20,7 @@ Grupo 3 · Docente: Carlos Iñiguez · Entrega: 18 de noviembre de 2026.
 
 ## Reparto del trabajo
 
-Cada pantalla tiene un solo dueño. El detalle completo está en [`docs/PLAN_IMPLEMENTACION.md`](docs/PLAN_IMPLEMENTACION.md).
+Cada pantalla tiene un solo dueño, y el historial de commits muestra el aporte de cada integrante.
 
 | Integrante | Casos de uso | Pantallas | Otras tareas |
 |---|---|---|---|
@@ -64,7 +64,7 @@ pages/            Las otras 33 pantallas, con los nombres del mapa navegacional
 css/estilos.css   Hoja de estilos común
 img/fotos/        Fotos de la interfaz (WebP)
 img/iconos/       Iconos SVG (Lucide)
-docs/             Entregables 3.1 a 3.5, plan de implementación e informes
+docs/             Entregables 3.1 a 3.5 y enunciado del proyecto
 README.md         Este archivo
 ```
 
@@ -87,9 +87,6 @@ No requiere instalación. Puedes hacer cualquiera de estas tres cosas:
 | `VetCare_3_3_Diagramas_de_Casos_de_Uso_por_Actor.pdf` | 3.3 Diagramas de casos de uso por actor |
 | `VetCare_Entregable_3_4_MoSCoW_3_Integrantes_Valor_Negocio.docx` | 3.4 Priorización MoSCoW y responsables |
 | `VetCare_Entregable_3_5_Mapa_Navegacional (1).pdf` | 3.5 Mapa navegacional (34 pantallas, Anexo A con las transiciones) |
-| `PLAN_IMPLEMENTACION.md` | Acuerdo de trabajo del equipo: reparto, componentes CSS, datos de ejemplo y ramas |
-| `ANALISIS_UX.md` | Análisis de experiencia de usuario y mejoras de la interfaz |
-| `INFORME_INTEGRANTE2.md`, `INFORME_INTEGRANTE3.md` | Informes de trabajo de cada integrante |
 | `Proyecto_Bimestre1_VetCare.pdf` | Enunciado del proyecto y rúbrica |
 
 ## Flujo de trabajo en Git
@@ -102,5 +99,18 @@ Los commits van en español y con el caso de uso como prefijo, por ejemplo `CU-0
 
 ## Créditos de imágenes
 
-- **Fotos:** [Pexels](https://www.pexels.com/), con la [licencia de Pexels](https://www.pexels.com/license/) (uso libre). El enlace a cada foto original está en [`img/CREDITOS.md`](img/CREDITOS.md).
+- **Fotos** (`img/fotos/`): [Pexels](https://www.pexels.com/), con la [licencia de Pexels](https://www.pexels.com/license/) (uso libre, sin atribución obligatoria). Fotos originales:
+
+  | Archivo | Foto original |
+  |---|---|
+  | `acceso-veterinaria.webp` | https://www.pexels.com/photo/6234618/ |
+  | `propietarios.webp` | https://www.pexels.com/photo/1975989/ |
+  | `mascotas.webp` | https://www.pexels.com/photo/16395150/ |
+  | `citas.webp` | https://www.pexels.com/photo/6234612/ |
+  | `agendar-cita.webp` | https://www.pexels.com/photo/6408282/ |
+  | `agenda.webp` | https://www.pexels.com/photo/6235231/ |
+  | `historial.webp` | https://www.pexels.com/photo/7470634/ |
+  | `veterinarios.webp` | https://www.pexels.com/photo/6235653/ |
+  | `servicios.webp` | https://www.pexels.com/photo/6816869/ |
+
 - **Iconos:** [Lucide](https://lucide.dev/) v0.460.0, con licencia ISC (ver [`img/iconos/LICENSE-lucide.txt`](img/iconos/LICENSE-lucide.txt)).

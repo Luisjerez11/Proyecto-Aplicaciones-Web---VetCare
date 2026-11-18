@@ -22,11 +22,65 @@
     </header>
 
     <main class="contenido">
+        <!-- CU-02, paso 4: formulario de registro -->
         <h1>Nuevo propietario</h1>
 
-        <!-- Pendiente: Integrante 1 · CU-02. Reemplazar este aviso por el contenido de la pantalla
-             (ver docs/PLAN_IMPLEMENTACION.md, sección 7). No modificar header, footer ni head. -->
-        <p class="aviso aviso--info">Pantalla en construcción · Integrante 1 · CU-02.</p>
+        <p class="introduccion">Registra la identificación y los datos de contacto del propietario. Los campos con * son obligatorios.</p>
+
+        <!-- CU-02, pasos 5 a 8: «Guardar» con datos válidos vuelve al listado.
+             Flujo 7a: el navegador señala el campo inválido y no envía el formulario.
+             Flujo 6a: «Cancelar» vuelve al listado sin registrar. -->
+        <form class="formulario" action="propietarios-listado.html" method="get">
+            <fieldset>
+                <legend>Identificación</legend>
+                <div class="campos">
+                    <!-- RN-01: cédula de 10 dígitos -->
+                    <div class="campo">
+                        <label for="cedula">Cédula</label>
+                        <input type="text" id="cedula" name="cedula" required minlength="10" maxlength="10" pattern="[0-9]{10}" title="Ingresa los 10 dígitos de la cédula, sin guiones ni espacios." placeholder="1712345678" autocomplete="off" inputmode="numeric" aria-describedby="ayuda-cedula">
+                        <p class="ayuda" id="ayuda-cedula">10 dígitos, sin guiones ni espacios.</p>
+                    </div>
+                    <!-- RN-04: nombres y apellidos solo con letras y espacios -->
+                    <div class="campo">
+                        <label for="nombres">Nombres</label>
+                        <input type="text" id="nombres" name="nombres" required minlength="2" maxlength="50" pattern="[A-Za-zÁÉÍÓÚáéíóúÑñÜü ]{2,50}" title="Ingresa entre 2 y 50 letras y espacios." placeholder="Carlos Andrés" autocomplete="given-name">
+                    </div>
+                    <div class="campo">
+                        <label for="apellidos">Apellidos</label>
+                        <input type="text" id="apellidos" name="apellidos" required minlength="2" maxlength="50" pattern="[A-Za-zÁÉÍÓÚáéíóúÑñÜü ]{2,50}" title="Ingresa entre 2 y 50 letras y espacios." placeholder="Andrade Ruiz" autocomplete="family-name">
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Datos de contacto</legend>
+                <div class="campos">
+                    <!-- RN-02: celular ecuatoriano que empieza con 09 -->
+                    <div class="campo">
+                        <label for="celular">Celular</label>
+                        <input type="tel" id="celular" name="celular" required pattern="09[0-9]{8}" minlength="10" maxlength="10" title="Ingresa 10 dígitos y comienza con 09." placeholder="0991234567" autocomplete="tel" aria-describedby="ayuda-celular">
+                        <p class="ayuda" id="ayuda-celular">10 dígitos, empieza con 09.</p>
+                    </div>
+                    <!-- RN-03: correo con formato válido -->
+                    <div class="campo">
+                        <label for="correo">Correo electrónico</label>
+                        <input type="email" id="correo" name="correo" required placeholder="nombre@correo.com" autocomplete="email" aria-describedby="ayuda-correo">
+                        <p class="ayuda" id="ayuda-correo">Formato: nombre@correo.com</p>
+                    </div>
+                </div>
+            </fieldset>
+
+            <div class="acciones">
+                <button type="submit" class="boton">Guardar</button>
+                <a class="boton boton--secundario" href="propietarios-listado.html">Cancelar</a>
+            </div>
+        </form>
+
+        <!-- Ayuda para quien prueba el prototipo -->
+        <aside class="nota-demo" aria-labelledby="titulo-demo">
+            <h2 id="titulo-demo">Datos de ejemplo válidos</h2>
+            <p>Cédula 1745678901, nombres «Ana Gabriela», apellidos «Torres Vega», celular 0998765432 y correo ana.torres@correo.com. Prueba también una cédula con 9 dígitos o un celular que empiece con 08 para ver la validación.</p>
+        </aside>
     </main>
 
     <footer class="pie-pagina">
