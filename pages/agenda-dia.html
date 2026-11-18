@@ -22,11 +22,78 @@
     </header>
 
     <main class="contenido">
+        <!-- CU-06, pasos 2–5: consultar la agenda del veterinario para una fecha. -->
         <h1>Agenda del día</h1>
+        <p class="introduccion">Consulta las citas programadas a cargo de la Dra. Ana Pérez. La consulta no modifica las citas.</p>
 
-        <!-- Pendiente: Integrante 3 · CU-06. Reemplazar este aviso por el contenido de la pantalla
-             (ver docs/PLAN_IMPLEMENTACION.md, sección 7). No modificar header, footer ni head. -->
-        <p class="aviso aviso--info">Pantalla en construcción · Integrante 3 · CU-06.</p>
+        <section aria-labelledby="titulo-consulta-agenda">
+            <h2 id="titulo-consulta-agenda">Consultar por fecha</h2>
+            <form class="formulario" action="agenda-dia.html#resultado" method="get">
+                <fieldset>
+                    <legend>Fecha de consulta</legend>
+                    <div class="campos">
+                        <div class="campo">
+                            <label for="fecha">Fecha</label>
+                            <input type="date" id="fecha" name="fecha" value="2026-11-18" required>
+                        </div>
+                    </div>
+                </fieldset>
+                <div class="acciones">
+                    <button type="submit" class="boton">Consultar</button>
+                </div>
+            </form>
+        </section>
+
+        <!-- CU-06, filas 78–82: ejemplo estático de la agenda del 18/11/2026. -->
+        <section id="resultado" aria-labelledby="titulo-resultado">
+            <h2 id="titulo-resultado">Citas programadas · miércoles 18/11/2026</h2>
+            <div class="tabla-contenedor">
+                <table class="tabla">
+                    <caption>Citas asignadas a la Dra. Ana Pérez, ordenadas por hora.</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col">Hora</th>
+                            <th scope="col">Mascota</th>
+                            <th scope="col">Servicio</th>
+                            <th scope="col">Propietario</th>
+                            <th scope="col">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row"><time datetime="09:00">09:00</time></th>
+                            <td>Toby (M-001)</td>
+                            <td>Consulta general</td>
+                            <td>Carlos Andrade</td>
+                            <td>
+                                <ul class="acciones-fila">
+                                    <li><a href="atencion-registrar.html">Registrar atención<span class="solo-lector"> de Toby, cita C-001</span></a></li>
+                                    <li><a href="historial-clinico.html">Ver historial<span class="solo-lector"> de Toby</span></a></li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row"><time datetime="10:30">10:30</time></th>
+                            <td>Michi (M-002)</td>
+                            <td>Vacunación</td>
+                            <td>María López</td>
+                            <td>
+                                <ul class="acciones-fila">
+                                    <li><a href="atencion-registrar.html">Registrar atención<span class="solo-lector"> de Michi, cita C-002</span></a></li>
+                                    <li><a href="historial-clinico.html">Ver historial<span class="solo-lector"> de Michi</span></a></li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- CU-06, flujo 5a: escenario estático de fecha sin citas. -->
+        <section class="aviso aviso--info" aria-labelledby="titulo-sin-citas">
+            <h2 id="titulo-sin-citas">Ejemplo de día sin citas</h2>
+            <p>Para el sábado 21/11/2026 no hay citas programadas para esta fecha. Selecciona otra fecha y pulsa «Consultar».</p>
+        </section>
     </main>
 
     <footer class="pie-pagina">

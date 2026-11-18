@@ -22,11 +22,82 @@
     </header>
 
     <main class="contenido">
+        <!-- CU-08, pasos 2–6: búsqueda, mascotas y detalles de atención en una página. -->
         <h1>Historial clínico</h1>
+        <p class="introduccion">Consulta los antecedentes registrados para cada mascota y abre el detalle de una atención.</p>
 
-        <!-- Pendiente: Integrante 3 · CU-08. Reemplazar este aviso por el contenido de la pantalla
-             (ver docs/PLAN_IMPLEMENTACION.md, sección 7). No modificar header, footer ni head. -->
-        <p class="aviso aviso--info">Pantalla en construcción · Integrante 3 · CU-08.</p>
+        <section id="mascotas" aria-labelledby="titulo-mascotas">
+            <h2 id="titulo-mascotas">Buscar mascota</h2>
+            <form class="buscador" role="search" action="historial-clinico.html#mascotas" method="get">
+                <label for="busqueda-mascota">Nombre o código de la mascota</label>
+                <input type="search" id="busqueda-mascota" name="busqueda" placeholder="Buscar mascota">
+                <button type="submit" class="boton">Buscar</button>
+            </form>
+
+            <div class="tabla-contenedor">
+                <table class="tabla">
+                    <caption>Mascotas de ejemplo disponibles para consultar.</caption>
+                    <thead>
+                        <tr><th scope="col">Código</th><th scope="col">Mascota</th><th scope="col">Propietario</th><th scope="col">Historial</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><th scope="row">M-001</th><td>Toby</td><td>Carlos Andrade</td><td>3 atenciones de ejemplo</td></tr>
+                        <tr><th scope="row">M-002</th><td>Michi</td><td>María López</td><td>Sin atenciones previas</td></tr>
+                        <tr><th scope="row">M-003</th><td>Luna</td><td>María López</td><td>Sin atenciones cargadas en esta demostración</td></tr>
+                        <tr><th scope="row">M-004</th><td>Kiwi</td><td>Jorge Paredes</td><td>Sin atenciones cargadas en esta demostración</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- CU-08, historial de Toby (A-001 a A-003) y detalles enlazados por ancla. -->
+        <section id="historial-toby" aria-labelledby="titulo-historial-toby">
+            <h2 id="titulo-historial-toby">Atenciones de Toby (M-001)</h2>
+            <p>Propietario: Carlos Andrés Andrade Ruiz. Especie: perro. Raza: mestizo.</p>
+            <div class="tabla-contenedor">
+                <table class="tabla">
+                    <caption>Atenciones registradas de Toby, ordenadas por fecha.</caption>
+                    <thead><tr><th scope="col">Código</th><th scope="col">Fecha</th><th scope="col">Diagnóstico</th><th scope="col">Acción</th></tr></thead>
+                    <tbody>
+                        <tr><th scope="row">A-001</th><td><time datetime="2026-05-20">20/05/2026</time></td><td>Otitis externa leve</td><td><a href="#atencion-1">Ver detalle<span class="solo-lector"> de A-001</span></a></td></tr>
+                        <tr><th scope="row">A-002</th><td><time datetime="2026-11-12">12/11/2026</time></td><td>Paciente sano, apto para vacunación</td><td><a href="#atencion-2">Ver detalle<span class="solo-lector"> de A-002</span></a></td></tr>
+                        <tr><th scope="row">A-003</th><td><time datetime="2026-11-18">18/11/2026</time></td><td>Control de rutina</td><td><a href="#atencion-3">Ver detalle<span class="solo-lector"> de A-003</span></a></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="historial-michi" class="aviso aviso--info" aria-labelledby="titulo-historial-michi">
+            <h2 id="titulo-historial-michi">Historial de Michi (M-002)</h2>
+            <p>Michi aún no tiene historial clínico registrado en los datos de ejemplo.</p>
+        </section>
+
+        <!-- CU-08, detalles de atenciones; :target resalta la ficha elegida. -->
+        <section aria-labelledby="titulo-detalles-atenciones">
+            <h2 id="titulo-detalles-atenciones">Detalle de las atenciones de Toby</h2>
+            <article id="atencion-1" aria-labelledby="titulo-atencion-1">
+                <h3 id="titulo-atencion-1">A-001 · <time datetime="2026-05-20">20/05/2026</time></h3>
+                <dl class="ficha"><dt>Diagnóstico</dt><dd>Otitis externa leve</dd><dt>Tratamiento</dt><dd>Gotas óticas cada 12 h por 7 días</dd><dt>Peso</dt><dd>11,8 kg</dd></dl>
+            </article>
+            <article id="atencion-2" aria-labelledby="titulo-atencion-2">
+                <h3 id="titulo-atencion-2">A-002 · <time datetime="2026-11-12">12/11/2026</time></h3>
+                <dl class="ficha"><dt>Diagnóstico</dt><dd>Paciente sano, apto para vacunación</dd><dt>Tratamiento</dt><dd>Vacuna antirrábica; refuerzo en un año</dd><dt>Peso</dt><dd>12,3 kg</dd></dl>
+            </article>
+            <article id="atencion-3" aria-labelledby="titulo-atencion-3">
+                <h3 id="titulo-atencion-3">A-003 · <time datetime="2026-11-18">18/11/2026</time></h3>
+                <dl class="ficha"><dt>Diagnóstico</dt><dd>Control de rutina</dd><dt>Tratamiento</dt><dd>Control en seis meses</dd><dt>Peso</dt><dd>12,5 kg</dd></dl>
+            </article>
+        </section>
+
+        <!-- CU-08, flujo 3a: escenario estático de búsqueda sin coincidencias. -->
+        <section class="aviso aviso--info" aria-label="Ejemplo de búsqueda sin coincidencias">
+            <p>Ejemplo: al buscar «Rex» no se encontraron mascotas. Intenta con otro criterio.</p>
+        </section>
+
+        <!-- CU-08, flujo 7a. -->
+        <div class="acciones">
+            <a class="boton boton--secundario" href="menu-veterinario.html">Volver</a>
+        </div>
     </main>
 
     <footer class="pie-pagina">

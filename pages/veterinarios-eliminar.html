@@ -22,11 +22,26 @@
     </header>
 
     <main class="contenido">
+        <!-- CU-09, flujo 3c: confirmar eliminación del veterinario V-003. -->
         <h1>Eliminar veterinario</h1>
-
-        <!-- Pendiente: Integrante 3 · CU-09. Reemplazar este aviso por el contenido de la pantalla
-             (ver docs/PLAN_IMPLEMENTACION.md, sección 7). No modificar header, footer ni head. -->
-        <p class="aviso aviso--info">Pantalla en construcción · Integrante 3 · CU-09.</p>
+        <article aria-labelledby="titulo-eliminar-veterinario">
+            <h2 id="titulo-eliminar-veterinario">¿Eliminar a la Dra. Sofía Vega?</h2>
+            <p>Confirma si deseas quitar este registro del listado de ejemplo.</p>
+            <dl class="ficha">
+                <dt>Código</dt><dd>V-003</dd>
+                <dt>Nombres</dt><dd>Sofía Elena</dd>
+                <dt>Apellidos</dt><dd>Vega Ríos</dd>
+                <dt>Celular</dt><dd>0993334455</dd>
+                <dt>Correo electrónico</dt><dd>sofia.vega@correo.com</dd>
+                <dt>Días habituales de atención</dt><dd>Martes, jueves y sábado</dd>
+            </dl>
+            <form action="veterinarios-listado.html" method="get">
+                <div class="acciones">
+                    <button type="submit" class="boton boton--peligro">Confirmar</button>
+                    <a class="boton boton--secundario" href="veterinarios-listado.html">Cancelar</a>
+                </div>
+            </form>
+        </article>
     </main>
 
     <footer class="pie-pagina">

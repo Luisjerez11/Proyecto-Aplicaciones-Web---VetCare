@@ -22,11 +22,47 @@
     </header>
 
     <main class="contenido">
+        <!-- CU-09, flujo 3b: editar datos del veterinario. -->
         <h1>Editar veterinario</h1>
-
-        <!-- Pendiente: Integrante 3 · CU-09. Reemplazar este aviso por el contenido de la pantalla
-             (ver docs/PLAN_IMPLEMENTACION.md, sección 7). No modificar header, footer ni head. -->
-        <p class="aviso aviso--info">Pantalla en construcción · Integrante 3 · CU-09.</p>
+        <form class="formulario" action="veterinarios-listado.html" method="get">
+            <fieldset>
+                <legend>Datos del veterinario</legend>
+                <div class="campos">
+                    <div class="campo">
+                        <label for="nombres">Nombres</label>
+                        <input type="text" id="nombres" name="nombres" required minlength="2" maxlength="50" pattern="[A-Za-zÁÉÍÓÚáéíóúÑñÜü ]{2,50}" title="Ingresa entre 2 y 50 letras y espacios." placeholder="Ana Lucía" value="Ana Lucía" autocomplete="given-name">
+                    </div>
+                    <div class="campo">
+                        <label for="apellidos">Apellidos</label>
+                        <input type="text" id="apellidos" name="apellidos" required minlength="2" maxlength="50" pattern="[A-Za-zÁÉÍÓÚáéíóúÑñÜü ]{2,50}" title="Ingresa entre 2 y 50 letras y espacios." placeholder="Pérez Cevallos" value="Pérez Cevallos" autocomplete="family-name">
+                    </div>
+                    <div class="campo">
+                        <label for="celular">Celular</label>
+                        <input type="tel" id="celular" name="celular" required pattern="09[0-9]{8}" minlength="10" maxlength="10" placeholder="0991234567" title="Ingresa 10 dígitos y comienza con 09." value="0991112233" autocomplete="tel">
+                    </div>
+                    <div class="campo">
+                        <label for="correo">Correo electrónico</label>
+                        <input type="email" id="correo" name="correo" required placeholder="nombre@correo.com" value="ana.perez@correo.com" autocomplete="email">
+                    </div>
+                    <fieldset class="campo-grupo campo--ancho">
+                        <legend>Días habituales de atención</legend>
+                        <div class="opciones">
+                            <label><input type="checkbox" id="lunes" name="dias" value="Lunes" checked> Lunes</label>
+                            <label><input type="checkbox" id="martes" name="dias" value="Martes" checked> Martes</label>
+                            <label><input type="checkbox" id="miercoles" name="dias" value="Miércoles" checked> Miércoles</label>
+                            <label><input type="checkbox" id="jueves" name="dias" value="Jueves" checked> Jueves</label>
+                            <label><input type="checkbox" id="viernes" name="dias" value="Viernes" checked> Viernes</label>
+                            <label><input type="checkbox" id="sabado" name="dias" value="Sábado"> Sábado</label>
+                        </div>
+                        <p class="ayuda">Información de referencia para coordinar citas.</p>
+                    </fieldset>
+                </div>
+            </fieldset>
+            <div class="acciones">
+                <button type="submit" class="boton">Guardar</button>
+                <a class="boton boton--secundario" href="veterinarios-listado.html">Cancelar</a>
+            </div>
+        </form>
     </main>
 
     <footer class="pie-pagina">

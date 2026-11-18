@@ -22,11 +22,23 @@
     </header>
 
     <main class="contenido">
+        <!-- CU-10, flujo 3c: confirmar eliminación del servicio S-005. -->
         <h1>Eliminar servicio</h1>
-
-        <!-- Pendiente: Integrante 3 · CU-10. Reemplazar este aviso por el contenido de la pantalla
-             (ver docs/PLAN_IMPLEMENTACION.md, sección 7). No modificar header, footer ni head. -->
-        <p class="aviso aviso--info">Pantalla en construcción · Integrante 3 · CU-10.</p>
+        <article aria-labelledby="titulo-eliminar-servicio">
+            <h2 id="titulo-eliminar-servicio">¿Eliminar «Baño medicado»?</h2>
+            <p>Confirma si deseas quitar este servicio del catálogo de ejemplo.</p>
+            <dl class="ficha">
+                <dt>Código</dt><dd>S-005</dd>
+                <dt>Nombre</dt><dd>Baño medicado</dd>
+                <dt>Precio</dt><dd>$15,00 USD</dd>
+            </dl>
+            <form action="servicios-listado.html" method="get">
+                <div class="acciones">
+                    <button type="submit" class="boton boton--peligro">Confirmar</button>
+                    <a class="boton boton--secundario" href="servicios-listado.html">Cancelar</a>
+                </div>
+            </form>
+        </article>
     </main>
 
     <footer class="pie-pagina">

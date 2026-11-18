@@ -22,11 +22,54 @@
     </header>
 
     <main class="contenido">
+        <!-- CU-09: listado, buscador y acciones CRUD de ejemplo. -->
         <h1>Listado de veterinarios</h1>
-
-        <!-- Pendiente: Integrante 3 · CU-09. Reemplazar este aviso por el contenido de la pantalla
-             (ver docs/PLAN_IMPLEMENTACION.md, sección 7). No modificar header, footer ni head. -->
-        <p class="aviso aviso--info">Pantalla en construcción · Integrante 3 · CU-09.</p>
+        <section class="barra-herramientas" aria-label="Herramientas del listado">
+            <form class="buscador" role="search" action="veterinarios-listado.html#resultados" method="get">
+                <label for="busqueda">Buscar veterinario</label>
+                <input type="search" id="busqueda" name="busqueda" placeholder="Buscar veterinario">
+                <button type="submit" class="boton">Buscar</button>
+            </form>
+            <a class="boton" href="veterinarios-nuevo.html">Nuevo veterinario</a>
+        </section>
+        <section id="resultados" aria-labelledby="titulo-resultados">
+            <h2 id="titulo-resultados">Veterinarios registrados</h2>
+            <div class="tabla-contenedor">
+                <table class="tabla">
+                    <caption>Veterinarios de ejemplo de la clínica Huellitas.</caption>
+                    <thead><tr><th scope="col">Código</th><th scope="col">Veterinario</th><th scope="col">Celular</th><th scope="col">Días habituales</th><th scope="col">Acciones</th></tr></thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">V-001</th><td>Dra. Ana Pérez</td><td>0991112233</td><td>Lunes a viernes</td>
+                            <td><ul class="acciones-fila">
+                                <li><a href="veterinarios-detalle.html">Ver detalle<span class="solo-lector"> de Dra. Ana Pérez</span></a></li>
+                                <li><a href="veterinarios-editar.html">Editar<span class="solo-lector"> a Dra. Ana Pérez</span></a></li>
+                                <li><a href="veterinarios-eliminar.html">Eliminar<span class="solo-lector"> a Dra. Ana Pérez</span></a></li>
+                            </ul></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">V-002</th><td>Dr. Luis Mora</td><td>0992223344</td><td>Lunes, miércoles, viernes y sábado</td>
+                            <td><ul class="acciones-fila">
+                                <li><a href="veterinarios-detalle.html">Ver detalle<span class="solo-lector"> de Dr. Luis Mora</span></a></li>
+                                <li><a href="veterinarios-editar.html">Editar<span class="solo-lector"> a Dr. Luis Mora</span></a></li>
+                                <li><a href="veterinarios-eliminar.html">Eliminar<span class="solo-lector"> a Dr. Luis Mora</span></a></li>
+                            </ul></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">V-003</th><td>Dra. Sofía Vega</td><td>0993334455</td><td>Martes, jueves y sábado</td>
+                            <td><ul class="acciones-fila">
+                                <li><a href="veterinarios-detalle.html">Ver detalle<span class="solo-lector"> de Dra. Sofía Vega</span></a></li>
+                                <li><a href="veterinarios-editar.html">Editar<span class="solo-lector"> a Dra. Sofía Vega</span></a></li>
+                                <li><a href="veterinarios-eliminar.html">Eliminar<span class="solo-lector"> a Dra. Sofía Vega</span></a></li>
+                            </ul></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        <section class="aviso aviso--info" aria-label="Ejemplo de búsqueda sin coincidencias">
+            <p>Ejemplo: al buscar un registro inexistente no se encontraron coincidencias. Intenta con otro criterio.</p>
+        </section>
     </main>
 
     <footer class="pie-pagina">
