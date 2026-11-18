@@ -659,9 +659,10 @@ a.boton[href$="-editar.html"]:not(.boton--secundario)::before {
     background-color: var(--c-rol-suave);
 }
 
-/* La celda de acciones deja al menos dos píldoras por línea */
+/* Ancho sugerido para la celda de acciones: caben dos píldoras por línea
+   (en tablas, width funciona como ancho preferido; min-width no aplica) */
 .tabla td:has(.acciones-fila) {
-    min-width: 16rem;
+    width: 20rem;
 }
 
 /* Enlaces de acción dentro de una fila: «píldoras» con icono */
