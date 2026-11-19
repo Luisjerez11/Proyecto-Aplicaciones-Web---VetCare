@@ -64,7 +64,7 @@ pages/            Las otras 33 pantallas, con los nombres del mapa navegacional
 css/estilos.css   Hoja de estilos común
 img/fotos/        Fotos de la interfaz (WebP)
 img/iconos/       Iconos SVG (Lucide)
-docs/             Entregables 3.1 a 3.5 y enunciado del proyecto
+docs/             Entregables 3.1 a 3.5 en PDF
 README.md         Este archivo
 ```
 
@@ -82,12 +82,11 @@ No requiere instalación. Puedes hacer cualquiera de estas tres cosas:
 
 | Documento | Contenido |
 |---|---|
-| `VetCare_Vision_y_Alcance_Corregido.docx` | Visión y alcance |
-| `VetCare_3_2_Especificacion_Casos_de_Uso_CORREGIDO.docx` | 3.2 Especificación de casos de uso (CU-01 a CU-11) |
-| `VetCare_3_3_Diagramas_de_Casos_de_Uso_por_Actor.pdf` | 3.3 Diagramas de casos de uso por actor |
-| `VetCare_Entregable_3_4_MoSCoW_3_Integrantes_Valor_Negocio.docx` | 3.4 Priorización MoSCoW y responsables |
-| `VetCare_Entregable_3_5_Mapa_Navegacional (1).pdf` | 3.5 Mapa navegacional (34 pantallas, Anexo A con las transiciones) |
-| `Proyecto_Bimestre1_VetCare.pdf` | Enunciado del proyecto y rúbrica |
+| `Grupo3_Vision_y_Alcance_VetCare.pdf` | 3.1 Visión y alcance |
+| `Grupo3_Especificacion_de_Casos_de_Uso_VetCare.pdf` | 3.2 Especificación de casos de uso (CU-01 a CU-11) |
+| `Grupo3_Diagramas_de_Casos_de_Uso_VetCare.pdf` | 3.3 Diagramas de casos de uso |
+| `Grupo3_Priorizacion_MoSCoW_VetCare.pdf` | 3.4 Priorización MoSCoW y responsables |
+| `Grupo3_Mapa_Navegacional_VetCare.pdf` | 3.5 Mapa navegacional (34 pantallas y transiciones) |
 
 ## Flujo de trabajo en Git
 
