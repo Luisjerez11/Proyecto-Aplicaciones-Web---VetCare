@@ -27,9 +27,13 @@
         <img class="portada-modulo" src="../img/fotos/veterinarios.webp" alt="" width="800" height="533">
         <section class="barra-herramientas" aria-label="Herramientas del listado">
             <form class="buscador" role="search" action="veterinarios-listado.html#resultados" method="get">
-                <label for="busqueda">Buscar veterinario</label>
-                <input type="search" id="busqueda" name="busqueda" placeholder="Buscar veterinario">
-                <button type="submit" class="boton">Buscar</button>
+                <!-- Criterio de búsqueda agrupado en un fieldset (legend solo para lectores de pantalla) -->
+                <fieldset>
+                    <legend class="solo-lector">Buscar veterinario</legend>
+                    <label for="busqueda">Buscar veterinario</label>
+                    <input type="search" id="busqueda" name="busqueda" placeholder="Buscar veterinario">
+                    <button type="submit" class="boton">Buscar</button>
+                </fieldset>
             </form>
             <a class="boton" href="veterinarios-nuevo.html">Nuevo veterinario</a>
         </section>

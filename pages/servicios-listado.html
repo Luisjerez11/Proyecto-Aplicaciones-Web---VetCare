@@ -27,9 +27,13 @@
         <img class="portada-modulo" src="../img/fotos/servicios.webp" alt="" width="800" height="533">
         <section class="barra-herramientas" aria-label="Herramientas del listado">
             <form class="buscador" role="search" action="servicios-listado.html#resultados" method="get">
-                <label for="busqueda">Buscar servicio</label>
-                <input type="search" id="busqueda" name="busqueda" placeholder="Buscar servicio">
-                <button type="submit" class="boton">Buscar</button>
+                <!-- Criterio de búsqueda agrupado en un fieldset (legend solo para lectores de pantalla) -->
+                <fieldset>
+                    <legend class="solo-lector">Buscar servicio</legend>
+                    <label for="busqueda">Buscar servicio</label>
+                    <input type="search" id="busqueda" name="busqueda" placeholder="Buscar servicio">
+                    <button type="submit" class="boton">Buscar</button>
+                </fieldset>
             </form>
             <a class="boton" href="servicios-nuevo.html">Nuevo servicio</a>
         </section>
