@@ -91,8 +91,8 @@ No requiere instalación. Puedes hacer cualquiera de estas tres cosas:
 ## Flujo de trabajo en Git
 
 - `main`: versión entregada, que es la que publica GitHub Pages.
-- `develop`: rama de integración.
-- `feature/*`: una rama por módulo, que entra a `develop` mediante un Pull Request revisado por otro integrante.
+- Las mejoras se trabajan en ramas `feature/*`, `fix/*` o `docs/*` creadas desde `main`.
+- Los cambios se integran en `main` mediante un Pull Request revisado por otro integrante. No hay una rama `develop` activa en el repositorio.
 
 Los commits van en español y con el caso de uso como prefijo, por ejemplo `CU-03: agrega listado de mascotas`.
 
