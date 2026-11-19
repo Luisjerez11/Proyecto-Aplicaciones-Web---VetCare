@@ -16,7 +16,7 @@ Grupo 3 · Docente: Carlos Iñiguez · Entrega: 18 de noviembre de 2026.
 |---|---|---|---|
 | 1 | Oscar Aldahir Gualotuña Asimbaya | [@OscarGualo](https://github.com/OscarGualo) | Base, acceso y propietarios |
 | 2 | Luis Jerez | [@Luisjerez11](https://github.com/Luisjerez11) | Recepción: mascotas y citas |
-| 3 | Abraham | [@AbrahamMIbd1](https://github.com/AbrahamMIbd1) | Veterinario y administración |
+| 3 | Abraham Minda | [@AbrahamMIbd1](https://github.com/AbrahamMIbd1) | Veterinario y administración |
 
 ## Reparto del trabajo
 
@@ -26,7 +26,7 @@ Cada pantalla tiene un solo dueño, y el historial de commits muestra el aporte 
 |---|---|---|---|
 | **1 · Oscar Gualotuña** | CU-01 Iniciar sesión<br>CU-02 Gestionar propietarios | `index.html`, `menu-recepcion`, `menu-veterinario`, `menu-administrador`, `propietarios-listado`, `-nuevo`, `-detalle`, `-editar`, `-eliminar` (9) | Hoja de estilos común (`css/estilos.css`), plantilla y esqueleto de las 34 pantallas, imágenes, README, QA final y publicación en GitHub Pages |
 | **2 · Luis Jerez** | CU-03 Gestionar mascotas<br>CU-04 Agendar cita<br>CU-05 Gestionar citas<br>CU-11 Consultar disponibilidad horaria | `mascotas-listado`, `-nueva`, `-detalle`, `-editar`, `-eliminar`, `citas-listado`, `-nueva`, `-disponibilidad`, `-detalle`, `-editar`, `-cancelar`, `-eliminar` (12) | QA de las pantallas del Integrante 3 |
-| **3 · Abraham** | CU-06 Consultar agenda del día<br>CU-07 Registrar atención<br>CU-08 Consultar historial clínico<br>CU-09 Gestionar veterinarios<br>CU-10 Gestionar servicios | `agenda-dia`, `atencion-registrar`, `historial-clinico`, `veterinarios-listado`, `-nuevo`, `-detalle`, `-editar`, `-eliminar`, `servicios-listado`, `-nuevo`, `-detalle`, `-editar`, `-eliminar` (13) | QA de las pantallas del Integrante 1 |
+| **3 · Abraham Minda** | CU-06 Consultar agenda del día<br>CU-07 Registrar atención<br>CU-08 Consultar historial clínico<br>CU-09 Gestionar veterinarios<br>CU-10 Gestionar servicios | `agenda-dia`, `atencion-registrar`, `historial-clinico`, `veterinarios-listado`, `-nuevo`, `-detalle`, `-editar`, `-eliminar`, `servicios-listado`, `-nuevo`, `-detalle`, `-editar`, `-eliminar` (13) | QA de las pantallas del Integrante 1 |
 
 ## Descripción
 
