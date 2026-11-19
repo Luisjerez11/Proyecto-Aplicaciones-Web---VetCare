@@ -1,41 +1,47 @@
 /* ==========================================================================
    VetCare · Hoja de estilos común
-   Dueño: Integrante 1. Para pedir un componente nuevo, abrir un Issue
-   «Solicitud CSS: …» (ver docs/PLAN_IMPLEMENTACION.md, sección 8).
+   Para pedir un componente nuevo, abrir un Issue «Solicitud CSS: …»
+   (ver docs/PLAN_IMPLEMENTACION.md, sección 8).
 
    Índice
    1. Tokens de diseño (:root y colores por rol)
    2. Base y tipografía
-   3. Layout común: encabezado, contenido, portada de módulo y pie
+   3. Layout común: barra lateral, contenido, portada de módulo y pie
    4. Componentes: botones, menús, barra de herramientas y buscador
    5. Tablas y estados de cita
    6. Formularios y validación
    7. Fichas, avisos y notas
+   7.1 Agenda, atención e historial (rol Veterinario)
    8. Pantalla de acceso
    9. Utilidades
    10. Puntos de quiebre (tablet 40rem y escritorio 64rem)
-   11. Movimiento reducido (prefers-reduced-motion)
+   11. Movimiento (fundido de entrada y prefers-reduced-motion)
 
    Imágenes: las fotos están en img/fotos/ y los iconos (Lucide, licencia
-   ISC) en img/iconos/. Los iconos se colocan solo desde esta hoja con
-   ::before, así el HTML no cambia y los textos de enlaces y botones
-   siguen siendo exactamente los del Anexo A.
+   ISC) en img/iconos/, una variante por color (nombre-color.svg). Los
+   iconos se colocan solo desde esta hoja con ::before, así el HTML no
+   cambia y los textos de enlaces y botones siguen siendo los del Anexo A.
+   Se usan como background-image (no como máscara) para que también se vean
+   al abrir el sitio como archivo local, sin servidor.
    ========================================================================== */
 
 /* 1. Tokens de diseño ===================================================== */
 :root {
+    color-scheme: light;
+
     /* Tipografía */
     --ff-titulos: "Poppins", system-ui, sans-serif;
     --ff-texto: "Nunito Sans", system-ui, sans-serif;
 
-    --fs-xs: 0.8125rem;
+    /* Escala compacta (razón ~1.2), pensada para pantallas de trabajo */
+    --fs-xs: 0.75rem;
     --fs-sm: 0.875rem;
     --fs-base: 1rem;
     --fs-md: 1.125rem;
     --fs-lg: 1.25rem;
-    --fs-xl: 1.563rem;
-    --fs-2xl: 1.953rem;
-    --lh-texto: 1.5;
+    --fs-xl: 1.5rem;
+    --fs-2xl: 1.875rem;
+    --lh-texto: 1.55;
     --lh-titulos: 1.2;
 
     /* Espaciado (múltiplos de 4px) */
@@ -46,66 +52,89 @@
     --sp-5: 1.5rem;
     --sp-6: 2rem;
     --sp-7: 3rem;
+    --sp-8: 4rem;
 
-    /* Colores (contraste AA verificado) */
-    --c-primario: #0f766e;
-    --c-primario-osc: #134e4a;
+    /* Neutros: lienzo gris verdoso y superficies blancas (contraste AA) */
+    --c-tinta: #0f1c22;           /* títulos (17:1 sobre blanco) */
+    --c-texto: #1d2a31;           /* texto principal (14.6:1) */
+    --c-texto-suave: #4a5a63;     /* ayudas y captions (7.1:1) */
+    --c-fondo: #f2f5f5;
+    --c-superficie: #ffffff;
+    --c-superficie-2: #f7f9f9;    /* cabeceras de tabla y zonas secundarias */
+    --c-fila-alterna: #f7f9f9;
+    --c-borde: #dfe6e8;
+    --c-borde-fuerte: #c3cdd1;
+    --c-borde-control: #7b8b92;   /* borde de campos: 3.5:1 sobre blanco */
+
+    /* Marca */
+    --c-primario: #0f766e;        /* teal (5.5:1 sobre blanco) */
+    --c-primario-osc: #115e59;
     --c-primario-suave: #ccfbf1;
     --c-acento: #c2410c;
-    --c-texto: #1f2937;
-    --c-texto-suave: #4b5563;
-    --c-fondo: #f8fafc;
-    --c-superficie: #ffffff;
-    --c-fila-alterna: #f1f5f9;
-    --c-borde: #d1d5db;
+
+    /* Estados */
     --c-error: #b91c1c;
     --c-error-osc: #7f1d1d;
-    --c-error-fondo: #fee2e2;
+    --c-error-fondo: #fef2f2;
     --c-exito: #15803d;
-    --c-exito-fondo: #dcfce7;
-    --c-aviso-fondo: #fef3c7;
+    --c-exito-osc: #166534;
+    --c-exito-fondo: #f0fdf4;
+    --c-aviso-fondo: #fffbeb;
     --c-aviso-texto: #92400e;
-    --c-info-fondo: #dbeafe;
-    --c-info-texto: #1e40af;
+    --c-info-fondo: #ecfeff;
+    --c-info-texto: #155e75;
 
     /* Color del rol (lo cambian las clases .rol-*) */
     --c-rol: var(--c-primario);
     --c-rol-osc: var(--c-primario-osc);
     --c-rol-suave: var(--c-primario-suave);
+    --c-lateral-1: #082f2c;       /* degradado de la barra lateral */
+    --c-lateral-2: #0f5752;
 
-    /* Forma y elevación */
-    --radio: 0.5rem;
+    /* Forma y elevación (sombras con desplazamiento y desenfoque suave) */
+    --radio-sm: 0.375rem;
+    --radio: 0.625rem;
     --radio-lg: 1rem;
     --radio-pildora: 999px;
-    --sombra: 0 1px 3px rgb(15 23 42 / 0.12);
-    --sombra-md: 0 4px 12px rgb(15 23 42 / 0.1);
-    --sombra-lg: 0 12px 28px rgb(15 23 42 / 0.16);
+    --sombra: 0 1px 2px rgb(15 28 34 / 0.06), 0 1px 3px rgb(15 28 34 / 0.08);
+    --sombra-md: 0 2px 4px -1px rgb(15 28 34 / 0.06), 0 6px 14px -4px rgb(15 28 34 / 0.12);
+    --sombra-lg: 0 12px 32px -8px rgb(15 28 34 / 0.22);
+    --halo: 0 0 0 4px rgb(15 118 110 / 0.16);
 
-    /* Movimiento */
-    --transicion: 200ms ease;
-    --transicion-rapida: 150ms ease-out;
+    /* Movimiento: desaceleración natural, sin rebotes */
+    --ease-salida: cubic-bezier(0.16, 1, 0.3, 1);
+    --transicion: 200ms var(--ease-salida);
+    --transicion-rapida: 140ms var(--ease-salida);
 
     /* Otros */
-    --ancho-max: 72rem;
-    --icono: 1.25rem;
+    --ancho-max: 76rem;
+    --ancho-lateral: 16.5rem;
+    --icono: 1.125rem;
 }
 
+/* Cada rol define su acento y el degradado de su barra lateral */
 .rol-recepcion {
-    --c-rol: #166534;
+    --c-rol: #15803d;
     --c-rol-osc: #14532d;
     --c-rol-suave: #dcfce7;
+    --c-lateral-1: #082419;
+    --c-lateral-2: #14532d;
 }
 
 .rol-veterinario {
-    --c-rol: #92400e;
+    --c-rol: #b45309;
     --c-rol-osc: #78350f;
     --c-rol-suave: #fef3c7;
+    --c-lateral-1: #241304;
+    --c-lateral-2: #6b3410;
 }
 
 .rol-administrador {
-    --c-rol: #5b21b6;
-    --c-rol-osc: #4c1d95;
-    --c-rol-suave: #ede9fe;
+    --c-rol: #1d4ed8;
+    --c-rol-osc: #1e3a8a;
+    --c-rol-suave: #dbeafe;
+    --c-lateral-1: #08142b;
+    --c-lateral-2: #1e3a8a;
 }
 
 /* 2. Base y tipografía ==================================================== */
@@ -118,6 +147,7 @@
 html {
     -webkit-text-size-adjust: 100%;
     text-size-adjust: 100%;
+    scrollbar-color: var(--c-borde-fuerte) transparent;
 }
 
 body {
@@ -130,11 +160,15 @@ body {
     line-height: var(--lh-texto);
     color: var(--c-texto);
     background-color: var(--c-fondo);
+    /* Luz tenue del color del rol en la esquina superior */
+    background-image: radial-gradient(70rem 32rem at 100% -8rem, color-mix(in srgb, var(--c-rol-suave) 70%, transparent), transparent 70%);
+    background-repeat: no-repeat;
+    caret-color: var(--c-rol);
 }
 
 ::selection {
-    color: var(--c-texto);
-    background-color: var(--c-rol-suave);
+    color: var(--c-tinta);
+    background-color: color-mix(in srgb, var(--c-rol) 22%, white);
 }
 
 h1,
@@ -145,12 +179,15 @@ h4 {
     font-family: var(--ff-titulos);
     font-weight: 600;
     line-height: var(--lh-titulos);
-    color: var(--c-texto);
+    letter-spacing: -0.01em;
+    color: var(--c-tinta);
+    text-wrap: balance;
 }
 
 h1 {
     font-size: var(--fs-2xl);
     font-weight: 700;
+    letter-spacing: -0.02em;
 }
 
 h2 {
@@ -165,17 +202,6 @@ h4 {
     font-size: var(--fs-md);
 }
 
-/* Título de cada pantalla con una barra de acento del color del rol */
-.contenido > h1::after {
-    content: "";
-    display: block;
-    width: 3.5rem;
-    height: 0.25rem;
-    margin-top: var(--sp-3);
-    background-image: linear-gradient(90deg, var(--c-rol), var(--c-acento));
-    border-radius: var(--radio-pildora);
-}
-
 p,
 ul,
 ol,
@@ -185,16 +211,18 @@ dl {
 
 a {
     color: var(--c-primario);
-    text-underline-offset: 0.15em;
-    transition: color var(--transicion);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
+    transition: color var(--transicion), text-decoration-color var(--transicion);
 }
 
 a:hover {
     color: var(--c-primario-osc);
+    text-decoration-thickness: 2px;
 }
 
 a:active {
-    color: var(--c-texto);
+    color: var(--c-tinta);
 }
 
 :focus-visible {
@@ -216,6 +244,9 @@ time,
 }
 
 /* 3. Layout común ========================================================= */
+
+/* Encabezado: en móvil y tablet es una barra superior compacta;
+   desde 64rem, en las pantallas internas, se convierte en barra lateral */
 .encabezado {
     display: flex;
     flex-wrap: wrap;
@@ -224,8 +255,10 @@ time,
     gap: var(--sp-2) var(--sp-4);
     padding: var(--sp-3) var(--sp-4);
     color: #ffffff;
-    background-color: var(--c-rol);
-    background-image: linear-gradient(120deg, var(--c-rol) 0%, var(--c-rol-osc) 100%);
+    background-color: var(--c-lateral-2);
+    background-image:
+        radial-gradient(120% 140% at 0% 0%, rgb(255 255 255 / 0.1), transparent 55%),
+        linear-gradient(120deg, var(--c-lateral-2), var(--c-lateral-1));
     box-shadow: var(--sombra-md);
 }
 
@@ -243,6 +276,7 @@ time,
     font-size: var(--fs-lg);
     font-weight: 700;
     line-height: var(--lh-titulos);
+    letter-spacing: -0.01em;
 }
 
 .marca::before {
@@ -250,25 +284,52 @@ time,
     grid-row: 1 / span 2;
     width: 2.5rem;
     height: 2.5rem;
-    background: rgb(255 255 255 / 0.16) url("../img/iconos/paw-print-blanco.svg") center / 1.5rem no-repeat;
-    border: 1px solid rgb(255 255 255 / 0.35);
-    border-radius: 50%;
+    background: rgb(255 255 255 / 0.14) url("../img/iconos/paw-print-blanco.svg") center / 1.375rem no-repeat;
+    border: 1px solid rgb(255 255 255 / 0.28);
+    border-radius: var(--radio);
 }
 
 .marca span {
     grid-column: 2;
     font-family: var(--ff-texto);
-    font-size: var(--fs-sm);
-    font-weight: 400;
+    font-size: var(--fs-xs);
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    color: rgb(255 255 255 / 0.78);
 }
 
+/* Rol de la sesión: tarjeta de usuario con el icono del rol */
 .rol-actual {
-    padding: var(--sp-1) var(--sp-3);
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-2);
+    padding: var(--sp-1) var(--sp-3) var(--sp-1) var(--sp-1);
     font-size: var(--fs-sm);
     font-weight: 700;
-    background-color: rgb(255 255 255 / 0.12);
-    border: 1px solid rgb(255 255 255 / 0.7);
+    background-color: rgb(255 255 255 / 0.1);
+    border: 1px solid rgb(255 255 255 / 0.22);
     border-radius: var(--radio-pildora);
+}
+
+.rol-actual::before {
+    content: "";
+    flex: none;
+    width: 1.75rem;
+    height: 1.75rem;
+    background: rgb(255 255 255 / 0.16) center / 1rem no-repeat;
+    border-radius: 50%;
+}
+
+.rol-recepcion .rol-actual::before {
+    background-image: url("../img/iconos/users-blanco.svg");
+}
+
+.rol-veterinario .rol-actual::before {
+    background-image: url("../img/iconos/stethoscope-blanco.svg");
+}
+
+.rol-administrador .rol-actual::before {
+    background-image: url("../img/iconos/clipboard-list-blanco.svg");
 }
 
 .nav-principal {
@@ -285,25 +346,27 @@ time,
 }
 
 .nav-principal a {
-    display: inline-flex;
+    display: flex;
     align-items: center;
-    gap: var(--sp-2);
-    min-height: 2.5rem;
-    padding: var(--sp-1) var(--sp-3);
+    gap: var(--sp-3);
+    min-height: 2.75rem;
+    padding: var(--sp-2) var(--sp-3);
     font-weight: 600;
-    color: #ffffff;
+    color: rgb(255 255 255 / 0.92);
     text-decoration: none;
     border: 1px solid transparent;
     border-radius: var(--radio);
-    transition: background-color var(--transicion), border-color var(--transicion);
+    transition: background-color var(--transicion), border-color var(--transicion), color var(--transicion);
 }
 
+/* Icono de cada enlace */
 .nav-principal a::before {
     content: "";
     flex: none;
-    width: 1.125rem;
-    height: 1.125rem;
+    width: var(--icono);
+    height: var(--icono);
     background: center / contain no-repeat;
+    transition: transform var(--transicion);
 }
 
 /* «Menú» lleva una casa; «Cerrar sesión» una puerta y queda separado */
@@ -312,7 +375,7 @@ time,
 }
 
 .nav-principal a[href$="index.html"] {
-    border-color: rgb(255 255 255 / 0.55);
+    border-color: rgb(255 255 255 / 0.24);
 }
 
 .nav-principal a[href$="index.html"]::before {
@@ -321,21 +384,28 @@ time,
 
 .nav-principal a:hover {
     color: #ffffff;
-    background-color: rgb(0 0 0 / 0.2);
+    background-color: rgb(255 255 255 / 0.12);
+}
+
+.nav-principal a:hover::before {
+    transform: translateX(2px);
 }
 
 .nav-principal a:active {
-    background-color: rgb(0 0 0 / 0.35);
+    background-color: rgb(0 0 0 / 0.22);
 }
 
 .nav-principal a:focus-visible {
     outline-color: #ffffff;
 }
 
+/* Contenido: una sola columna; las pantallas de entrada de módulo
+   agregan su foto junto al título desde 64rem */
 .contenido {
     flex: 1;
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    align-content: start;
     gap: var(--sp-5);
     width: 100%;
     max-width: var(--ancho-max);
@@ -348,16 +418,22 @@ time,
     margin-bottom: 0;
 }
 
+/* El párrafo de introducción queda pegado a su título */
+.contenido > h1 + .introduccion,
+.contenido > .portada-modulo + .introduccion {
+    margin-top: calc(var(--sp-3) - var(--sp-5));
+}
+
 .introduccion {
-    max-width: 65ch;
+    max-width: 68ch;
     font-size: var(--fs-md);
     color: var(--c-texto-suave);
 }
 
-/* Foto decorativa bajo el título de cada pantalla de entrada de módulo */
+/* Foto decorativa de cada pantalla de entrada de módulo */
 .portada-modulo {
     width: 100%;
-    aspect-ratio: 3 / 1;
+    aspect-ratio: 16 / 5;
     object-fit: cover;
     object-position: center 40%;
     border-radius: var(--radio-lg);
@@ -379,7 +455,6 @@ time,
     text-align: center;
     color: var(--c-texto-suave);
     border-top: 1px solid var(--c-borde);
-    background-color: var(--c-superficie);
 }
 
 .pie-pagina p {
@@ -397,18 +472,139 @@ time,
     background: url("../img/iconos/paw-print-primario.svg") center / contain no-repeat;
 }
 
+/* Tablet: el rol y la navegación comparten la fila de la marca */
+@media (min-width: 40rem) {
+    .encabezado {
+        flex-wrap: nowrap;
+    }
+
+    .nav-principal {
+        width: auto;
+        margin-left: auto;
+    }
+}
+
+/* Escritorio: barra lateral fija a la izquierda en las pantallas internas */
+@media (min-width: 64rem) {
+    body[class*="rol-"] {
+        display: grid;
+        grid-template-columns: var(--ancho-lateral) minmax(0, 1fr);
+        grid-template-rows: 1fr auto;
+    }
+
+    body[class*="rol-"] > .encabezado {
+        position: sticky;
+        top: 0;
+        grid-row: 1 / -1;
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: flex-start;
+        gap: var(--sp-5);
+        height: 100vh;
+        height: 100dvh;
+        padding: var(--sp-5) var(--sp-4);
+        overflow-y: auto;
+        background-image:
+            radial-gradient(140% 50% at 0% 0%, rgb(255 255 255 / 0.12), transparent 60%),
+            linear-gradient(180deg, var(--c-lateral-2), var(--c-lateral-1));
+        box-shadow: inset -1px 0 0 rgb(255 255 255 / 0.08), var(--sombra-md);
+    }
+
+    /* Tarjeta de sesión: icono del rol, nombre del rol y estado */
+    body[class*="rol-"] .rol-actual {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        column-gap: var(--sp-3);
+        align-items: center;
+        padding: var(--sp-3);
+        font-size: var(--fs-base);
+        border-radius: var(--radio);
+    }
+
+    body[class*="rol-"] .rol-actual::before {
+        grid-row: 1 / span 2;
+        width: 2.5rem;
+        height: 2.5rem;
+        background-size: 1.25rem;
+        border-radius: var(--radio);
+    }
+
+    body[class*="rol-"] .rol-actual::after {
+        content: "Sesión activa";
+        grid-column: 2;
+        font-size: var(--fs-xs);
+        font-weight: 600;
+        color: rgb(255 255 255 / 0.75);
+    }
+
+    body[class*="rol-"] .nav-principal {
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        margin-left: 0;
+    }
+
+    body[class*="rol-"] .nav-principal ul {
+        flex: 1;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        gap: var(--sp-1);
+    }
+
+    /* «Cerrar sesión» se separa al pie de la barra */
+    body[class*="rol-"] .nav-principal li:has(a[href$="index.html"]) {
+        margin-top: auto;
+        padding-top: var(--sp-4);
+        border-top: 1px solid rgb(255 255 255 / 0.14);
+    }
+
+    body[class*="rol-"] > .contenido,
+    body[class*="rol-"] > .pie-pagina {
+        grid-column: 2;
+    }
+
+    .contenido {
+        padding: var(--sp-6) var(--sp-6) var(--sp-7);
+    }
+
+    /* Pantalla de entrada de módulo: foto a la derecha del título */
+    .contenido:has(> .portada-modulo) {
+        grid-template-columns: minmax(0, 1fr) 18rem;
+    }
+
+    .contenido:has(> .portada-modulo) > * {
+        grid-column: 1 / -1;
+    }
+
+    .contenido:has(> .portada-modulo) > h1,
+    .contenido:has(> .portada-modulo) > .introduccion {
+        grid-column: 1;
+    }
+
+    .contenido > .portada-modulo {
+        grid-column: 2;
+        grid-row: 1 / span 2;
+        align-self: stretch;
+        height: 100%;
+        min-height: 7.5rem;
+        aspect-ratio: auto;
+        contain: size;
+    }
+}
+
 /* 4. Componentes ========================================================== */
 
 /* Botones (también para enlaces con aspecto de botón) */
 .boton {
+    --icono-boton: none;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: var(--sp-2);
     min-height: 2.75rem;
-    padding: var(--sp-2) var(--sp-5);
+    padding: 0.625rem 1.125rem;
     font-family: var(--ff-texto);
-    font-size: var(--fs-base);
+    font-size: 0.9375rem;
     font-weight: 700;
     line-height: var(--lh-titulos);
     color: #ffffff;
@@ -416,73 +612,76 @@ time,
     text-decoration: none;
     cursor: pointer;
     background-color: var(--c-primario);
-    border: 2px solid var(--c-primario);
+    background-image: linear-gradient(180deg, rgb(255 255 255 / 0.14), rgb(255 255 255 / 0));
+    border: 1px solid var(--c-primario-osc);
     border-radius: var(--radio);
-    box-shadow: var(--sombra);
+    box-shadow: var(--sombra), inset 0 1px 0 rgb(255 255 255 / 0.18);
     transition: background-color var(--transicion), border-color var(--transicion), color var(--transicion), box-shadow var(--transicion), transform var(--transicion-rapida);
 }
 
 .boton:hover {
     color: #ffffff;
+    text-decoration: none;
     background-color: var(--c-primario-osc);
-    border-color: var(--c-primario-osc);
-    box-shadow: var(--sombra-md);
+    box-shadow: var(--sombra-md), inset 0 1px 0 rgb(255 255 255 / 0.18);
 }
 
 .boton:active {
-    transform: translateY(1px);
+    transform: translateY(1px) scale(0.99);
     box-shadow: var(--sombra);
 }
 
 .boton--secundario {
-    color: var(--c-primario);
+    color: var(--c-texto);
     background-color: var(--c-superficie);
-    box-shadow: none;
+    background-image: none;
+    border-color: var(--c-borde-fuerte);
+    box-shadow: var(--sombra);
 }
 
 .boton--secundario:hover {
-    color: var(--c-primario-osc);
-    background-color: var(--c-fila-alterna);
-    box-shadow: none;
+    color: var(--c-tinta);
+    background-color: var(--c-superficie-2);
+    border-color: var(--c-borde-control);
+    box-shadow: var(--sombra);
 }
 
 .boton--peligro {
     background-color: var(--c-error);
-    border-color: var(--c-error);
+    border-color: var(--c-error-osc);
 }
 
 .boton--peligro:hover {
     background-color: var(--c-error-osc);
-    border-color: var(--c-error-osc);
 }
 
-/* Iconos de los botones: se eligen por su función, sin tocar el HTML */
+/* Iconos de los botones: se eligen por su función, sin tocar el HTML.
+   Cada uno usa la variante blanca del icono (img/iconos/*-blanco.svg). */
 .buscador .boton::before,
 .barra-herramientas > a.boton:not(.boton--secundario)::before,
 a.boton[href$="-editar.html"]:not(.boton--secundario)::before,
-.boton--peligro::before,
-.opciones-acceso .boton::before {
+.boton--peligro::before {
     content: "";
     flex: none;
     width: var(--icono);
     height: var(--icono);
-    background: center / contain no-repeat;
+    background: var(--icono-boton) center / contain no-repeat;
 }
 
-.buscador .boton::before {
-    background-image: url("../img/iconos/search-blanco.svg");
+.buscador .boton {
+    --icono-boton: url("../img/iconos/search-blanco.svg");
 }
 
-.barra-herramientas > a.boton:not(.boton--secundario)::before {
-    background-image: url("../img/iconos/plus-blanco.svg");
+.barra-herramientas > a.boton:not(.boton--secundario) {
+    --icono-boton: url("../img/iconos/plus-blanco.svg");
 }
 
-a.boton[href$="-editar.html"]:not(.boton--secundario)::before {
-    background-image: url("../img/iconos/pencil-blanco.svg");
+a.boton[href$="-editar.html"]:not(.boton--secundario) {
+    --icono-boton: url("../img/iconos/pencil-blanco.svg");
 }
 
-.boton--peligro::before {
-    background-image: url("../img/iconos/trash-2-blanco.svg");
+.boton--peligro {
+    --icono-boton: url("../img/iconos/trash-2-blanco.svg");
 }
 
 /* Fila de botones al final de un formulario o una ficha */
@@ -498,11 +697,37 @@ a.boton[href$="-editar.html"]:not(.boton--secundario)::before {
     flex: 1 1 12rem;
 }
 
-/* Menús de rol: cada opción es una tarjeta con foto (toda la tarjeta es clicable) */
+/* Buscador agrupado en un fieldset con legend oculta: sin borde ni fondo,
+   se ve igual que un buscador sin agrupar */
+.buscador fieldset {
+    display: flex;
+    flex: 1 1 100%;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: var(--sp-2);
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+    background: none;
+    border: 0;
+    box-shadow: none;
+}
+
+/* Select sin opción elegida: «Selecciona…» en gris (pseudoclase :invalid) */
+select:invalid {
+    color: var(--c-texto-suave);
+}
+
+select option {
+    color: var(--c-texto);
+}
+
+/* Menús de rol: cada módulo es una tarjeta con foto y el título sobre ella
+   (toda la tarjeta es clicable gracias al ::after del enlace) */
 .menu-tarjetas ul {
     display: grid;
     grid-template-columns: 1fr;
-    gap: var(--sp-5);
+    gap: var(--sp-4);
     margin: 0;
     padding: 0;
     list-style: none;
@@ -510,20 +735,49 @@ a.boton[href$="-editar.html"]:not(.boton--secundario)::before {
 
 .menu-tarjetas li {
     position: relative;
-    display: flex;
-    flex-direction: column;
+    isolation: isolate;
+    display: grid;
+    grid-template-rows: auto 1fr;
     overflow: hidden;
     background-color: var(--c-superficie);
     border: 1px solid var(--c-borde);
-    border-bottom: 4px solid var(--c-rol);
     border-radius: var(--radio-lg);
     box-shadow: var(--sombra);
-    transition: transform var(--transicion), box-shadow var(--transicion);
+    transition: box-shadow var(--transicion), border-color var(--transicion);
+}
+
+/* Velo en degradado sobre la foto para que el título se lea en blanco */
+.menu-tarjetas li::before {
+    content: "";
+    z-index: 0;
+    grid-area: 1 / 1;
+    background-image: linear-gradient(180deg, rgb(10 20 24 / 0) 35%, rgb(10 20 24 / 0.78) 100%);
+    pointer-events: none;
+}
+
+/* Flecha de «abrir» en la esquina inferior */
+.menu-tarjetas li::after {
+    content: "";
+    position: absolute;
+    right: var(--sp-4);
+    bottom: var(--sp-4);
+    width: 2rem;
+    height: 2rem;
+    background: var(--c-superficie-2) url("../img/iconos/arrow-right-tinta.svg") center / 1rem no-repeat;
+    border: 1px solid var(--c-borde);
+    border-radius: 50%;
+    transition: transform var(--transicion), background-color var(--transicion), border-color var(--transicion);
 }
 
 .menu-tarjetas li:hover {
-    transform: translateY(-4px);
+    border-color: var(--c-borde-fuerte);
     box-shadow: var(--sombra-lg);
+}
+
+.menu-tarjetas li:hover::after {
+    transform: translateX(3px);
+    background-color: var(--c-rol-suave);
+    border-color: var(--c-rol);
 }
 
 /* Foco del teclado: se marca la tarjeta completa, no solo el texto */
@@ -537,46 +791,91 @@ a.boton[href$="-editar.html"]:not(.boton--secundario)::before {
 }
 
 .menu-tarjetas img {
+    z-index: -1;
+    grid-area: 1 / 1;
     width: 100%;
     aspect-ratio: 16 / 9;
     object-fit: cover;
     background-color: var(--c-rol-suave);
-    transition: transform 400ms ease;
+    transition: transform 600ms var(--ease-salida);
 }
 
 .menu-tarjetas li:hover img {
-    transform: scale(1.05);
+    transform: scale(1.03);
 }
 
 .menu-tarjetas a {
-    margin: var(--sp-4) var(--sp-5) 0;
+    z-index: 1;
+    grid-area: 1 / 1;
+    align-self: end;
+    padding: var(--sp-4) var(--sp-5);
     font-family: var(--ff-titulos);
-    font-size: var(--fs-lg);
+    font-size: var(--fs-xl);
     font-weight: 600;
-    color: var(--c-rol);
+    line-height: var(--lh-titulos);
+    letter-spacing: -0.01em;
+    color: #ffffff;
     text-decoration: none;
+    text-shadow: 0 1px 2px rgb(0 0 0 / 0.35);
+}
+
+.menu-tarjetas a:hover {
+    color: #ffffff;
 }
 
 .menu-tarjetas a::after {
     content: "";
     position: absolute;
     inset: 0;
-    z-index: 1;
+    z-index: 2;
     border-radius: var(--radio-lg);
 }
 
 .menu-tarjetas p {
-    margin: var(--sp-2) var(--sp-5) var(--sp-5);
+    margin: 0;
+    padding: var(--sp-4) 4rem var(--sp-4) var(--sp-5);
     color: var(--c-texto-suave);
 }
 
-/* Barra superior de los listados: buscador + botón «Nuevo …» */
+@media (min-width: 40rem) {
+    .menu-tarjetas ul {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--sp-5);
+    }
+}
+
+@media (min-width: 64rem) {
+    .menu-tarjetas ul {
+        grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    }
+}
+
+/* Las tarjetas entran como lista, con un escalonado corto */
+@media (prefers-reduced-motion: no-preference) {
+    .menu-tarjetas li {
+        animation: aparecer 500ms var(--ease-salida) both;
+    }
+
+    .menu-tarjetas li:nth-child(2) {
+        animation-delay: 60ms;
+    }
+
+    .menu-tarjetas li:nth-child(3) {
+        animation-delay: 120ms;
+    }
+
+    .menu-tarjetas li:nth-child(4) {
+        animation-delay: 180ms;
+    }
+}
+
+/* Barra superior de los listados: buscador + botón «Nuevo …» en una tarjeta */
 .barra-herramientas {
     display: flex;
     flex-wrap: wrap;
     align-items: flex-end;
     justify-content: space-between;
-    gap: var(--sp-4);
+    gap: var(--sp-3) var(--sp-4);
     padding: var(--sp-4);
     background-color: var(--c-superficie);
     border: 1px solid var(--c-borde);
@@ -589,20 +888,47 @@ a.boton[href$="-editar.html"]:not(.boton--secundario)::before {
     flex-wrap: wrap;
     align-items: flex-end;
     gap: var(--sp-2);
-    flex: 1 1 18rem;
+    flex: 1 1 20rem;
     margin: 0;
 }
 
 .buscador label {
     flex-basis: 100%;
-    font-weight: 600;
+    font-size: var(--fs-sm);
+    font-weight: 700;
+    color: var(--c-texto-suave);
 }
 
+/* Campo de búsqueda con lupa a la izquierda */
 .buscador input {
     flex: 1 1 12rem;
+    padding-left: 2.625rem;
+    background: var(--c-superficie) url("../img/iconos/search-suave.svg") 0.875rem center / 1.125rem no-repeat;
+}
+
+/* «Buscar» es la acción secundaria; «Nuevo …» queda como la principal */
+.buscador .boton {
+    --icono-boton: url("../img/iconos/search-tinta.svg");
+    color: var(--c-texto);
+    background-color: var(--c-superficie);
+    background-image: none;
+    border-color: var(--c-borde-fuerte);
+    box-shadow: var(--sombra);
+}
+
+.buscador .boton:hover {
+    color: var(--c-tinta);
+    background-color: var(--c-superficie-2);
+    border-color: var(--c-borde-control);
+}
+
+.barra-herramientas > a.boton {
+    flex: 0 0 auto;
 }
 
 /* 5. Tablas y estados de cita ============================================= */
+
+/* Tabla de datos dentro de una tarjeta; en móvil se desplaza en horizontal */
 .tabla-contenedor {
     position: relative; /* contiene los .solo-lector de las filas dentro del scroll */
     overflow-x: auto;
@@ -619,11 +945,18 @@ a.boton[href$="-editar.html"]:not(.boton--secundario)::before {
     font-size: var(--fs-sm);
 }
 
+/* Con columna de acciones la tabla necesita más ancho (en móvil se desplaza) */
+.tabla:has(.acciones-fila) {
+    min-width: 52rem;
+}
+
 .tabla caption {
     padding: var(--sp-3) var(--sp-4);
+    font-size: var(--fs-sm);
     font-weight: 600;
     text-align: left;
     color: var(--c-texto-suave);
+    border-bottom: 1px solid var(--c-borde);
 }
 
 .tabla th,
@@ -634,42 +967,51 @@ a.boton[href$="-editar.html"]:not(.boton--secundario)::before {
     border-top: 1px solid var(--c-borde);
 }
 
+/* Cabecera discreta: etiquetas pequeñas sobre un gris muy claro */
 .tabla thead th {
-    font-family: var(--ff-titulos);
-    font-weight: 600;
-    color: #ffffff;
+    font-size: var(--fs-xs);
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--c-texto-suave);
     white-space: nowrap;
-    background-color: var(--c-rol-osc);
+    background-color: var(--c-superficie-2);
+    border-top: 0;
 }
 
+/* Primera columna: el código del registro */
 .tabla tbody th[scope="row"] {
     font-weight: 700;
+    color: var(--c-tinta);
     white-space: nowrap;
 }
 
+/* Filas alternas muy suaves (:nth-child) y resaltado con el color del rol */
 .tabla tbody tr:nth-child(even) {
     background-color: var(--c-fila-alterna);
 }
 
 .tabla tbody tr {
-    transition: background-color var(--transicion);
+    transition: background-color var(--transicion-rapida);
 }
 
 .tabla tbody tr:hover {
-    background-color: var(--c-rol-suave);
+    background-color: color-mix(in srgb, var(--c-rol-suave) 55%, white);
 }
 
-/* Ancho sugerido para la celda de acciones: caben dos píldoras por línea
+/* Ancho sugerido para la celda de acciones: caben dos acciones por línea
    (en tablas, width funciona como ancho preferido; min-width no aplica) */
 .tabla td:has(.acciones-fila) {
     width: 20rem;
 }
 
-/* Enlaces de acción dentro de una fila: «píldoras» con icono */
+/* Acciones de cada fila: botones compactos con icono
+   (el ancho mínimo asegura dos acciones por línea aunque la tabla se estreche) */
 .acciones-fila {
+    min-width: 17.5rem;
     display: flex;
     flex-wrap: wrap;
-    gap: var(--sp-2);
+    gap: var(--sp-1) var(--sp-2);
     margin: 0;
     padding: 0;
     list-style: none;
@@ -679,17 +1021,18 @@ a.boton[href$="-editar.html"]:not(.boton--secundario)::before {
     --icono-fila: none;
     display: inline-flex;
     align-items: center;
-    gap: var(--sp-1);
+    gap: 0.375rem;
     min-height: 2rem;
-    padding: var(--sp-1) var(--sp-3);
+    padding: var(--sp-1) 0.625rem;
     font-size: var(--fs-sm);
-    font-weight: 600;
+    font-weight: 700;
     white-space: nowrap;
+    color: var(--c-primario);
     text-decoration: none;
     background-color: var(--c-superficie);
     border: 1px solid var(--c-borde);
-    border-radius: var(--radio-pildora);
-    transition: background-color var(--transicion), border-color var(--transicion), color var(--transicion);
+    border-radius: var(--radio-sm);
+    transition: background-color var(--transicion-rapida), border-color var(--transicion-rapida), color var(--transicion-rapida);
 }
 
 .acciones-fila a::before {
@@ -701,8 +1044,9 @@ a.boton[href$="-editar.html"]:not(.boton--secundario)::before {
 }
 
 .acciones-fila a:hover {
+    color: var(--c-primario-osc);
     background-color: var(--c-primario-suave);
-    border-color: currentColor;
+    border-color: var(--c-primario);
 }
 
 .acciones-fila a[href*="-detalle"] {
@@ -739,6 +1083,7 @@ a.boton[href$="-editar.html"]:not(.boton--secundario)::before {
 .acciones-fila a[href*="-cancelar"]:hover {
     color: var(--c-error-osc);
     background-color: var(--c-error-fondo);
+    border-color: var(--c-error);
 }
 
 .acciones-fila a[href*="-eliminar"] {
@@ -753,8 +1098,8 @@ a.boton[href$="-editar.html"]:not(.boton--secundario)::before {
 .estado {
     display: inline-flex;
     align-items: center;
-    gap: var(--sp-1);
-    padding: 0.125rem var(--sp-3);
+    gap: 0.375rem;
+    padding: 0.125rem 0.625rem;
     font-size: var(--fs-sm);
     font-weight: 700;
     white-space: nowrap;
@@ -763,8 +1108,8 @@ a.boton[href$="-editar.html"]:not(.boton--secundario)::before {
 
 .estado::before {
     content: "";
-    width: 0.5rem;
-    height: 0.5rem;
+    width: 0.4375rem;
+    height: 0.4375rem;
     background-color: currentColor;
     border-radius: 50%;
 }
@@ -775,13 +1120,19 @@ a.boton[href$="-editar.html"]:not(.boton--secundario)::before {
 }
 
 .estado[data-estado="Atendida"] {
-    color: #166534;
+    color: var(--c-exito-osc);
     background-color: var(--c-exito-fondo);
 }
 
 .estado[data-estado="Cancelada"] {
     color: #991b1b;
     background-color: var(--c-error-fondo);
+}
+
+@media (min-width: 64rem) {
+    .tabla {
+        font-size: 0.9375rem;
+    }
 }
 
 /* 6. Formularios y validación ============================================= */
@@ -792,10 +1143,11 @@ a.boton[href$="-editar.html"]:not(.boton--secundario)::before {
     margin: 0;
 }
 
+/* Cada grupo principal es una tarjeta con su título como cabecera */
 fieldset {
     min-width: 0;
     margin: 0;
-    padding: var(--sp-4) var(--sp-4) var(--sp-5);
+    padding: 0 var(--sp-4) var(--sp-5);
     background-color: var(--c-superficie);
     border: 1px solid var(--c-borde);
     border-radius: var(--radio-lg);
@@ -807,39 +1159,59 @@ legend {
     font-family: var(--ff-titulos);
     font-size: var(--fs-md);
     font-weight: 600;
+    color: var(--c-tinta);
 }
 
-/* Huella junto al título de cada grupo principal del formulario */
+/* La legend flota para quedar dentro de la tarjeta, con una línea debajo */
 .formulario > fieldset > legend {
-    display: inline-flex;
+    float: left;
+    display: flex;
     align-items: center;
-    gap: var(--sp-2);
+    gap: var(--sp-3);
+    width: 100%;
+    margin-bottom: var(--sp-4);
+    padding: var(--sp-4) 0;
+    border-bottom: 1px solid var(--c-borde);
+}
+
+.formulario > fieldset > legend + * {
+    clear: both;
 }
 
 .formulario > fieldset > legend::before {
     content: "";
     flex: none;
-    width: 1.125rem;
-    height: 1.125rem;
-    background: url("../img/iconos/paw-print-primario.svg") center / contain no-repeat;
+    width: 2rem;
+    height: 2rem;
+    background: var(--c-primario-suave) url("../img/iconos/paw-print-primario.svg") center / 1.125rem no-repeat;
+    border-radius: var(--radio-sm);
+}
+
+/* En el login la legend es una etiqueta simple (ver sección 8) */
+.acceso .formulario > fieldset > legend {
+    float: none;
+    width: auto;
+    border-bottom: 0;
 }
 
 /* Campos dentro de un fieldset: una columna en móvil, dos desde tablet */
 .campos {
     display: grid;
     grid-template-columns: 1fr;
-    gap: var(--sp-4);
+    gap: var(--sp-4) var(--sp-5);
 }
 
 .campo {
     display: flex;
     flex-direction: column;
-    gap: var(--sp-1);
+    gap: 0.375rem;
 }
 
 .campo label,
 .campo-grupo legend {
-    font-weight: 600;
+    font-size: 0.9375rem;
+    font-weight: 700;
+    color: var(--c-tinta);
 }
 
 /* Indicador de campo obligatorio (pseudoclase :required) */
@@ -859,13 +1231,14 @@ textarea {
     font-size: var(--fs-base);
     color: var(--c-texto);
     background-color: var(--c-superficie);
-    border: 1px solid #6b7280;
+    border: 1px solid var(--c-borde-control);
     border-radius: var(--radio);
-    transition: border-color var(--transicion), box-shadow var(--transicion), background-color var(--transicion);
+    box-shadow: inset 0 1px 2px rgb(15 28 34 / 0.05);
+    transition: border-color var(--transicion-rapida), box-shadow var(--transicion-rapida), background-color var(--transicion-rapida);
 }
 
 textarea {
-    min-height: 6rem;
+    min-height: 6.5rem;
     resize: vertical;
 }
 
@@ -875,27 +1248,29 @@ input[type="checkbox"] {
     min-height: 1.25rem;
     height: 1.25rem;
     margin: 0;
+    box-shadow: none;
     accent-color: var(--c-rol);
 }
 
 input::placeholder,
 textarea::placeholder {
-    color: #6b7280;
+    color: #6b7a82;
 }
 
 input:hover,
 select:hover,
 textarea:hover {
-    border-color: var(--c-primario);
+    border-color: var(--c-texto-suave);
 }
 
+/* Foco: contorno del color de marca y un halo suave alrededor */
 input:focus-visible,
 select:focus-visible,
 textarea:focus-visible {
     border-color: var(--c-primario);
-    outline: 3px solid var(--c-primario);
-    outline-offset: 1px;
-    box-shadow: 0 0 0 6px var(--c-primario-suave);
+    outline: 2px solid var(--c-primario);
+    outline-offset: 0;
+    box-shadow: var(--halo);
 }
 
 /* Valor válido mientras se escribe */
@@ -910,26 +1285,40 @@ input:user-invalid,
 select:user-invalid,
 textarea:user-invalid {
     border-color: var(--c-error);
-    background-color: #fff7f7;
+    background-color: var(--c-error-fondo);
 }
 
 input:user-invalid:focus-visible,
 select:user-invalid:focus-visible,
 textarea:user-invalid:focus-visible {
     outline-color: var(--c-error);
-    box-shadow: 0 0 0 6px var(--c-error-fondo);
+    box-shadow: 0 0 0 4px rgb(185 28 28 / 0.14);
 }
 
+/* El texto de ayuda pasa a ser el mensaje de error, con su icono */
 .campo:has(:user-invalid) .ayuda {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--sp-2);
     color: var(--c-error);
-    font-weight: 600;
+    font-weight: 700;
+}
+
+.campo:has(:user-invalid) .ayuda::before {
+    content: "";
+    flex: none;
+    width: 1rem;
+    height: 1rem;
+    margin-top: 0.125rem;
+    background: url("../img/iconos/circle-alert-error.svg") center / contain no-repeat;
 }
 
 /* Campo de solo lectura (dato que se conserva, p. ej. veterinario al reprogramar) */
 input[readonly] {
     color: var(--c-texto-suave);
-    background-color: var(--c-fila-alterna);
+    background-color: var(--c-superficie-2);
     border-style: dashed;
+    box-shadow: none;
 }
 
 .ayuda {
@@ -938,16 +1327,19 @@ input[readonly] {
     color: var(--c-texto-suave);
 }
 
-/* Grupo de radio o checkbox */
+/* Grupo de radio o checkbox: sin tarjeta, la legend actúa como etiqueta */
 .campo-grupo {
-    padding: var(--sp-3) var(--sp-4);
+    padding: 0;
     background-color: transparent;
+    border: 0;
+    border-radius: 0;
     box-shadow: none;
 }
 
 .campo-grupo legend {
+    margin-bottom: var(--sp-2);
+    padding: 0;
     font-family: var(--ff-texto);
-    font-size: var(--fs-base);
 }
 
 .opciones {
@@ -957,71 +1349,183 @@ input[readonly] {
 }
 
 /* Cada opción es un «chip»: se ve de un vistazo cuál está marcada */
-.opciones label {
+.opciones label,
+.campo > label:has(input[type="checkbox"]) {
     display: inline-flex;
     align-items: center;
     gap: var(--sp-2);
     min-height: 2.75rem;
     padding: var(--sp-2) var(--sp-4);
-    font-weight: 400;
+    font-weight: 600;
+    color: var(--c-texto);
     cursor: pointer;
     background-color: var(--c-superficie);
-    border: 1px solid var(--c-borde);
-    border-radius: var(--radio-pildora);
-    transition: background-color var(--transicion), border-color var(--transicion);
+    border: 1px solid var(--c-borde-fuerte);
+    border-radius: var(--radio);
+    transition: background-color var(--transicion-rapida), border-color var(--transicion-rapida), box-shadow var(--transicion-rapida);
 }
 
-.opciones label:hover {
+.campo > label:has(input[type="checkbox"]) {
+    align-self: flex-start;
+    margin-top: auto;
+}
+
+.opciones label:hover,
+.campo > label:has(input[type="checkbox"]):hover {
     border-color: var(--c-rol);
 }
 
-.opciones label:has(:checked) {
+.opciones label:has(:checked),
+.campo > label:has(input[type="checkbox"]:checked) {
     font-weight: 700;
+    color: var(--c-rol-osc);
     background-color: var(--c-rol-suave);
     border-color: var(--c-rol);
+    box-shadow: inset 0 0 0 1px var(--c-rol);
+}
+
+.opciones label:has(:focus-visible),
+.campo > label:has(input[type="checkbox"]:focus-visible) {
+    outline: 3px solid var(--c-primario);
+    outline-offset: 2px;
+}
+
+/* Botones del formulario: barra al pie del formulario */
+.formulario > .acciones {
+    padding: var(--sp-3);
+    background-color: var(--c-superficie);
+    border: 1px solid var(--c-borde);
+    border-radius: var(--radio-lg);
+    box-shadow: 0 -6px 16px -10px rgb(15 28 34 / 0.25), var(--sombra);
+}
+
+@media (min-width: 40rem) {
+    .campos {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    fieldset {
+        padding-inline: var(--sp-5);
+    }
 }
 
 /* 7. Fichas, avisos y notas =============================================== */
+
+/* Ficha (dl): lista de propiedades con separadores, dentro de una tarjeta */
 .ficha {
     display: grid;
     grid-template-columns: 1fr;
-    gap: var(--sp-1) var(--sp-5);
     margin: 0;
-    padding: var(--sp-4) var(--sp-5);
+    padding: var(--sp-2) var(--sp-5);
     background-color: var(--c-superficie);
     border: 1px solid var(--c-borde);
-    border-left: 4px solid var(--c-rol);
     border-radius: var(--radio-lg);
     box-shadow: var(--sombra);
 }
 
 .ficha dt {
-    font-size: var(--fs-xs);
-    font-weight: 700;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
+    padding-top: var(--sp-3);
+    font-size: var(--fs-sm);
+    font-weight: 600;
     color: var(--c-texto-suave);
+    border-top: 1px solid var(--c-borde);
 }
 
 .ficha dd {
-    margin: 0 0 var(--sp-2);
-    font-weight: 600;
+    margin: 0;
+    padding-bottom: var(--sp-3);
+    font-weight: 700;
+    color: var(--c-tinta);
 }
 
-/* Avisos: el tipo se distingue por color y también por icono */
+.ficha dt:first-of-type {
+    border-top: 0;
+}
+
+/* Detalle y confirmaciones: el registro completo es una tarjeta */
+.contenido > article {
+    padding: var(--sp-5);
+    background-color: var(--c-superficie);
+    border: 1px solid var(--c-borde);
+    border-radius: var(--radio-lg);
+    box-shadow: var(--sombra-md);
+}
+
+/* Título del registro con un icono a la izquierda */
+.contenido > article > h2 {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-3);
+    margin-bottom: var(--sp-4);
+}
+
+.contenido > article > h2::before {
+    content: "";
+    flex: none;
+    width: 2.75rem;
+    height: 2.75rem;
+    background: var(--c-primario-suave) url("../img/iconos/paw-print-primario.svg") center / 1.375rem no-repeat;
+    border-radius: var(--radio);
+}
+
+/* Dentro de la tarjeta la ficha no lleva su propio borde (no hay tarjetas anidadas) */
+.contenido > article .ficha {
+    padding: 0;
+    background: none;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+.contenido > article .acciones {
+    margin-top: var(--sp-5);
+    padding-top: var(--sp-4);
+    border-top: 1px solid var(--c-borde);
+}
+
+/* Formulario dentro de la tarjeta (cancelar cita): sin tarjetas anidadas */
+.contenido > article fieldset {
+    padding: 0;
+    background: none;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+.contenido > article .formulario > .acciones {
+    padding: var(--sp-4) 0 0;
+    background: none;
+    border: 0;
+    border-top: 1px solid var(--c-borde);
+    border-radius: 0;
+    box-shadow: none;
+}
+
+/* Confirmación de eliminar: borde rojo suave e icono de alerta */
+.contenido > article:has(.boton--peligro) {
+    border-color: #fca5a5;
+    box-shadow: 0 0 0 4px var(--c-error-fondo), var(--sombra-md);
+}
+
+.contenido > article:has(.boton--peligro) > h2::before {
+    background-color: var(--c-error-fondo);
+    background-image: url("../img/iconos/triangle-alert-error.svg");
+}
+
+/* Avisos: el tipo se distingue por color, por icono y por su título */
 .aviso {
     position: relative;
-    padding: var(--sp-3) var(--sp-4) var(--sp-3) 3.25rem;
+    padding: var(--sp-4) var(--sp-4) var(--sp-4) 3.5rem;
     color: var(--c-aviso-texto);
     background-color: var(--c-aviso-fondo);
-    border-left: 4px solid currentColor;
-    border-radius: var(--radio);
+    border: 1px solid #fcd34d;
+    border-radius: var(--radio-lg);
 }
 
 .aviso::before {
     content: "";
     position: absolute;
-    top: 0.875rem;
+    top: var(--sp-4);
     left: var(--sp-4);
     width: 1.5rem;
     height: 1.5rem;
@@ -1042,6 +1546,7 @@ input[readonly] {
 .aviso--error {
     color: #991b1b;
     background-color: var(--c-error-fondo);
+    border-color: #fca5a5;
 }
 
 .aviso--error::before {
@@ -1049,8 +1554,9 @@ input[readonly] {
 }
 
 .aviso--exito {
-    color: #166534;
+    color: var(--c-exito-osc);
     background-color: var(--c-exito-fondo);
+    border-color: #86efac;
 }
 
 .aviso--exito::before {
@@ -1060,18 +1566,20 @@ input[readonly] {
 .aviso--info {
     color: var(--c-info-texto);
     background-color: var(--c-info-fondo);
+    border-color: #a5f3fc;
 }
 
 .aviso--info::before {
     background-image: url("../img/iconos/info-info.svg");
 }
 
+/* Nota para quien prueba el prototipo */
 .nota-demo {
     padding: var(--sp-3) var(--sp-4);
     font-size: var(--fs-sm);
     color: var(--c-texto-suave);
-    background-color: var(--c-superficie);
-    border: 2px dashed var(--c-borde);
+    background-color: var(--c-superficie-2);
+    border: 1px dashed var(--c-borde-fuerte);
     border-radius: var(--radio);
 }
 
@@ -1090,14 +1598,14 @@ input[readonly] {
 
 /* Varios artículos seguidos (detalles del historial): aire entre uno y otro */
 article + article {
-    margin-top: var(--sp-6);
+    margin-top: var(--sp-5);
 }
 
 article:target {
     outline: 3px solid var(--c-rol);
     outline-offset: 4px;
     border-radius: var(--radio-lg);
-    animation: resaltar 1.2s ease-out;
+    animation: resaltar 1.2s var(--ease-salida);
 }
 
 @keyframes resaltar {
@@ -1110,84 +1618,570 @@ article:target {
     }
 }
 
-/* 8. Pantalla de acceso =================================================== */
+/* Desde tablet, cada propiedad de la ficha va en una fila: etiqueta | valor */
+@media (min-width: 40rem) {
+    .ficha {
+        grid-template-columns: minmax(10rem, max-content) 1fr;
+        column-gap: var(--sp-6);
+    }
 
-/* Foto de la clínica + tarjeta de inicio de sesión */
-.acceso-portada {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--sp-5);
-    width: 100%;
-    max-width: 64rem;
-    margin-inline: auto;
+    .ficha dt,
+    .ficha dd {
+        padding-block: var(--sp-3);
+        border-top: 1px solid var(--c-borde);
+    }
+
+    .ficha dt:first-of-type,
+    .ficha dt:first-of-type + dd {
+        border-top: 0;
+    }
+
+    .contenido > article {
+        padding: var(--sp-6);
+    }
 }
 
-.acceso-portada > img {
-    width: 100%;
-    max-width: 30rem;
-    margin-inline: auto;
-    aspect-ratio: 16 / 9;
-    object-fit: cover;
-    border-radius: var(--radio-lg);
-    box-shadow: var(--sombra-md);
+/* 7.1 Agenda, atención e historial (rol Veterinario) ====================== */
+
+/* Agenda: el botón «Consultar» va suelto, sin barra */
+.formulario[action^="agenda-dia"] > .acciones {
+    padding: 0;
+    background: none;
+    border: 0;
+    box-shadow: none;
 }
 
-.acceso {
-    width: 100%;
-    max-width: 30rem;
-    margin-inline: auto;
-    padding: var(--sp-5);
+/* Resumen del día: datos clave en una fila de etiquetas */
+.resumen-dia {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-2);
+    margin: 0 0 var(--sp-4);
+    padding: 0;
+    list-style: none;
+}
+
+.resumen-dia li {
+    display: inline-flex;
+    align-items: baseline;
+    gap: var(--sp-1);
+    padding: var(--sp-1) var(--sp-3);
+    font-size: var(--fs-sm);
+    font-weight: 600;
+    color: var(--c-texto-suave);
     background-color: var(--c-superficie);
     border: 1px solid var(--c-borde);
-    border-top: 4px solid var(--c-primario);
-    border-radius: var(--radio-lg);
-    box-shadow: var(--sombra-lg);
+    border-radius: var(--radio-pildora);
 }
 
-.acceso .formulario {
+.resumen-dia strong,
+.resumen-dia time {
+    font-weight: 700;
+    color: var(--c-rol-osc);
+}
+
+/* La hora de cada cita, como un bloque del horario */
+.tabla tbody th[scope="row"] time {
+    display: inline-block;
+    min-width: 4.25rem;
+    padding: var(--sp-1) var(--sp-3);
+    font-family: var(--ff-titulos);
+    font-size: var(--fs-md);
+    font-weight: 600;
+    text-align: center;
+    color: var(--c-rol-osc);
+    background-color: var(--c-rol-suave);
+    border-radius: var(--radio);
+}
+
+/* Historial: el buscador queda separado de la tabla de mascotas */
+.buscador + .tabla-contenedor {
     margin-top: var(--sp-4);
 }
 
+/* «Ver detalle» de cada atención, con el mismo aspecto que las demás acciones de fila */
+.tabla td > a[href^="#atencion"] {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    min-height: 2rem;
+    padding: var(--sp-1) 0.625rem;
+    font-size: var(--fs-sm);
+    font-weight: 700;
+    white-space: nowrap;
+    text-decoration: none;
+    background-color: var(--c-superficie);
+    border: 1px solid var(--c-borde);
+    border-radius: var(--radio-sm);
+    transition: background-color var(--transicion-rapida), border-color var(--transicion-rapida);
+}
+
+.tabla td > a[href^="#atencion"]::before {
+    content: "";
+    flex: none;
+    width: 1rem;
+    height: 1rem;
+    background: url("../img/iconos/eye-primario.svg") center / contain no-repeat;
+}
+
+.tabla td > a[href^="#atencion"]:hover {
+    background-color: var(--c-primario-suave);
+    border-color: var(--c-primario);
+}
+
+/* Registrar atención: la ficha de la cita junto al formulario */
+.disposicion-atencion {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--sp-5);
+    align-items: start;
+}
+
+.disposicion-atencion h2 {
+    font-size: var(--fs-lg);
+}
+
+/* En la columna estrecha la ficha va en una sola columna: etiqueta y valor */
+.disposicion-atencion .ficha {
+    grid-template-columns: minmax(0, 1fr);
+}
+
+.disposicion-atencion .ficha dd {
+    padding-top: 0;
+    border-top: 0;
+}
+
+/* Historial: las atenciones forman una línea de tiempo vertical */
+.linea-tiempo > article {
+    position: relative;
+    margin-left: var(--sp-6);
+    padding: var(--sp-4) var(--sp-5);
+    background-color: var(--c-superficie);
+    border: 1px solid var(--c-borde);
+    border-radius: var(--radio-lg);
+    box-shadow: var(--sombra);
+    transition: border-color var(--transicion), box-shadow var(--transicion);
+}
+
+/* Punto de la línea de tiempo */
+.linea-tiempo > article::before {
+    content: "";
+    position: absolute;
+    top: 1.375rem;
+    left: calc(-1 * var(--sp-6) + 0.1875rem);
+    width: 0.875rem;
+    height: 0.875rem;
+    background-color: var(--c-superficie);
+    border: 3px solid var(--c-rol);
+    border-radius: 50%;
+    transition: background-color var(--transicion);
+}
+
+/* Tramo de línea hasta la atención siguiente */
+.linea-tiempo > article:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    top: 2.375rem;
+    bottom: calc(-1 * var(--sp-5) - 1.375rem);
+    left: calc(-1 * var(--sp-6) + 0.5625rem);
+    width: 2px;
+    background-color: var(--c-borde-fuerte);
+}
+
+.linea-tiempo h3 {
+    margin-bottom: var(--sp-2);
+    font-size: var(--fs-md);
+}
+
+.linea-tiempo .ficha {
+    padding: 0;
+    background: none;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+/* Atención abierta desde «Ver detalle» (#atencion-N): se resalta la tarjeta */
+.linea-tiempo > article:target {
+    outline: 0;
+    border-color: var(--c-rol);
+    box-shadow: 0 0 0 4px var(--c-rol-suave), var(--sombra-md);
+    animation: resaltar-tarjeta 1.2s var(--ease-salida);
+}
+
+.linea-tiempo > article:target::before {
+    background-color: var(--c-rol);
+}
+
+@keyframes resaltar-tarjeta {
+    from {
+        background-color: var(--c-rol-suave);
+    }
+
+    to {
+        background-color: var(--c-superficie);
+    }
+}
+
+@media (min-width: 64rem) {
+    .disposicion-atencion {
+        grid-template-columns: 22rem minmax(0, 1fr);
+    }
+
+    /* La ficha acompaña al formulario mientras se desplaza la página */
+    .disposicion-atencion > section {
+        position: sticky;
+        top: var(--sp-5);
+    }
+}
+
+/* 8. Pantalla de acceso =================================================== */
+
+/* El login ocupa toda la ventana: panel de la clínica + formulario.
+   La marca flota sobre el panel en todos los tamaños. */
+body:has(.acceso-portada) {
+    position: relative;
+    background-color: var(--c-superficie);
+    background-image: none;
+}
+
+body:has(.acceso-portada) > .encabezado {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    width: 100%;
+    padding: var(--sp-5);
+    background: none;
+    box-shadow: none;
+}
+
+body:has(.acceso-portada) > .contenido {
+    max-width: none;
+    padding: 0;
+}
+
+body:has(.acceso-portada) > .pie-pagina {
+    border-top: 0;
+}
+
+.acceso-portada {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+}
+
+/* Panel de la clínica: foto con un velo en degradado y el mensaje del sistema */
+.acceso-marca {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: var(--sp-4);
+    min-height: 18rem;
+    padding: 6.5rem var(--sp-5) var(--sp-5);
+    color: #ffffff;
+    background-color: var(--c-lateral-1);
+}
+
+.acceso-marca img {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 30%;
+}
+
+.acceso-marca::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background-image:
+        radial-gradient(70% 55% at 0% 0%, rgb(15 118 110 / 0.6), transparent 70%),
+        linear-gradient(180deg, rgb(4 28 26 / 0.3) 0%, rgb(4 28 26 / 0.55) 40%, rgb(4 28 26 / 0.94) 100%);
+}
+
+.acceso-titular {
+    max-width: 22ch;
+    margin: 0;
+    font-family: var(--ff-titulos);
+    font-size: var(--fs-xl);
+    font-weight: 600;
+    line-height: var(--lh-titulos);
+    letter-spacing: -0.015em;
+    text-wrap: balance;
+}
+
+.acceso-puntos {
+    display: none;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.acceso-puntos li {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--sp-3);
+    color: rgb(255 255 255 / 0.88);
+}
+
+.acceso-puntos li::before {
+    content: "";
+    flex: none;
+    width: 1.25rem;
+    height: 1.25rem;
+    margin-top: 0.125rem;
+    background: url("../img/iconos/circle-check-blanco.svg") center / contain no-repeat;
+}
+
+/* Formulario: columna limpia, sin tarjeta */
+.acceso {
+    width: 100%;
+    margin: 0;
+    padding: var(--sp-6) max(var(--sp-5), calc((100% - 28rem) / 2)) var(--sp-5);
+    background-color: var(--c-superficie);
+}
+
+.acceso h1 {
+    margin-bottom: var(--sp-2);
+}
+
+.acceso .introduccion {
+    font-size: var(--fs-base);
+}
+
+.acceso .formulario {
+    margin-top: var(--sp-5);
+}
+
+.acceso fieldset {
+    padding: 0;
+    background: none;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+.acceso .formulario > fieldset > legend {
+    margin-bottom: var(--sp-3);
+    padding: 0;
+    font-family: var(--ff-texto);
+    font-size: var(--fs-sm);
+    font-weight: 700;
+    color: var(--c-texto-suave);
+}
+
+.acceso .formulario > fieldset > legend::before {
+    content: none;
+}
+
+/* Campos con icono a la izquierda: correo y contraseña */
+.acceso input[type="email"],
+.acceso input[type="password"] {
+    padding-left: 2.75rem;
+    background: var(--c-superficie) url("../img/iconos/mail-suave.svg") 0.875rem center / 1.125rem no-repeat;
+}
+
+.acceso input[type="password"] {
+    background-image: url("../img/iconos/lock-keyhole-suave.svg");
+}
+
+/* Ingreso por rol: cada botón es una tarjeta con el icono y el color de su rol */
 .opciones-acceso {
     display: grid;
-    gap: var(--sp-3);
+    gap: var(--sp-2);
 }
 
-/* Cada botón de ingreso lleva el color y el icono de su rol */
 .opciones-acceso .boton {
+    --c-boton: var(--c-primario);
+    --c-boton-suave: var(--c-primario-suave);
+    --icono-rol: none;
     justify-content: flex-start;
+    gap: var(--sp-3);
+    min-height: 3.75rem;
+    padding: var(--sp-2) var(--sp-4) var(--sp-2) var(--sp-2);
+    font-size: var(--fs-base);
+    color: var(--c-tinta);
     text-align: left;
+    background-color: var(--c-superficie);
+    background-image: none;
+    border-color: var(--c-borde-fuerte);
+    box-shadow: var(--sombra);
 }
 
-.opciones-acceso .boton[formaction$="menu-recepcion.html"] {
-    background-color: #166534;
-    border-color: #166534;
+.opciones-acceso .boton::before {
+    content: "";
+    flex: none;
+    width: 2.75rem;
+    height: 2.75rem;
+    background: var(--c-boton-suave) var(--icono-rol) center / 1.375rem no-repeat;
+    border-radius: var(--radio-sm);
 }
 
-.opciones-acceso .boton[formaction$="menu-recepcion.html"]::before {
-    background-image: url("../img/iconos/users-blanco.svg");
-}
-
-.opciones-acceso .boton[formaction$="menu-veterinario.html"] {
-    background-color: #92400e;
-    border-color: #92400e;
-}
-
-.opciones-acceso .boton[formaction$="menu-veterinario.html"]::before {
-    background-image: url("../img/iconos/stethoscope-blanco.svg");
-}
-
-.opciones-acceso .boton[formaction$="menu-administrador.html"] {
-    background-color: #5b21b6;
-    border-color: #5b21b6;
-}
-
-.opciones-acceso .boton[formaction$="menu-administrador.html"]::before {
-    background-image: url("../img/iconos/clipboard-list-blanco.svg");
+.opciones-acceso .boton::after {
+    content: "";
+    flex: none;
+    width: 1.125rem;
+    height: 1.125rem;
+    margin-left: auto;
+    background: url("../img/iconos/arrow-right-suave.svg") center / contain no-repeat;
+    transition: transform var(--transicion);
 }
 
 .opciones-acceso .boton:hover {
-    filter: brightness(0.85);
+    color: var(--c-tinta);
+    background-color: color-mix(in srgb, var(--c-boton-suave) 40%, white);
+    border-color: var(--c-boton);
+    box-shadow: var(--sombra-md);
+}
+
+.opciones-acceso .boton:hover::after {
+    transform: translateX(3px);
+}
+
+.opciones-acceso .boton:focus-visible {
+    outline-color: var(--c-boton);
+}
+
+.opciones-acceso .boton[formaction$="menu-recepcion.html"] {
+    --c-boton: #15803d;
+    --c-boton-suave: #dcfce7;
+    --icono-rol: url("../img/iconos/users-recepcion.svg");
+}
+
+.opciones-acceso .boton[formaction$="menu-veterinario.html"] {
+    --c-boton: #b45309;
+    --c-boton-suave: #fef3c7;
+    --icono-rol: url("../img/iconos/stethoscope-veterinario.svg");
+}
+
+.opciones-acceso .boton[formaction$="menu-administrador.html"] {
+    --c-boton: #1d4ed8;
+    --c-boton-suave: #dbeafe;
+    --icono-rol: url("../img/iconos/clipboard-list-administrador.svg");
+}
+
+.acceso .nota-demo {
+    margin-top: var(--sp-5);
+}
+
+@media (min-width: 40rem) {
+    .acceso-marca {
+        min-height: 24rem;
+        padding: 7rem var(--sp-6) var(--sp-6);
+    }
+
+    .acceso-titular {
+        font-size: var(--fs-2xl);
+    }
+
+    .acceso-puntos {
+        display: grid;
+        gap: var(--sp-2);
+    }
+}
+
+/* Escritorio: panel a la izquierda y formulario centrado a la derecha */
+@media (min-width: 64rem) {
+    body:has(.acceso-portada) {
+        display: grid;
+        grid-template-columns: minmax(0, 1.1fr) minmax(32rem, 1fr);
+        grid-template-rows: 1fr auto;
+        min-height: 100vh;
+        min-height: 100dvh;
+    }
+
+    body:has(.acceso-portada) > .encabezado {
+        width: auto;
+        padding: var(--sp-6) var(--sp-7);
+    }
+
+    body:has(.acceso-portada) > .contenido {
+        grid-column: 1 / -1;
+        grid-row: 1 / -1;
+    }
+
+    body:has(.acceso-portada) > .pie-pagina {
+        z-index: 1;
+        grid-column: 2;
+        grid-row: 2;
+    }
+
+    .acceso-portada {
+        grid-template-columns: minmax(0, 1.1fr) minmax(32rem, 1fr);
+        min-height: 100vh;
+        min-height: 100dvh;
+    }
+
+    .acceso-marca {
+        min-height: 0;
+        gap: var(--sp-5);
+        padding: var(--sp-8) var(--sp-7);
+    }
+
+    .acceso-titular {
+        max-width: 18ch;
+        font-size: 2.5rem;
+    }
+
+    .acceso {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: var(--sp-8) max(var(--sp-7), calc((100% - 28rem) / 2)) 6rem;
+    }
+}
+
+/* Entrada del login: la foto se asienta y el formulario aparece por partes */
+@media (prefers-reduced-motion: no-preference) {
+    .acceso-marca img {
+        animation: asentar 1.6s var(--ease-salida) both;
+    }
+
+    .acceso > *,
+    .acceso-marca > :not(img) {
+        animation: aparecer 600ms var(--ease-salida) both;
+    }
+
+    .acceso > :nth-child(2),
+    .acceso-marca > :nth-child(3) {
+        animation-delay: 70ms;
+    }
+
+    .acceso > :nth-child(3) {
+        animation-delay: 140ms;
+    }
+
+    .acceso > :nth-child(4) {
+        animation-delay: 210ms;
+    }
+
+    @keyframes asentar {
+        from {
+            transform: scale(1.06);
+        }
+
+        to {
+            transform: none;
+        }
+    }
+
+    @keyframes aparecer {
+        from {
+            opacity: 0;
+            transform: translateY(8px);
+        }
+
+        to {
+            opacity: 1;
+            transform: none;
+        }
+    }
 }
 
 /* 9. Utilidades =========================================================== */
@@ -1208,86 +2202,38 @@ article:target {
 }
 
 /* 10. Puntos de quiebre =================================================== */
-
-/* Tablet: desde 40rem (640px) */
+/* Móvil primero. Cada componente declara sus cambios junto a sus estilos
+   (tablet desde 40rem y escritorio desde 64rem); aquí quedan los generales. */
 @media (min-width: 40rem) {
-    .encabezado {
-        flex-wrap: nowrap;
-    }
-
-    .nav-principal {
-        width: auto;
-        margin-left: auto;
-    }
-
-    .menu-tarjetas ul {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .campos {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .ficha {
-        grid-template-columns: max-content 1fr;
-        align-items: baseline;
-    }
-
-    .ficha dd {
-        margin-bottom: 0;
-    }
-
     .acciones > .boton {
         flex: 0 0 auto;
     }
-
-    .portada-modulo {
-        aspect-ratio: 5 / 1;
-    }
-
-    .acceso {
-        padding: var(--sp-6);
-    }
 }
 
-/* Escritorio: desde 64rem (1024px) */
-@media (min-width: 64rem) {
-    .encabezado {
-        padding-inline: max(var(--sp-4), calc((100% - var(--ancho-max)) / 2 + var(--sp-4)));
-    }
-
-    .contenido {
-        padding-top: var(--sp-6);
-    }
-
-    .menu-tarjetas ul {
-        grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
-    }
-
-    .tabla {
-        font-size: var(--fs-base);
-    }
-
-    /* Login en dos columnas: foto a la izquierda, tarjeta a la derecha */
-    .acceso-portada {
-        grid-template-columns: minmax(0, 1fr) 30rem;
-        align-items: stretch;
-    }
-
-    .acceso-portada > img {
-        max-width: none;
-        height: 100%;
-        aspect-ratio: auto;
-    }
-}
-
-/* 11. Movimiento reducido ================================================= */
+/* 11. Movimiento ========================================================== */
 @media (prefers-reduced-motion: no-preference) {
     html {
         scroll-behavior: smooth;
     }
+
+    /* Al abrir una pantalla interna, el contenido aparece con un fundido breve
+       (solo opacidad: nada cambia de lugar mientras se puede hacer clic) */
+    body[class*="rol-"] > .contenido {
+        animation: fundido 240ms ease-out both;
+    }
+
+    @keyframes fundido {
+        from {
+            opacity: 0;
+        }
+
+        to {
+            opacity: 1;
+        }
+    }
 }
 
+/* Con movimiento reducido todo queda quieto y visible */
 @media (prefers-reduced-motion: reduce) {
     *,
     *::before,
@@ -1297,8 +2243,15 @@ article:target {
         animation-iteration-count: 1 !important;
     }
 
-    .menu-tarjetas li:hover,
-    .menu-tarjetas li:hover img {
+    html {
+        scroll-behavior: auto;
+    }
+
+    .menu-tarjetas li:hover img,
+    .menu-tarjetas li:hover::after,
+    .nav-principal a:hover::before,
+    .opciones-acceso .boton:hover::after,
+    .boton:active {
         transform: none;
     }
 }

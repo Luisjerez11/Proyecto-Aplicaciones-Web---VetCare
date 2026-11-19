@@ -26,45 +26,48 @@
         <h1>Registrar atención médica</h1>
         <p class="introduccion">Registra los datos clínicos de la atención. En este prototipo, guardar solo navega al historial de ejemplo.</p>
 
-        <section aria-labelledby="titulo-cita">
-            <h2 id="titulo-cita">Cita seleccionada</h2>
-            <dl class="ficha">
-                <dt>Código de cita</dt><dd>C-001</dd>
-                <dt>Estado</dt><dd>Programada</dd>
-                <dt>Mascota</dt><dd>Toby (M-001), perro mestizo, macho</dd>
-                <dt>Propietario</dt><dd>Carlos Andrés Andrade Ruiz</dd>
-                <dt>Servicio</dt><dd>Consulta general</dd>
-                <dt>Veterinaria</dt><dd>Dra. Ana Pérez</dd>
-                <dt>Fecha y hora</dt><dd><time datetime="2026-11-18T09:00">18/11/2026, 09:00</time></dd>
-            </dl>
-        </section>
+        <!-- CU-07: la cita seleccionada queda a la vista mientras se registra la atención -->
+        <div class="disposicion-atencion">
+            <section aria-labelledby="titulo-cita">
+                <h2 id="titulo-cita">Cita seleccionada</h2>
+                <dl class="ficha">
+                    <dt>Código de cita</dt><dd>C-001</dd>
+                    <dt>Estado</dt><dd>Programada</dd>
+                    <dt>Mascota</dt><dd>Toby (M-001), perro mestizo, macho</dd>
+                    <dt>Propietario</dt><dd>Carlos Andrés Andrade Ruiz</dd>
+                    <dt>Servicio</dt><dd>Consulta general</dd>
+                    <dt>Veterinaria</dt><dd>Dra. Ana Pérez</dd>
+                    <dt>Fecha y hora</dt><dd><time datetime="2026-11-18T09:00">18/11/2026, 09:00</time></dd>
+                </dl>
+            </section>
 
-        <form class="formulario" action="historial-clinico.html" method="get">
-            <fieldset>
-                <legend>Datos de la atención</legend>
-                <div class="campos">
-                    <div class="campo campo--ancho">
-                        <label for="diagnostico">Diagnóstico</label>
-                        <textarea id="diagnostico" name="diagnostico" required aria-describedby="ayuda-diagnostico"></textarea>
-                        <p class="ayuda" id="ayuda-diagnostico">Describe la valoración clínica de Toby.</p>
+            <form class="formulario" action="historial-clinico.html" method="get">
+                <fieldset>
+                    <legend>Datos de la atención</legend>
+                    <div class="campos">
+                        <div class="campo campo--ancho">
+                            <label for="diagnostico">Diagnóstico</label>
+                            <textarea id="diagnostico" name="diagnostico" required aria-describedby="ayuda-diagnostico"></textarea>
+                            <p class="ayuda" id="ayuda-diagnostico">Describe la valoración clínica de Toby.</p>
+                        </div>
+                        <div class="campo campo--ancho">
+                            <label for="tratamiento">Tratamiento</label>
+                            <textarea id="tratamiento" name="tratamiento" required aria-describedby="ayuda-tratamiento"></textarea>
+                            <p class="ayuda" id="ayuda-tratamiento">Indica las indicaciones y cuidados recomendados.</p>
+                        </div>
+                        <div class="campo">
+                            <label for="peso">Peso actual (kg)</label>
+                            <input type="number" id="peso" name="peso" required min="0.1" max="120" step="0.1" placeholder="12.5" aria-describedby="ayuda-peso">
+                            <p class="ayuda" id="ayuda-peso">Ingresa el peso con un decimal, entre 0,1 y 120 kg.</p>
+                        </div>
                     </div>
-                    <div class="campo campo--ancho">
-                        <label for="tratamiento">Tratamiento</label>
-                        <textarea id="tratamiento" name="tratamiento" required aria-describedby="ayuda-tratamiento"></textarea>
-                        <p class="ayuda" id="ayuda-tratamiento">Indica las indicaciones y cuidados recomendados.</p>
-                    </div>
-                    <div class="campo">
-                        <label for="peso">Peso actual (kg)</label>
-                        <input type="number" id="peso" name="peso" required min="0.1" max="120" step="0.1" placeholder="12.5" aria-describedby="ayuda-peso">
-                        <p class="ayuda" id="ayuda-peso">Ingresa el peso con un decimal, entre 0,1 y 120 kg.</p>
-                    </div>
+                </fieldset>
+                <div class="acciones">
+                    <button type="submit" class="boton">Guardar</button>
+                    <a class="boton boton--secundario" href="agenda-dia.html">Cancelar</a>
                 </div>
-            </fieldset>
-            <div class="acciones">
-                <button type="submit" class="boton">Guardar</button>
-                <a class="boton boton--secundario" href="agenda-dia.html">Cancelar</a>
-            </div>
-        </form>
+            </form>
+        </div>
 
         <!-- CU-07: datos que se mostrarán en el historial de ejemplo tras guardar. -->
         <aside class="nota-demo" aria-labelledby="titulo-ejemplo-atencion">

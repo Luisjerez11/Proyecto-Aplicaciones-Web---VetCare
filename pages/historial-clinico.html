@@ -30,9 +30,13 @@
         <section id="mascotas" aria-labelledby="titulo-mascotas">
             <h2 id="titulo-mascotas">Buscar mascota</h2>
             <form class="buscador" role="search" action="historial-clinico.html#mascotas" method="get">
-                <label for="busqueda-mascota">Nombre o código de la mascota</label>
-                <input type="search" id="busqueda-mascota" name="busqueda" placeholder="Buscar mascota">
-                <button type="submit" class="boton">Buscar</button>
+                <!-- Criterio de búsqueda agrupado en un fieldset (legend solo para lectores de pantalla) -->
+                <fieldset>
+                    <legend class="solo-lector">Buscar mascota en el historial</legend>
+                    <label for="busqueda-mascota">Nombre o código de la mascota</label>
+                    <input type="search" id="busqueda-mascota" name="busqueda" placeholder="Buscar mascota">
+                    <button type="submit" class="boton">Buscar</button>
+                </fieldset>
             </form>
 
             <div class="tabla-contenedor">
@@ -74,7 +78,7 @@
         </section>
 
         <!-- CU-08, detalles de atenciones; :target resalta la ficha elegida. -->
-        <section aria-labelledby="titulo-detalles-atenciones">
+        <section class="linea-tiempo" aria-labelledby="titulo-detalles-atenciones">
             <h2 id="titulo-detalles-atenciones">Detalle de las atenciones de Toby</h2>
             <article id="atencion-1" aria-labelledby="titulo-atencion-1">
                 <h3 id="titulo-atencion-1">A-001 · <time datetime="2026-05-20">20/05/2026</time></h3>
